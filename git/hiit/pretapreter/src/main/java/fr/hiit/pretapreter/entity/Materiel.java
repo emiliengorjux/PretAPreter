@@ -56,46 +56,52 @@ public class Materiel {
         this.categorie = categorie;
         this.dateAjout = LocalDateTime.now();
     }
+    public Long getId() {
+        return id; }
 
+    public String getNom() {
+        return nom; }
     public void setNom(String nom) {
         this.nom = nom; }
     public void getNom(String nom) {
         this.nom = nom; }
 
 
-    public void getReference(String reference) {
-        this.reference = reference; }
+    public String getReference() {
+        return reference; }
+
     public void setReference(String reference) {
         this.reference = reference; }
 
+    public String getCategorie() {
+        return categorie; }
 
-    public void getCategorie(String categorie) {
-        this.categorie = categorie; }
     public void setCategorie(String categorie){
         this.categorie = categorie; }
 
+    public Set<Emprunt> getEmprunts() {
+        return emprunts; }
 
     public void setEmprunts(Set<Emprunt> emprunts) {
         this.emprunts = emprunts; }
 
-    public void getEtatMateriel(String etatMateriel) {
-        this.etatMateriel = etatMateriel; }
+
+    public String getEtatMateriel() {
+        return etatMateriel; }
+
     public void setEtatMateriel(String etatMateriel) {
         this.etatMateriel = etatMateriel; }
 
+    public String getCommentaire() {
+        return commentaire; }
 
-    public void getcommentaire(String commentaire) {
-        this.commentaire = commentaire; }
     public void setCommentaire(String commentaire) {
         this.commentaire = commentaire; }
 
-
-    public void getDateAjout(LocalDateTime dateAjout) {
-        this.dateAjout = dateAjout; }
+    public LocalDateTime getDateAjout() {
+        return dateAjout; }
+        
     public void setDateAjout(LocalDateTime dateAjout) {
-        this.dateAjout = dateAjout; }
-
-
-
+        this.dateAjout = dateAjout; }  
 
 }
