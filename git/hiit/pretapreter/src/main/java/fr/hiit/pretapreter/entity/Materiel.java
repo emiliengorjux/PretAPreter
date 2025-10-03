@@ -53,10 +53,18 @@ public class Materiel {
 
     public void setNom(String nom) {
         this.nom = nom; }
+    public void getNom(String nom) {
+        this.nom = nom; }
 
+
+    public void getReference(String reference) {
+        this.reference = reference; }
     public void setReference(String reference) {
         this.reference = reference; }
 
+
+    public void getCategorie(String categorie) {
+        this.categorie = categorie; }
     public void setCategorie(String categorie){
         this.categorie = categorie; }
 
@@ -64,10 +72,16 @@ public class Materiel {
     public void setEmprunts(Set<Emprunt> emprunts) {
         this.emprunts = emprunts; }
 
+    public void getEtatMateriel(String etatMateriel) {
+        this.etatMateriel = etatMateriel; }
     public void setEtatMateriel(String etatMateriel) {
         this.etatMateriel = etatMateriel; }
 
+
+    public void getSuiviEtatMateriel(String suiviEtatMateriel) {
+        this.suiviEtatMateriel = suiviEtatMateriel; }
     public void setSuiviEtatMateriel(String suiviEtatMateriel) {
         this.suiviEtatMateriel = suiviEtatMateriel; }
+
 
 }
