@@ -50,22 +50,40 @@ public class Materiel {
         this.suiviEtatMateriel = suiviEtatMateriel;
         this.categorie = categorie;
     }
+    public Long getId() {
+        return id; }
 
+    public String getNom() {
+        return nom; }
     public void setNom(String nom) {
         this.nom = nom; }
+
+    public String getReference() {
+        return reference; }
 
     public void setReference(String reference) {
         this.reference = reference; }
 
+    public String getCategorie() {
+        return categorie; }
+
     public void setCategorie(String categorie){
         this.categorie = categorie; }
 
+    public Set<Emprunt> getEmprunts() {
+        return emprunts; }
 
     public void setEmprunts(Set<Emprunt> emprunts) {
         this.emprunts = emprunts; }
 
+    public String getEtatMateriel() {
+        return etatMateriel; }
+
     public void setEtatMateriel(String etatMateriel) {
         this.etatMateriel = etatMateriel; }
+
+    public String getSuiviEtatMateriel() {
+        return suiviEtatMateriel; }
 
     public void setSuiviEtatMateriel(String suiviEtatMateriel) {
         this.suiviEtatMateriel = suiviEtatMateriel; }
