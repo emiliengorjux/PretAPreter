@@ -1,5 +1,6 @@
 package fr.hiit.pretapreter.entity;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -32,23 +33,28 @@ public class Materiel {
     @Column (nullable = false)
     private String etatMateriel;
 
-    @Column (nullable = false)
-    private String suiviEtatMateriel;
+    @Column (nullable = true)
+    private String commentaire;
 
     @Column (nullable = false)
     private String categorie;
+
+    @Column(nullable = false , updatable = false)
+    private LocalDateTime dateAjout = LocalDateTime.now();
 
     @OneToMany(mappedBy = "materiel", cascade = CascadeType.ALL)
     private Set<Emprunt> emprunts = new HashSet<>();
 
     public Materiel() {}
 
-    public Materiel(String nom, String reference, String etatMateriel, String suiviEtatMateriel, String categorie) {
+    public Materiel(String nom, String reference, String etatMateriel, String commentaire,
+                    String categorie, LocalDateTime dateAjout) {
         this.nom = nom;
         this.reference = reference;
         this.etatMateriel = etatMateriel;
-        this.suiviEtatMateriel = suiviEtatMateriel;
+        this.commentaire = commentaire;
         this.categorie = categorie;
+        this.dateAjout = LocalDateTime.now();
     }
 
     public void setNom(String nom) {
@@ -76,6 +82,18 @@ public class Materiel {
         this.etatMateriel = etatMateriel; }
     public void setEtatMateriel(String etatMateriel) {
         this.etatMateriel = etatMateriel; }
+
+
+    public void getcommentaire(String commentaire) {
+        this.commentaire = commentaire; }
+    public void setCommentaire(String commentaire) {
+        this.commentaire = commentaire; }
+
+
+    public void getDateAjout(LocalDateTime dateAjout) {
+        this.dateAjout = dateAjout; }
+    public void setDateAjout(LocalDateTime dateAjout) {
+        this.dateAjout = dateAjout; }
 
 
 

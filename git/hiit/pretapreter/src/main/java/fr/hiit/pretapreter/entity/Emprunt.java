@@ -30,6 +30,10 @@ public class Emprunt {
     private Materiel materiel;
 
     @Column(nullable = false)
+    private String emprunteur;
+
+
+    @Column(nullable = false)
     private LocalDateTime dateEmprunt;
 
     @Column(nullable = false)
@@ -40,12 +44,17 @@ public class Emprunt {
     @Column(nullable = false)
     private String suiviEtatMateriel;
 
+    @Column(nullable = true)
+    private String commentaire;
 
-    public Emprunt(Materiel materiel, LocalDateTime dateEmprunt, LocalDateTime retourPrevu, String statut) {
+
+    public Emprunt(Materiel materiel, LocalDateTime dateEmprunt, LocalDateTime retourPrevu,
+                   String suiviEtatMateriel, String commentaire) {
         //this.utilisateur = utilisateur;
         this.materiel = materiel;
         this.dateEmprunt = dateEmprunt;
         this.retourPrevu = retourPrevu;
+        this.suiviEtatMateriel = suiviEtatMateriel;
 
     }
 
@@ -64,40 +73,38 @@ public class Emprunt {
         this.utilisateur = utilisateur; }
 */
     public Materiel getMateriel() {
-        return materiel;
-    }
+        return materiel; }
 
     public void setMateriel(Materiel materiel) {
-        this.materiel = materiel;
-    }
+        this.materiel = materiel; }
+
 
     public LocalDateTime getDateEmprunt() {
-        return dateEmprunt;
-    }
+        return dateEmprunt; }
 
     public void setDateEmprunt(LocalDateTime dateEmprunt) {
-        this.dateEmprunt = dateEmprunt;
-    }
+        this.dateEmprunt = dateEmprunt; }
 
     public LocalDateTime getRetourPrevu() {
-        return retourPrevu;
-    }
+        return retourPrevu; }
 
     public void setRetourPrevu(LocalDateTime retourPrevu) {
-        this.retourPrevu = retourPrevu;
-    }
+        this.retourPrevu = retourPrevu; }
 
     public LocalDateTime getRetourEffectif() {
-        return retoutEffectif;
-    }
+        return retoutEffectif; }
 
     public void setRetourEffectif(LocalDateTime retoutEffectif) {
-        this.retoutEffectif = retoutEffectif;
-    }
+        this.retoutEffectif = retoutEffectif; }
 
 
     public void getSuiviEtatMateriel(String suiviEtatMateriel) {
         this.suiviEtatMateriel = suiviEtatMateriel; }
     public void setSuiviEtatMateriel(String suiviEtatMateriel) {
         this.suiviEtatMateriel = suiviEtatMateriel; }
+
+    public String getCommentaire() {
+        return commentaire;}
+    public void setCommentaire() {
+        this.commentaire = commentaire; }
 }
