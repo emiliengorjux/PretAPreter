@@ -1,4 +1,4 @@
-package fr.hiit.pretapreter.entity;
+ /*package fr.hiit.pretapreter.entity;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -69,4 +69,4 @@ public class Utilisateur {
         return emprunts; }
     public void setEmprunts(Set<Emprunt> emprunts) {
         this.emprunts = emprunts; }
-}
+} */

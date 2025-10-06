@@ -78,10 +78,6 @@ public class Materiel {
         this.etatMateriel = etatMateriel; }
 
 
-    public void getSuiviEtatMateriel(String suiviEtatMateriel) {
-        this.suiviEtatMateriel = suiviEtatMateriel; }
-    public void setSuiviEtatMateriel(String suiviEtatMateriel) {
-        this.suiviEtatMateriel = suiviEtatMateriel; }
 
 
 }

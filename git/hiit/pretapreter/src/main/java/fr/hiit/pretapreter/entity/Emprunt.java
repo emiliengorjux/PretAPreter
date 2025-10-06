@@ -20,10 +20,10 @@ public class Emprunt {
     private Long id;
 
 
-    @ManyToOne
+   /* @ManyToOne
     @JoinColumn(name = "utilisateur_id", nullable = false)
     private Utilisateur utilisateur;
-
+*/
 
     @ManyToOne
     @JoinColumn(name = "materiel_id", nullable = false)
@@ -38,48 +38,66 @@ public class Emprunt {
     private LocalDateTime retoutEffectif;
 
     @Column(nullable = false)
-    private String statut = "EMPRUNT";
+    private String suiviEtatMateriel;
 
 
-    public Emprunt(Utilisateur utilisateur, Materiel materiel, LocalDateTime dateEmprunt, LocalDateTime retourPrevu, String statut) {
-        this.utilisateur = utilisateur;
+    public Emprunt(Materiel materiel, LocalDateTime dateEmprunt, LocalDateTime retourPrevu, String statut) {
+        //this.utilisateur = utilisateur;
         this.materiel = materiel;
         this.dateEmprunt = dateEmprunt;
         this.retourPrevu = retourPrevu;
 
     }
 
+    public Emprunt() {
+
+    }
+
 
     public Long getId() {
-        return id; }
+        return id;
+    }
 
-    public Utilisateur getUtilisateur() {
+    /* public Utilisateur getUtilisateur() {
         return utilisateur; }
     public void setUtilisateur(Utilisateur utilisateur) {
         this.utilisateur = utilisateur; }
-
+*/
     public Materiel getMateriel() {
-        return materiel; }
+        return materiel;
+    }
+
     public void setMateriel(Materiel materiel) {
-        this.materiel = materiel; }
+        this.materiel = materiel;
+    }
 
     public LocalDateTime getDateEmprunt() {
-        return dateEmprunt; }
+        return dateEmprunt;
+    }
+
     public void setDateEmprunt(LocalDateTime dateEmprunt) {
-        this.dateEmprunt = dateEmprunt; }
+        this.dateEmprunt = dateEmprunt;
+    }
 
     public LocalDateTime getRetourPrevu() {
-        return retourPrevu; }
+        return retourPrevu;
+    }
+
     public void setRetourPrevu(LocalDateTime retourPrevu) {
-        this.retourPrevu = retourPrevu; }
+        this.retourPrevu = retourPrevu;
+    }
 
     public LocalDateTime getRetourEffectif() {
-        return retoutEffectif; }
-    public void setRetourEffectif(LocalDateTime retoutEffectif) {
-        this.retoutEffectif = retoutEffectif; }
+        return retoutEffectif;
+    }
 
-    public String getStatut() {
-        return statut; }
-    public void setStatut(String statut) {
-        this.statut = statut; }
+    public void setRetourEffectif(LocalDateTime retoutEffectif) {
+        this.retoutEffectif = retoutEffectif;
+    }
+
+
+    public void getSuiviEtatMateriel(String suiviEtatMateriel) {
+        this.suiviEtatMateriel = suiviEtatMateriel; }
+    public void setSuiviEtatMateriel(String suiviEtatMateriel) {
+        this.suiviEtatMateriel = suiviEtatMateriel; }
 }
