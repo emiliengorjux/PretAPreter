@@ -30,25 +30,32 @@ public class Emprunt {
     private Materiel materiel;
 
     @Column(nullable = false)
+    private String emprunteur;
+
+    @Column(nullable = false)
     private LocalDateTime dateEmprunt;
 
     @Column (nullable = false)
     private String suiviEtatMateriel;
+
+    @Column(nullable = true)
+    private String commentaire;
 
     @Column(nullable = false)
     private LocalDateTime retourPrevu;
 
     private LocalDateTime retoutEffectif;
 
-    @Column(nullable = false)
-    private String statut = "EMPRUNT";
 
 
-    public Emprunt( Materiel materiel, LocalDateTime dateEmprunt, LocalDateTime retourPrevu, String statut) {
+    public Emprunt( Materiel materiel, LocalDateTime dateEmprunt, LocalDateTime retourPrevu, String suiviEtatMateriel, String commentaire, String emprunteur) {
         // this.utilisateur = utilisateur; a ajouter dans les parentheses au dessus
         this.materiel = materiel;
         this.dateEmprunt = dateEmprunt;
         this.retourPrevu = retourPrevu;
+        this.suiviEtatMateriel = suiviEtatMateriel;
+        this.commentaire = commentaire;
+        this.emprunteur = emprunteur;
 
     }
 
@@ -81,14 +88,20 @@ public class Emprunt {
     public void setRetourEffectif(LocalDateTime retoutEffectif) {
         this.retoutEffectif = retoutEffectif; }
 
-    public String getStatut() {
-        return statut; }
-    public void setStatut(String statut) {
-        this.statut = statut; }
-
         public String getSuiviEtatMateriel() {
         return suiviEtatMateriel; }
 
     public void setSuiviEtatMateriel(String suiviEtatMateriel) {
         this.suiviEtatMateriel = suiviEtatMateriel; }
+
+    public String getCommentaire() {
+        return commentaire; }
+    public void setCommentaire(String commentaire) {
+        this.commentaire = commentaire; }
+
+    public String getEmprunteur() {
+        return emprunteur; }
+        
+    public void setEmprunteur(String emprunteur) {
+        this.emprunteur = emprunteur; }
 }

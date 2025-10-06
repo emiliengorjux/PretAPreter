@@ -1,5 +1,6 @@
 package fr.hiit.pretapreter.entity;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,8 +12,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-
-
 
 @Entity
 @Table(name = "materiel")
@@ -28,56 +27,89 @@ public class Materiel {
     @Column(unique = true, nullable = true)
     private String reference;
 
-
-    @Column (nullable = false)
+    @Column(nullable = false)
     private String etatMateriel;
 
-    @Column (nullable = false)
+    @Column(nullable = true)
+    private String commentaire;
+
+    @Column(nullable = false)
     private String categorie;
+
+    @Column(nullable = false, updatable= false)
+    private LocalDateTime dateAjout = LocalDateTime.now();
 
     @OneToMany(mappedBy = "materiel", cascade = CascadeType.ALL)
     private Set<Emprunt> emprunts = new HashSet<>();
 
-    public Materiel() {}
+    public Materiel() {
+    }
 
-    public Materiel(String nom, String reference, String etatMateriel, String suiviEtatMateriel, String categorie) {
+    public Materiel(String nom, String reference, String etatMateriel, String suiviEtatMateriel, String categorie , LocalDateTime dateAjout, String commentaire) {
         this.nom = nom;
         this.reference = reference;
         this.etatMateriel = etatMateriel;
         this.categorie = categorie;
+        this.dateAjout = dateAjout;
+        this.commentaire = commentaire;
     }
+
     public Long getId() {
-        return id; }
+        return id;
+    }
 
     public String getNom() {
-        return nom; }
+        return nom;
+    }
+
     public void setNom(String nom) {
-        this.nom = nom; }
+        this.nom = nom;
+    }
 
     public String getReference() {
-        return reference; }
+        return reference;
+    }
 
     public void setReference(String reference) {
-        this.reference = reference; }
+        this.reference = reference;
+    }
 
     public String getCategorie() {
-        return categorie; }
+        return categorie;
+    }
 
-    public void setCategorie(String categorie){
-        this.categorie = categorie; }
+    public void setCategorie(String categorie) {
+        this.categorie = categorie;
+    }
 
     public Set<Emprunt> getEmprunts() {
-        return emprunts; }
+        return emprunts;
+    }
 
     public void setEmprunts(Set<Emprunt> emprunts) {
-        this.emprunts = emprunts; }
+        this.emprunts = emprunts;
+    }
 
     public String getEtatMateriel() {
-        return etatMateriel; }
+        return etatMateriel;
+    }
 
     public void setEtatMateriel(String etatMateriel) {
-        this.etatMateriel = etatMateriel; }
+        this.etatMateriel = etatMateriel;
+    }
+    public LocalDateTime getDateAjout() {
+        return dateAjout;
+    }
+    public void setDateAjout(LocalDateTime dateAjout) {
+        this.dateAjout = dateAjout;
+    }
 
-    
+    public String getCommentaire() {
+        return commentaire;
+    }
+
+    public void setCommentaire(String commentaire) {
+        this.commentaire = commentaire;
+    }
 
 }
