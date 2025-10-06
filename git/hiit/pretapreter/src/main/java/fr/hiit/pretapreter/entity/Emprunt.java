@@ -39,18 +39,25 @@ public class Emprunt {
     @Column(nullable = false)
     private String emprunteur;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8db55db (ajout attribut aux entités)
     @Column(nullable = false)
     private LocalDateTime dateEmprunt;
 
     @Column (nullable = false)
     private String suiviEtatMateriel;
 
+    @Column(nullable = true)
+    private String commentaire;
+
     @Column(nullable = false)
     private LocalDateTime retourPrevu;
 
     private LocalDateTime retoutEffectif;
 
+<<<<<<< HEAD
     @Column(nullable = false)
     private String suiviEtatMateriel;
 
@@ -64,16 +71,26 @@ public class Emprunt {
         //this.utilisateur = utilisateur;
 =======
     public Emprunt( Materiel materiel, LocalDateTime dateEmprunt, LocalDateTime retourPrevu, String statut) {
+=======
+
+
+    public Emprunt( Materiel materiel, LocalDateTime dateEmprunt, LocalDateTime retourPrevu, String suiviEtatMateriel, String commentaire, String emprunteur) {
+>>>>>>> 8db55db (ajout attribut aux entités)
         // this.utilisateur = utilisateur; a ajouter dans les parentheses au dessus
 >>>>>>> b6a6fa1 (modif entité utilisateur mis de coté)
         this.materiel = materiel;
         this.dateEmprunt = dateEmprunt;
         this.retourPrevu = retourPrevu;
         this.suiviEtatMateriel = suiviEtatMateriel;
+<<<<<<< HEAD
 
     }
 
     public Emprunt() {
+=======
+        this.commentaire = commentaire;
+        this.emprunteur = emprunteur;
+>>>>>>> 8db55db (ajout attribut aux entités)
 
     }
 
@@ -121,6 +138,7 @@ public class Emprunt {
         this.retoutEffectif = retoutEffectif; }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     public void getSuiviEtatMateriel(String suiviEtatMateriel) {
         this.suiviEtatMateriel = suiviEtatMateriel; }
@@ -137,10 +155,26 @@ public class Emprunt {
     public void setStatut(String statut) {
         this.statut = statut; }
 
+=======
+>>>>>>> 8db55db (ajout attribut aux entités)
         public String getSuiviEtatMateriel() {
         return suiviEtatMateriel; }
 
     public void setSuiviEtatMateriel(String suiviEtatMateriel) {
         this.suiviEtatMateriel = suiviEtatMateriel; }
+<<<<<<< HEAD
 >>>>>>> b6a6fa1 (modif entité utilisateur mis de coté)
+=======
+
+    public String getCommentaire() {
+        return commentaire; }
+    public void setCommentaire(String commentaire) {
+        this.commentaire = commentaire; }
+
+    public String getEmprunteur() {
+        return emprunteur; }
+        
+    public void setEmprunteur(String emprunteur) {
+        this.emprunteur = emprunteur; }
+>>>>>>> 8db55db (ajout attribut aux entités)
 }

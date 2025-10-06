@@ -13,8 +13,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
-
-
 @Entity
 @Table(name = "materiel")
 public class Materiel {
@@ -29,10 +27,10 @@ public class Materiel {
     @Column(unique = true, nullable = true)
     private String reference;
 
-
-    @Column (nullable = false)
+    @Column(nullable = false)
     private String etatMateriel;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     @Column (nullable = true)
     private String commentaire;
@@ -43,15 +41,29 @@ public class Materiel {
     private String categorie;
 
     @Column(nullable = false , updatable = false)
+=======
+    @Column(nullable = true)
+    private String commentaire;
+
+    @Column(nullable = false)
+    private String categorie;
+
+    @Column(nullable = false, updatable= false)
+>>>>>>> 8db55db (ajout attribut aux entités)
     private LocalDateTime dateAjout = LocalDateTime.now();
 
     @OneToMany(mappedBy = "materiel", cascade = CascadeType.ALL)
     private Set<Emprunt> emprunts = new HashSet<>();
 
-    public Materiel() {}
+    public Materiel() {
+    }
 
+<<<<<<< HEAD
     public Materiel(String nom, String reference, String etatMateriel, String commentaire,
                     String categorie, LocalDateTime dateAjout) {
+=======
+    public Materiel(String nom, String reference, String etatMateriel, String suiviEtatMateriel, String categorie , LocalDateTime dateAjout, String commentaire) {
+>>>>>>> 8db55db (ajout attribut aux entités)
         this.nom = nom;
         this.reference = reference;
         this.etatMateriel = etatMateriel;
@@ -60,44 +72,73 @@ public class Materiel {
 =======
 >>>>>>> b6a6fa1 (modif entité utilisateur mis de coté)
         this.categorie = categorie;
+<<<<<<< HEAD
         this.dateAjout = LocalDateTime.now();
+=======
+        this.dateAjout = dateAjout;
+        this.commentaire = commentaire;
+>>>>>>> 8db55db (ajout attribut aux entités)
     }
+
     public Long getId() {
-        return id; }
+        return id;
+    }
 
     public String getNom() {
-        return nom; }
+        return nom;
+    }
+
     public void setNom(String nom) {
+<<<<<<< HEAD
         this.nom = nom; }
     public void getNom(String nom) {
         this.nom = nom; }
 
+=======
+        this.nom = nom;
+    }
+>>>>>>> 8db55db (ajout attribut aux entités)
 
     public String getReference() {
-        return reference; }
+        return reference;
+    }
 
     public void setReference(String reference) {
-        this.reference = reference; }
+        this.reference = reference;
+    }
 
     public String getCategorie() {
-        return categorie; }
+        return categorie;
+    }
 
-    public void setCategorie(String categorie){
-        this.categorie = categorie; }
+    public void setCategorie(String categorie) {
+        this.categorie = categorie;
+    }
 
     public Set<Emprunt> getEmprunts() {
-        return emprunts; }
+        return emprunts;
+    }
 
     public void setEmprunts(Set<Emprunt> emprunts) {
-        this.emprunts = emprunts; }
+        this.emprunts = emprunts;
+    }
 
 
     public String getEtatMateriel() {
-        return etatMateriel; }
+        return etatMateriel;
+    }
 
     public void setEtatMateriel(String etatMateriel) {
-        this.etatMateriel = etatMateriel; }
+        this.etatMateriel = etatMateriel;
+    }
+    public LocalDateTime getDateAjout() {
+        return dateAjout;
+    }
+    public void setDateAjout(LocalDateTime dateAjout) {
+        this.dateAjout = dateAjout;
+    }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     public String getCommentaire() {
         return commentaire; }
@@ -113,5 +154,14 @@ public class Materiel {
 =======
     
 >>>>>>> b6a6fa1 (modif entité utilisateur mis de coté)
+=======
+    public String getCommentaire() {
+        return commentaire;
+    }
+>>>>>>> 8db55db (ajout attribut aux entités)
+
+    public void setCommentaire(String commentaire) {
+        this.commentaire = commentaire;
+    }
 
 }
