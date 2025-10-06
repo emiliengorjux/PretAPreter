@@ -1,7 +1,6 @@
 package fr.hiit.pretapreter.entity;
 
 import java.time.LocalDateTime;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,12 +18,6 @@ public class Emprunt {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
-   /* @ManyToOne
-    @JoinColumn(name = "utilisateur_id", nullable = false)
-    private Utilisateur utilisateur;
-*/
-
     @ManyToOne
     @JoinColumn(name = "materiel_id", nullable = false)
     private Materiel materiel;
@@ -32,14 +25,14 @@ public class Emprunt {
     @Column(nullable = false)
     private String emprunteur;
 
-
     @Column(nullable = false)
     private LocalDateTime dateEmprunt;
 
     @Column(nullable = false)
     private LocalDateTime retourPrevu;
 
-    private LocalDateTime retoutEffectif;
+    @Column(nullable = true)
+    private LocalDateTime retourEffectif;
 
     @Column(nullable = false)
     private String suiviEtatMateriel;
@@ -47,19 +40,16 @@ public class Emprunt {
     @Column(nullable = true)
     private String commentaire;
 
+    public Emprunt() {}
 
-    public Emprunt(Materiel materiel, LocalDateTime dateEmprunt, LocalDateTime retourPrevu,
-                   String suiviEtatMateriel, String commentaire) {
-        //this.utilisateur = utilisateur;
+    public Emprunt(Materiel materiel, String emprunteur, LocalDateTime dateEmprunt,
+                   LocalDateTime retourPrevu, String suiviEtatMateriel, String commentaire) {
         this.materiel = materiel;
+        this.emprunteur = emprunteur;
         this.dateEmprunt = dateEmprunt;
         this.retourPrevu = retourPrevu;
         this.suiviEtatMateriel = suiviEtatMateriel;
-
-    }
-
-    public Emprunt() {
-
+        this.commentaire = commentaire;
     }
 
 
@@ -67,47 +57,65 @@ public class Emprunt {
         return id;
     }
 
-    /* public Utilisateur getUtilisateur() {
-        return utilisateur; }
-    public void setUtilisateur(Utilisateur utilisateur) {
-        this.utilisateur = utilisateur; }
-*/
+
     public Materiel getMateriel() {
-        return materiel; }
+        return materiel;
+    }
 
     public void setMateriel(Materiel materiel) {
-        this.materiel = materiel; }
+        this.materiel = materiel;
+    }
+
+
+    public String getEmprunteur() {
+        return emprunteur;
+    }
+
+    public void setEmprunteur(String emprunteur) {
+        this.emprunteur = emprunteur;
+    }
 
 
     public LocalDateTime getDateEmprunt() {
-        return dateEmprunt; }
+        return dateEmprunt;
+    }
 
     public void setDateEmprunt(LocalDateTime dateEmprunt) {
-        this.dateEmprunt = dateEmprunt; }
+        this.dateEmprunt = dateEmprunt;
+    }
+
 
     public LocalDateTime getRetourPrevu() {
-        return retourPrevu; }
+        return retourPrevu;
+    }
 
     public void setRetourPrevu(LocalDateTime retourPrevu) {
-        this.retourPrevu = retourPrevu; }
+        this.retourPrevu = retourPrevu;
+    }
+
 
     public LocalDateTime getRetourEffectif() {
-        return retoutEffectif; }
+        return retourEffectif;
+    }
 
-    public void setRetourEffectif(LocalDateTime retoutEffectif) {
-        this.retoutEffectif = retoutEffectif; }
+    public void setRetourEffectif(LocalDateTime retourEffectif) {
+        this.retourEffectif = retourEffectif;
+    }
 
+    public String getSuiviEtatMateriel() {
+        return suiviEtatMateriel;
+    }
 
-    public void getSuiviEtatMateriel(String suiviEtatMateriel) {
-        this.suiviEtatMateriel = suiviEtatMateriel; }
     public void setSuiviEtatMateriel(String suiviEtatMateriel) {
-        this.suiviEtatMateriel = suiviEtatMateriel; }
+        this.suiviEtatMateriel = suiviEtatMateriel;
+    }
+
 
     public String getCommentaire() {
-        return commentaire;}
-    public void setCommentaire() {
-        this.commentaire = commentaire; }
+        return commentaire;
+    }
 
-
-
+    public void setCommentaire(String commentaire) {
+        this.commentaire = commentaire;
+    }
 }

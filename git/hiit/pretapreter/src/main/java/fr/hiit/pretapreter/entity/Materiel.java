@@ -41,10 +41,7 @@ public class Materiel {
     @OneToMany(mappedBy = "materiel", cascade = CascadeType.ALL)
     private Set<Emprunt> emprunts = new HashSet<>();
 
-    // Constructeur par défaut (nécessaire pour JPA)
-    public Materiel(String number, String ordinateurPortable, String dell, String disponible, String bonÉtat, LocalDateTime now, String description) {}
 
-    // Constructeur avec paramètres
     public Materiel(String nom, String reference, String etatMateriel, String commentaire, String categorie) {
         this.nom = nom;
         this.reference = reference;
@@ -52,8 +49,13 @@ public class Materiel {
         this.commentaire = commentaire;
         this.categorie = categorie;
     }
+    public Materiel(String number, String ordinateurPortable, String dell, String disponible, String bonÉtat, LocalDateTime now, String description) {
 
-    // Getters
+    }
+
+    public Materiel() {
+
+    }
     public Long getId() {
         return id;
     }
@@ -62,49 +64,55 @@ public class Materiel {
         return nom;
     }
 
-    public String getReference() {
-        return reference;
-    }
-
-    public String getEtatMateriel() {
-        return etatMateriel;
-    }
-
-    public String getCommentaire() {
-        return commentaire;
-    }
-
-    public String getCategorie() {
-        return categorie;
-    }
-
-    public LocalDateTime getDateAjout() {
-        return dateAjout;
-    }
-
-    public Set<Emprunt> getEmprunts() {
-        return emprunts;
-    }
-
-    // Setters
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public String getReference() {
+        return reference;
     }
 
     public void setReference(String reference) {
         this.reference = reference;
     }
 
+    public String getEtatMateriel() {
+        return etatMateriel;
+    }
+
     public void setEtatMateriel(String etatMateriel) {
         this.etatMateriel = etatMateriel;
+    }
+
+    public String getCommentaire() {
+        return commentaire;
     }
 
     public void setCommentaire(String commentaire) {
         this.commentaire = commentaire;
     }
 
+
+    public String getCategorie() {
+        return categorie;
+    }
+
     public void setCategorie(String categorie) {
         this.categorie = categorie;
+    }
+
+
+    public LocalDateTime getDateAjout() {
+        return dateAjout;
+    }
+
+    public void setDateAjout(LocalDateTime dateAjout) {
+        this.dateAjout = dateAjout;
+    }
+
+
+    public Set<Emprunt> getEmprunts() {
+        return emprunts;
     }
 
     public void setEmprunts(Set<Emprunt> emprunts) {
