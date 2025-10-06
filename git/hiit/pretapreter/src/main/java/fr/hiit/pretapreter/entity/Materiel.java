@@ -33,9 +33,12 @@ public class Materiel {
     @Column (nullable = false)
     private String etatMateriel;
 
+<<<<<<< HEAD
     @Column (nullable = true)
     private String commentaire;
 
+=======
+>>>>>>> b6a6fa1 (modif entité utilisateur mis de coté)
     @Column (nullable = false)
     private String categorie;
 
@@ -52,7 +55,10 @@ public class Materiel {
         this.nom = nom;
         this.reference = reference;
         this.etatMateriel = etatMateriel;
+<<<<<<< HEAD
         this.commentaire = commentaire;
+=======
+>>>>>>> b6a6fa1 (modif entité utilisateur mis de coté)
         this.categorie = categorie;
         this.dateAjout = LocalDateTime.now();
     }
@@ -92,6 +98,7 @@ public class Materiel {
     public void setEtatMateriel(String etatMateriel) {
         this.etatMateriel = etatMateriel; }
 
+<<<<<<< HEAD
     public String getCommentaire() {
         return commentaire; }
 
@@ -103,5 +110,8 @@ public class Materiel {
         
     public void setDateAjout(LocalDateTime dateAjout) {
         this.dateAjout = dateAjout; }  
+=======
+    
+>>>>>>> b6a6fa1 (modif entité utilisateur mis de coté)
 
 }

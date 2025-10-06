@@ -20,10 +20,17 @@ public class Emprunt {
     private Long id;
 
 
+<<<<<<< HEAD
    /* @ManyToOne
     @JoinColumn(name = "utilisateur_id", nullable = false)
     private Utilisateur utilisateur;
 */
+=======
+    // @ManyToOne
+    // @JoinColumn(name = "utilisateur_id", nullable = false)
+    // private Utilisateur utilisateur;
+
+>>>>>>> b6a6fa1 (modif entité utilisateur mis de coté)
 
     @ManyToOne
     @JoinColumn(name = "materiel_id", nullable = false)
@@ -35,6 +42,9 @@ public class Emprunt {
 
     @Column(nullable = false)
     private LocalDateTime dateEmprunt;
+
+    @Column (nullable = false)
+    private String suiviEtatMateriel;
 
     @Column(nullable = false)
     private LocalDateTime retourPrevu;
@@ -48,9 +58,14 @@ public class Emprunt {
     private String commentaire;
 
 
+<<<<<<< HEAD
     public Emprunt(Materiel materiel, LocalDateTime dateEmprunt, LocalDateTime retourPrevu,
                    String suiviEtatMateriel, String commentaire) {
         //this.utilisateur = utilisateur;
+=======
+    public Emprunt( Materiel materiel, LocalDateTime dateEmprunt, LocalDateTime retourPrevu, String statut) {
+        // this.utilisateur = utilisateur; a ajouter dans les parentheses au dessus
+>>>>>>> b6a6fa1 (modif entité utilisateur mis de coté)
         this.materiel = materiel;
         this.dateEmprunt = dateEmprunt;
         this.retourPrevu = retourPrevu;
@@ -67,11 +82,19 @@ public class Emprunt {
         return id;
     }
 
+<<<<<<< HEAD
     /* public Utilisateur getUtilisateur() {
         return utilisateur; }
     public void setUtilisateur(Utilisateur utilisateur) {
         this.utilisateur = utilisateur; }
 */
+=======
+    // public Utilisateur getUtilisateur() {
+    //     return utilisateur; }
+    // public void setUtilisateur(Utilisateur utilisateur) {
+    //     this.utilisateur = utilisateur; }
+
+>>>>>>> b6a6fa1 (modif entité utilisateur mis de coté)
     public Materiel getMateriel() {
         return materiel; }
 
@@ -97,6 +120,7 @@ public class Emprunt {
     public void setRetourEffectif(LocalDateTime retoutEffectif) {
         this.retoutEffectif = retoutEffectif; }
 
+<<<<<<< HEAD
 
     public void getSuiviEtatMateriel(String suiviEtatMateriel) {
         this.suiviEtatMateriel = suiviEtatMateriel; }
@@ -107,4 +131,16 @@ public class Emprunt {
         return commentaire;}
     public void setCommentaire() {
         this.commentaire = commentaire; }
+=======
+    public String getStatut() {
+        return statut; }
+    public void setStatut(String statut) {
+        this.statut = statut; }
+
+        public String getSuiviEtatMateriel() {
+        return suiviEtatMateriel; }
+
+    public void setSuiviEtatMateriel(String suiviEtatMateriel) {
+        this.suiviEtatMateriel = suiviEtatMateriel; }
+>>>>>>> b6a6fa1 (modif entité utilisateur mis de coté)
 }
