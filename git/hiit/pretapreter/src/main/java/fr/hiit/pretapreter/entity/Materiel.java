@@ -33,9 +33,6 @@ public class Materiel {
     private String etatMateriel;
 
     @Column (nullable = false)
-    private String suiviEtatMateriel;
-
-    @Column (nullable = false)
     private String categorie;
 
     @OneToMany(mappedBy = "materiel", cascade = CascadeType.ALL)
@@ -47,7 +44,6 @@ public class Materiel {
         this.nom = nom;
         this.reference = reference;
         this.etatMateriel = etatMateriel;
-        this.suiviEtatMateriel = suiviEtatMateriel;
         this.categorie = categorie;
     }
     public Long getId() {
@@ -82,10 +78,6 @@ public class Materiel {
     public void setEtatMateriel(String etatMateriel) {
         this.etatMateriel = etatMateriel; }
 
-    public String getSuiviEtatMateriel() {
-        return suiviEtatMateriel; }
-
-    public void setSuiviEtatMateriel(String suiviEtatMateriel) {
-        this.suiviEtatMateriel = suiviEtatMateriel; }
+    
 
 }

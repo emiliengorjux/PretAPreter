@@ -20,9 +20,9 @@ public class Emprunt {
     private Long id;
 
 
-    @ManyToOne
-    @JoinColumn(name = "utilisateur_id", nullable = false)
-    private Utilisateur utilisateur;
+    // @ManyToOne
+    // @JoinColumn(name = "utilisateur_id", nullable = false)
+    // private Utilisateur utilisateur;
 
 
     @ManyToOne
@@ -31,6 +31,9 @@ public class Emprunt {
 
     @Column(nullable = false)
     private LocalDateTime dateEmprunt;
+
+    @Column (nullable = false)
+    private String suiviEtatMateriel;
 
     @Column(nullable = false)
     private LocalDateTime retourPrevu;
@@ -41,8 +44,8 @@ public class Emprunt {
     private String statut = "EMPRUNT";
 
 
-    public Emprunt(Utilisateur utilisateur, Materiel materiel, LocalDateTime dateEmprunt, LocalDateTime retourPrevu, String statut) {
-        this.utilisateur = utilisateur;
+    public Emprunt( Materiel materiel, LocalDateTime dateEmprunt, LocalDateTime retourPrevu, String statut) {
+        // this.utilisateur = utilisateur; a ajouter dans les parentheses au dessus
         this.materiel = materiel;
         this.dateEmprunt = dateEmprunt;
         this.retourPrevu = retourPrevu;
@@ -53,10 +56,10 @@ public class Emprunt {
     public Long getId() {
         return id; }
 
-    public Utilisateur getUtilisateur() {
-        return utilisateur; }
-    public void setUtilisateur(Utilisateur utilisateur) {
-        this.utilisateur = utilisateur; }
+    // public Utilisateur getUtilisateur() {
+    //     return utilisateur; }
+    // public void setUtilisateur(Utilisateur utilisateur) {
+    //     this.utilisateur = utilisateur; }
 
     public Materiel getMateriel() {
         return materiel; }
@@ -82,4 +85,10 @@ public class Emprunt {
         return statut; }
     public void setStatut(String statut) {
         this.statut = statut; }
+
+        public String getSuiviEtatMateriel() {
+        return suiviEtatMateriel; }
+
+    public void setSuiviEtatMateriel(String suiviEtatMateriel) {
+        this.suiviEtatMateriel = suiviEtatMateriel; }
 }
