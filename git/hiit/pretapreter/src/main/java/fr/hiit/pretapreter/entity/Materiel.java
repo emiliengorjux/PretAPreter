@@ -49,6 +49,7 @@ public class Materiel {
         this.commentaire = commentaire;
         this.categorie = categorie;
     }
+
     public Materiel(String number, String ordinateurPortable, String dell, String disponible, String bonÉtat, LocalDateTime now, String description) {
 
     }
