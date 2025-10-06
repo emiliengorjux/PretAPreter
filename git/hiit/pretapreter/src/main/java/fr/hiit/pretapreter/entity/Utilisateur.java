@@ -1,8 +1,12 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
  /*package fr.hiit.pretapreter.entity;
 =======
 // package fr.hiit.pretapreter.entity;
 >>>>>>> b6a6fa1 (modif entité utilisateur mis de coté)
+=======
+// package fr.hiit.pretapreter.entity;
+>>>>>>> 4e9ffac1c69a4ef3eb855383f7b7083bf2906b3c
 
 // import java.util.HashSet;
 // import java.util.Set;
@@ -69,14 +73,21 @@
 //     public void setEmail(String email) {
 //         this.email = email; }
 
+<<<<<<< HEAD
     public Set<Emprunt> getEmprunts() {
         return emprunts; }
     public void setEmprunts(Set<Emprunt> emprunts) {
         this.emprunts = emprunts; }
 } */
+=======
+>>>>>>> 4e9ffac1c69a4ef3eb855383f7b7083bf2906b3c
 //     public Set<Emprunt> getEmprunts() {
 //         return emprunts; }
 //     public void setEmprunts(Set<Emprunt> emprunts) {
 //         this.emprunts = emprunts; }
+<<<<<<< HEAD
 // }
 
+=======
+// }
+>>>>>>> 4e9ffac1c69a4ef3eb855383f7b7083bf2906b3c

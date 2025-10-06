@@ -21,11 +21,14 @@ public class Emprunt {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
    /* @ManyToOne
     @JoinColumn(name = "utilisateur_id", nullable = false)
     private Utilisateur utilisateur;
 */
 =======
+=======
+>>>>>>> 4e9ffac1c69a4ef3eb855383f7b7083bf2906b3c
     // @ManyToOne
     // @JoinColumn(name = "utilisateur_id", nullable = false)
     // private Utilisateur utilisateur;
@@ -40,9 +43,12 @@ public class Emprunt {
     private String emprunteur;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> 8db55db (ajout attribut aux entités)
+=======
+>>>>>>> 4e9ffac1c69a4ef3eb855383f7b7083bf2906b3c
     @Column(nullable = false)
     private LocalDateTime dateEmprunt;
 
@@ -57,6 +63,7 @@ public class Emprunt {
 
     private LocalDateTime retoutEffectif;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     @Column(nullable = false)
     private String suiviEtatMateriel;
@@ -78,10 +85,17 @@ public class Emprunt {
 
         // this.utilisateur = utilisateur; a ajouter dans les parentheses au dessus
 
+=======
+
+
+    public Emprunt( Materiel materiel, LocalDateTime dateEmprunt, LocalDateTime retourPrevu, String suiviEtatMateriel, String commentaire, String emprunteur) {
+        // this.utilisateur = utilisateur; a ajouter dans les parentheses au dessus
+>>>>>>> 4e9ffac1c69a4ef3eb855383f7b7083bf2906b3c
         this.materiel = materiel;
         this.dateEmprunt = dateEmprunt;
         this.retourPrevu = retourPrevu;
         this.suiviEtatMateriel = suiviEtatMateriel;
+<<<<<<< HEAD
 
 
     }
@@ -90,6 +104,10 @@ public class Emprunt {
         this.commentaire = commentaire;
         this.emprunteur = emprunteur;
 
+=======
+        this.commentaire = commentaire;
+        this.emprunteur = emprunteur;
+>>>>>>> 4e9ffac1c69a4ef3eb855383f7b7083bf2906b3c
 
     }
 
@@ -99,12 +117,15 @@ public class Emprunt {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     /* public Utilisateur getUtilisateur() {
         return utilisateur; }
     public void setUtilisateur(Utilisateur utilisateur) {
         this.utilisateur = utilisateur; }
 */
 =======
+=======
+>>>>>>> 4e9ffac1c69a4ef3eb855383f7b7083bf2906b3c
     // public Utilisateur getUtilisateur() {
     //     return utilisateur; }
     // public void setUtilisateur(Utilisateur utilisateur) {
@@ -138,6 +159,7 @@ public class Emprunt {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     public void getSuiviEtatMateriel(String suiviEtatMateriel) {
         this.suiviEtatMateriel = suiviEtatMateriel; }
@@ -156,14 +178,19 @@ public class Emprunt {
 
 =======
 >>>>>>> 8db55db (ajout attribut aux entités)
+=======
+>>>>>>> 4e9ffac1c69a4ef3eb855383f7b7083bf2906b3c
         public String getSuiviEtatMateriel() {
         return suiviEtatMateriel; }
 
     public void setSuiviEtatMateriel(String suiviEtatMateriel) {
         this.suiviEtatMateriel = suiviEtatMateriel; }
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> b6a6fa1 (modif entité utilisateur mis de coté)
 =======
+=======
+>>>>>>> 4e9ffac1c69a4ef3eb855383f7b7083bf2906b3c
 
     public String getCommentaire() {
         return commentaire; }
@@ -175,5 +202,8 @@ public class Emprunt {
         
     public void setEmprunteur(String emprunteur) {
         this.emprunteur = emprunteur; }
+<<<<<<< HEAD
 >>>>>>> 8db55db (ajout attribut aux entités)
+=======
+>>>>>>> 4e9ffac1c69a4ef3eb855383f7b7083bf2906b3c
 }

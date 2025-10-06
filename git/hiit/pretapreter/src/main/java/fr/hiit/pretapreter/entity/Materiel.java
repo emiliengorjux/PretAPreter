@@ -32,6 +32,7 @@ public class Materiel {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     @Column (nullable = true)
     private String commentaire;
 
@@ -50,6 +51,15 @@ public class Materiel {
 
     @Column(nullable = false, updatable= false)
 >>>>>>> 8db55db (ajout attribut aux entités)
+=======
+    @Column(nullable = true)
+    private String commentaire;
+
+    @Column(nullable = false)
+    private String categorie;
+
+    @Column(nullable = false, updatable= false)
+>>>>>>> 4e9ffac1c69a4ef3eb855383f7b7083bf2906b3c
     private LocalDateTime dateAjout = LocalDateTime.now();
 
     @OneToMany(mappedBy = "materiel", cascade = CascadeType.ALL)
@@ -58,6 +68,7 @@ public class Materiel {
     public Materiel() {
     }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     public Materiel(String nom, String reference, String etatMateriel, String commentaire,
                     String categorie, LocalDateTime dateAjout) {
@@ -109,9 +120,48 @@ public class Materiel {
     }
 
     public void setCategorie(String categorie) {
+=======
+    public Materiel(String nom, String reference, String etatMateriel, String suiviEtatMateriel, String categorie , LocalDateTime dateAjout, String commentaire) {
+        this.nom = nom;
+        this.reference = reference;
+        this.etatMateriel = etatMateriel;
+>>>>>>> 4e9ffac1c69a4ef3eb855383f7b7083bf2906b3c
+        this.categorie = categorie;
+        this.dateAjout = dateAjout;
+        this.commentaire = commentaire;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+<<<<<<< HEAD
+=======
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getReference() {
+        return reference;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
+
+    public String getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(String categorie) {
         this.categorie = categorie;
     }
 
+>>>>>>> 4e9ffac1c69a4ef3eb855383f7b7083bf2906b3c
     public Set<Emprunt> getEmprunts() {
         return emprunts;
     }
@@ -120,7 +170,10 @@ public class Materiel {
         this.emprunts = emprunts;
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4e9ffac1c69a4ef3eb855383f7b7083bf2906b3c
     public String getEtatMateriel() {
         return etatMateriel;
     }
@@ -135,6 +188,7 @@ public class Materiel {
         this.dateAjout = dateAjout;
     }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     public String getCommentaire() {
@@ -158,6 +212,13 @@ public class Materiel {
 >>>>>>> 8db55db (ajout attribut aux entités)
 
     public void setCommentaire(String commentaire) {
+=======
+    public String getCommentaire() {
+        return commentaire;
+    }
+
+    public void setCommentaire(String commentaire) {
+>>>>>>> 4e9ffac1c69a4ef3eb855383f7b7083bf2906b3c
         this.commentaire = commentaire;
     }
 

@@ -9,7 +9,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import fr.hiit.pretapreter.entity.Materiel;
+<<<<<<< HEAD
 import fr.hiit.pretapreter.repository.MaterielRepository;
+=======
+import fr.hiit.pretapreter.entity.repository.MaterielRepository;
+>>>>>>> 4e9ffac1c69a4ef3eb855383f7b7083bf2906b3c
 
 @Component
 public class DataInitializer implements CommandLineRunner {
