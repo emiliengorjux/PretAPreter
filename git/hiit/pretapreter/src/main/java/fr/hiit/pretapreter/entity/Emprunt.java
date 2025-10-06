@@ -65,32 +65,31 @@ public class Emprunt {
     private String commentaire;
 
 
-<<<<<<< HEAD
+
     public Emprunt(Materiel materiel, LocalDateTime dateEmprunt, LocalDateTime retourPrevu,
                    String suiviEtatMateriel, String commentaire) {
         //this.utilisateur = utilisateur;
-=======
+
     public Emprunt( Materiel materiel, LocalDateTime dateEmprunt, LocalDateTime retourPrevu, String statut) {
-=======
+
 
 
     public Emprunt( Materiel materiel, LocalDateTime dateEmprunt, LocalDateTime retourPrevu, String suiviEtatMateriel, String commentaire, String emprunteur) {
->>>>>>> 8db55db (ajout attribut aux entités)
+
         // this.utilisateur = utilisateur; a ajouter dans les parentheses au dessus
->>>>>>> b6a6fa1 (modif entité utilisateur mis de coté)
+
         this.materiel = materiel;
         this.dateEmprunt = dateEmprunt;
         this.retourPrevu = retourPrevu;
         this.suiviEtatMateriel = suiviEtatMateriel;
-<<<<<<< HEAD
+
 
     }
 
     public Emprunt() {
-=======
         this.commentaire = commentaire;
         this.emprunteur = emprunteur;
->>>>>>> 8db55db (ajout attribut aux entités)
+
 
     }
 

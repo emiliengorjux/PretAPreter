@@ -88,16 +88,13 @@ public class Materiel {
         return nom;
     }
 
-    public void setNom(String nom) {
-<<<<<<< HEAD
         this.nom = nom; }
     public void getNom(String nom) {
         this.nom = nom; }
 
-=======
+
         this.nom = nom;
-    }
->>>>>>> 8db55db (ajout attribut aux entités)
+    
 
     public String getReference() {
         return reference;

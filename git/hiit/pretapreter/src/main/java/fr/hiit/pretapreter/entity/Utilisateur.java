@@ -69,16 +69,14 @@
 //     public void setEmail(String email) {
 //         this.email = email; }
 
-<<<<<<< HEAD
     public Set<Emprunt> getEmprunts() {
         return emprunts; }
     public void setEmprunts(Set<Emprunt> emprunts) {
         this.emprunts = emprunts; }
 } */
-=======
 //     public Set<Emprunt> getEmprunts() {
 //         return emprunts; }
 //     public void setEmprunts(Set<Emprunt> emprunts) {
 //         this.emprunts = emprunts; }
 // }
->>>>>>> b6a6fa1 (modif entité utilisateur mis de coté)
+
