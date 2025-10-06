@@ -3,6 +3,7 @@ package fr.hiit.pretapreter.entity;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -42,21 +43,20 @@ public class Materiel {
     private Set<Emprunt> emprunts = new HashSet<>();
 
 
-    public Materiel(String nom, String reference, String etatMateriel, String commentaire, String categorie) {
-        this.nom = nom;
-        this.reference = reference;
-        this.etatMateriel = etatMateriel;
-        this.commentaire = commentaire;
-        this.categorie = categorie;
-    }
+    public Materiel(String reference, String nom, String categorie, String etatMateriel, String commentaire) {
+    this.reference = reference;
+    this.nom = nom;
+    this.categorie = categorie;
+    this.etatMateriel = etatMateriel;
+    this.commentaire = commentaire;
+    this.dateAjout = LocalDateTime.now();
+}
 
-    public Materiel(String number, String ordinateurPortable, String dell, String disponible, String bonÉtat, LocalDateTime now, String description) {
-
-    }
 
     public Materiel() {
 
     }
+    
     public Long getId() {
         return id;
     }

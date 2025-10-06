@@ -29,10 +29,17 @@ public class DataInitializer implements CommandLineRunner {
         }
 
         List<Materiel> materiels = List.of(
+
                 new Materiel("Ordinateur portable", "Dell", "Bon", "RAS", "Informatique"),
                 new Materiel("Écran 24 pouces", "LG", "Moyen", "Quelques rayures", "Informatique"),
                 new Materiel("Clavier mécanique", "Logitech", "Mauvais", "Reparation necessaire", "Informatique"),
                 new Materiel("Switch", "Nintendo", "Bon", "RAS", "Console de jeu")
+
+                new Materiel("REF001", "Ordinateur portable", "Informatique", "Disponible", "Dell - Bon état"),
+                new Materiel("REF002", "Écran 24 pouces", "Informatique", "Disponible", "Samsung - Bon état"),
+                new Materiel("REF003", "Clavier mécanique", "Informatique", "Disponible", "Logitech - Bon état"),
+                new Materiel("REF004", "Souris sans fil", "Informatique", "Disponible", "HP - Bon état")
+
         );
 
         repository.saveAll(materiels);
