@@ -24,11 +24,12 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) {
         if (repository.count() > 0) {
-            log.info("✅ Base déjà initialisée ({} matériels)", repository.count());
+            log.info(" Base déjà initialisée ({} matériels)", repository.count());
             return;
         }
 
         List<Materiel> materiels = List.of(
+
                 new Materiel("Ordinateur portable", "Dell", "Bon", "RAS", "Informatique"),
                 new Materiel("Écran 24 pouces", "LG", "Moyen", "Quelques rayures", "Informatique"),
                 new Materiel("Clavier mécanique", "Logitech", "Mauvais", "Reparation necessaire", "Informatique"),
@@ -36,6 +37,6 @@ public class DataInitializer implements CommandLineRunner {
         );
 
         repository.saveAll(materiels);
-        log.info("🧩 Base de données initialisée avec {} matériels.", repository.count());
+        log.info(" Base de données initialisée avec {} matériels.", repository.count());
     }
 }
