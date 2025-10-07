@@ -41,7 +41,7 @@ public class Emprunt {
     @Column(nullable = true)
     private String commentaire;
 
-    public Emprunt(String nomMateriel, String nom, LocalDate dateEmprunt, LocalDate retourPrevu, String suiviEtatMateriel, String commentaire) {}
+    public Emprunt(Materiel materiel, String nom, LocalDate dateEmprunt, LocalDate retourPrevu, String suiviEtatMateriel, String commentaire) {}
 
     public Emprunt(Materiel materiel, String emprunteur, LocalDateTime dateEmprunt,
                    LocalDateTime retourPrevu, String suiviEtatMateriel, String commentaire) {
