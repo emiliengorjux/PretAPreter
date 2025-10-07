@@ -13,9 +13,7 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
-  sql:
-    init:
-      mode: always
+      sql-load-script-source: classpath:import.sql
 
 server:
   port: 8090
