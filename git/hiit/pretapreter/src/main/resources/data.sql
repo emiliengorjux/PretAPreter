@@ -8,7 +8,7 @@ VALUES
 
 INSERT INTO materiel (id, nom, reference, etat_materiel, commentaire, categorie, date_ajout)
 VALUES
-(1, 'Ordinateur portable', 'REF001', 'Disponible', 'Bon état', 'Informatique', CURRENT_TIMESTAMP()),
-(2, 'Écran 24 pouces', 'REF002', 'Disponible', 'RAS', 'Informatique', CURRENT_TIMESTAMP()),
-(3, 'Clavier mécanique', 'REF003', 'Disponible', 'Bon état', 'Informatique', CURRENT_TIMESTAMP()),
-(4, 'Souris sans fil', 'REF004', 'Disponible', 'RAS', 'Informatique', CURRENT_TIMESTAMP());
+(1, 'Ordinateur portable', 'ASUS', 'Bon état', 'RAS', 'Informatique', CURRENT_TIMESTAMP()),
+(2, 'Écran 24 pouces', 'LG', 'Moyen', 'Quelques rayures', 'Informatique', CURRENT_TIMESTAMP()),
+(3, 'Clavier mécanique', 'Logitech', 'Mauvais', 'A envoyer en réparation', 'Bureautique', CURRENT_TIMESTAMP()),
+(4, 'Nintendo', 'Switch', 'Parfait état', 'RAS', 'Console de jeu', CURRENT_TIMESTAMP());
