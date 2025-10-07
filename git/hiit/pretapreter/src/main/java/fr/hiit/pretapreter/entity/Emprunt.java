@@ -1,7 +1,7 @@
 package fr.hiit.pretapreter.entity;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,13 +27,13 @@ public class Emprunt {
     private String emprunteur;
 
     @Column(nullable = false)
-    private LocalDateTime dateEmprunt;
+    private LocalDate dateEmprunt;
 
     @Column(nullable = false)
-    private LocalDateTime retourPrevu;
+    private LocalDate retourPrevu;
 
     @Column(nullable = true)
-    private LocalDateTime retourEffectif;
+    private LocalDate retourEffectif;
 
     @Column(nullable = false)
     private String suiviEtatMateriel;
@@ -41,21 +41,19 @@ public class Emprunt {
     @Column(nullable = true)
     private String commentaire;
 
-    public Emprunt(Materiel materiel, String nom, LocalDate dateEmprunt, LocalDate retourPrevu, String suiviEtatMateriel, String commentaire) {}
 
-    public Emprunt(Materiel materiel, String emprunteur, LocalDateTime dateEmprunt,
-                   LocalDateTime retourPrevu, String suiviEtatMateriel, String commentaire) {
+    public Emprunt(Materiel materiel, String emprunteur, LocalDate dateEmprunt,
+                   LocalDate retourPrevu, LocalDate retourEffectif, String suiviEtatMateriel, String commentaire) {
         this.materiel = materiel;
         this.emprunteur = emprunteur;
         this.dateEmprunt = dateEmprunt;
         this.retourPrevu = retourPrevu;
+        this.retourEffectif = retourEffectif;
         this.suiviEtatMateriel = suiviEtatMateriel;
         this.commentaire = commentaire;
     }
 
-    public Emprunt() {
-
-    }
+    public Emprunt() {}
 
 
     public Long getId() {
@@ -81,29 +79,29 @@ public class Emprunt {
     }
 
 
-    public LocalDateTime getDateEmprunt() {
+    public LocalDate getDateEmprunt() {
         return dateEmprunt;
     }
 
-    public void setDateEmprunt(LocalDateTime dateEmprunt) {
+    public void setDateEmprunt(LocalDate dateEmprunt) {
         this.dateEmprunt = dateEmprunt;
     }
 
 
-    public LocalDateTime getRetourPrevu() {
+    public LocalDate getRetourPrevu() {
         return retourPrevu;
     }
 
-    public void setRetourPrevu(LocalDateTime retourPrevu) {
+    public void setRetourPrevu(LocalDate retourPrevu) {
         this.retourPrevu = retourPrevu;
     }
 
 
-    public LocalDateTime getRetourEffectif() {
+    public LocalDate getRetourEffectif() {
         return retourEffectif;
     }
 
-    public void setRetourEffectif(LocalDateTime retourEffectif) {
+    public void setRetourEffectif(LocalDate retourEffectif) {
         this.retourEffectif = retourEffectif;
     }
 

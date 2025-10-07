@@ -29,10 +29,10 @@ public class EmpruntDataInitializer implements CommandLineRunner {
         }
 
         List<Emprunt> emprunts = List.of(
-                new Emprunt(new Materiel(), "Didier", LocalDate.of(2025, 10, 7), LocalDate.of(2025, 10, 10),"RAS", "RAS"),
-                new Emprunt(new Materiel(), "Yves", LocalDate.of(2025, 10, 7), LocalDate.of(2025, 10, 10), "Bon", "Le matériel est bon"),
-                new Emprunt(new Materiel(), "Guy", LocalDate.of(2025, 10, 7), LocalDate.of(2025, 10, 10), "Mauvais", "Le matériel est défectueux"),
-                new Emprunt(new Materiel(), "Michel", LocalDate.of(2025, 10, 7), LocalDate.of(2025, 10, 10), "RAS", "RAS")
+                new Emprunt(new Materiel(), "Didier", LocalDate.of(2025, 10, 7), LocalDate.of(2025, 10, 10), LocalDate.of(2025, 10, 11), "RAS","RAS"),
+                new Emprunt(new Materiel(), "Yves", LocalDate.of(2025, 10, 7), LocalDate.of(2025, 10, 10), LocalDate.of(2025, 10, 11), "Bon", "Le matériel est bon"),
+                new Emprunt(new Materiel(), "Guy", LocalDate.of(2025, 10, 7), LocalDate.of(2025, 10, 10), LocalDate.of(2025, 10, 11), "Mauvais", "Le matériel est défectueux"),
+                new Emprunt(new Materiel(), "Michel", LocalDate.of(2025, 10, 7), LocalDate.of(2025, 10, 10), LocalDate.of(2025, 10, 11), "RAS", "RAS")
         );
 
         empruntRepository.saveAll(emprunts);
