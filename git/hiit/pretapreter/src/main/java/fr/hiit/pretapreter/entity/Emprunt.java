@@ -1,5 +1,6 @@
 package fr.hiit.pretapreter.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -40,7 +41,7 @@ public class Emprunt {
     @Column(nullable = true)
     private String commentaire;
 
-    public Emprunt() {}
+    public Emprunt(String nomMateriel, String nom, LocalDate dateEmprunt, LocalDate retourPrevu, String suiviEtatMateriel, String commentaire) {}
 
     public Emprunt(Materiel materiel, String emprunteur, LocalDateTime dateEmprunt,
                    LocalDateTime retourPrevu, String suiviEtatMateriel, String commentaire) {
@@ -50,6 +51,10 @@ public class Emprunt {
         this.retourPrevu = retourPrevu;
         this.suiviEtatMateriel = suiviEtatMateriel;
         this.commentaire = commentaire;
+    }
+
+    public Emprunt() {
+
     }
 
 
