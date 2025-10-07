@@ -3,18 +3,21 @@ spring:
     url: jdbc:h2:mem:empruntsdb
     driverClassName: org.h2.Driver
     username: sa
-    password: "admin"
+    password: admin
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
   h2:
     console:
       enabled: true
       path: /h2-console
+
   jpa:
-    show-sql: true
     hibernate:
-      ddl-auto: update
-  sql:
-    init:
-      mode: always
+      ddl-auto: validate   # ✅ Hibernate vérifie la structure mais ne crée rien
+    show-sql: true         # ✅ Pour voir les requêtes dans la console
 
 server:
   port: 8090
