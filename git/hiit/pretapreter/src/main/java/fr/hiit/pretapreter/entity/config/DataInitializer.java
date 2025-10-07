@@ -24,7 +24,7 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) {
         if (repository.count() > 0) {
-            log.info("✅ Base déjà initialisée ({} matériels)", repository.count());
+            log.info(" Base déjà initialisée ({} matériels)", repository.count());
             return;
         }
 
@@ -37,6 +37,6 @@ public class DataInitializer implements CommandLineRunner {
         );
 
         repository.saveAll(materiels);
-        log.info("🧩 Base de données initialisée avec {} matériels.", repository.count());
+        log.info(" Base de données initialisée avec {} matériels.", repository.count());
     }
 }
