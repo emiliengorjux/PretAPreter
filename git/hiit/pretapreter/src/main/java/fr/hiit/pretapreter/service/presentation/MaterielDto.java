@@ -1,4 +1,4 @@
 package fr.hiit.pretapreter.service.presentation;
 
-public class Dto {
+public class MaterielDto {
 }
