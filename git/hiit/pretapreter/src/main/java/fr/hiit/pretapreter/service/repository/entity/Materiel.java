@@ -43,7 +43,7 @@ public class Materiel {
     private Set<Emprunt> emprunts = new HashSet<>();
 
 
-    public Materiel(String reference, String nom, String categorie, String etatMateriel, String commentaire) {
+    public Materiel(String reference, String nom, String categorie, String etatMateriel, String commentaire, LocalDateTime dateAjout) {
     this.reference = reference;
     this.nom = nom;
     this.categorie = categorie;
