@@ -1,4 +1,4 @@
-package fr.hiit.pretapreter.service.presentation;
+package fr.hiit.pretapreter.service.Presentation;
 
 public class Dto {
 }
