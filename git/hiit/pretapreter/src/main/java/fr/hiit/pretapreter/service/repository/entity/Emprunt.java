@@ -56,9 +56,7 @@ public class Emprunt {
     public Emprunt() {}
 
 
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id;  }
 
 
     public Materiel getMateriel() {
