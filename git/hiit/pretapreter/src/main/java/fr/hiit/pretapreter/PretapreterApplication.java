@@ -1,4 +1,4 @@
-package fr.hiit.pretapreter.entity;
+package fr.hiit.pretapreter;
 
 
 import org.springframework.boot.SpringApplication;
