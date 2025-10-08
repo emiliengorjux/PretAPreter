@@ -43,20 +43,20 @@ public class Materiel {
     private Set<Emprunt> emprunts = new HashSet<>();
 
 
-    public Materiel(String reference, String nom, String categorie, String etatMateriel, String commentaire) {
-    this.reference = reference;
-    this.nom = nom;
-    this.categorie = categorie;
-    this.etatMateriel = etatMateriel;
-    this.commentaire = commentaire;
-    this.dateAjout = LocalDateTime.now();
-}
+    public Materiel(String reference, String nom, String categorie, String etatMateriel, String commentaire, LocalDateTime dateAjout) {
+        this.reference = reference;
+        this.nom = nom;
+        this.categorie = categorie;
+        this.etatMateriel = etatMateriel;
+        this.commentaire = commentaire;
+        this.dateAjout = LocalDateTime.now();
+    }
 
 
     public Materiel() {
 
     }
-    
+
     public Long getId() {
         return id;
     }
