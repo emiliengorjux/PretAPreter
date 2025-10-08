@@ -1,4 +1,4 @@
-package fr.hiit.pretapreter.Service.repository.entity;
+package fr.hiit.pretapreter.service.repository.entity;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
