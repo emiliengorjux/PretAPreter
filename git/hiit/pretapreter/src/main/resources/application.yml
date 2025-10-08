@@ -16,8 +16,8 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: validate   # ✅ Hibernate vérifie la structure mais ne crée rien
-    show-sql: true         # ✅ Pour voir les requêtes dans la console
+      ddl-auto: validate   #  Hibernate vérifie la structure mais ne crée rien
+    show-sql: true         #  Pour voir les requêtes dans la console
 
 server:
   port: 8090
