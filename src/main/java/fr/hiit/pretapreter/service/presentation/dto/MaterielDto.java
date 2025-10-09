@@ -26,4 +26,16 @@ public class MaterielDto {
         materiel.setCategorie(materielDto.getCategorie());
         return materiel;
     }
+
+    public static MaterielDto toDtoMateriel(Materiel materiel) {
+        MaterielDto materielDto = new MaterielDto();
+        materielDto.setId(materiel.getId());
+        materielDto.setNom(materiel.getNom());
+        materielDto.setReference(materiel.getReference());
+        materielDto.setEtatMateriel(materiel.getEtatMateriel());
+        materielDto.setCommentaire(materiel.getCommentaire());
+        materielDto.setCategorie(materiel.getCategorie());
+        materielDto.setDateAjout(materiel.getDateAjout().toString());
+        return materielDto;
+    }
 }

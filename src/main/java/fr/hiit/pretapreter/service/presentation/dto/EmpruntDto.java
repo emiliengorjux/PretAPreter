@@ -19,7 +19,7 @@ public class EmpruntDto {
     private String suiviEtatMateriel;
     private String commentaire;
 
-    public static Emprunt toEntityEmprunt(EmpruntDto empruntDto) {
+    public static Emprunt toEntity(EmpruntDto empruntDto) {
         Emprunt emprunt = new Emprunt();
         emprunt.setEmprunteur(empruntDto.getEmprunteur());
         emprunt.setDateEmprunt(empruntDto.getDateEmprunt());
@@ -30,4 +30,15 @@ public class EmpruntDto {
         return emprunt;
     }
 
-}
+    public static Emprunt toDto(Emprunt emprunt) {
+        Emprunt empruntDto = new Emprunt();
+        empruntDto.setEmprunteur(emprunt.getEmprunteur());
+        empruntDto.setDateEmprunt(emprunt.getDateEmprunt());
+        empruntDto.setRetourPrevu(emprunt.getRetourPrevu());
+        empruntDto.setRetourEffectif(emprunt.getRetourEffectif());
+        empruntDto.setSuiviEtatMateriel(emprunt.getSuiviEtatMateriel());
+        empruntDto.setCommentaire(emprunt.getCommentaire());
+        return empruntDto;
+    }
+
+    }
