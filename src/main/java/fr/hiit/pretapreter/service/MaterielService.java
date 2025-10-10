@@ -32,6 +32,7 @@ public class MaterielService {
 
     public MaterielDto creeMateriel(String nom, String reference, String etatMateriel,
                                     String commentaire, String categorie, LocalDateTime dateAjout) {
+        
         Materiel materielR = (Materiel) materielRepository;
 
         String defectueux = materielR.getEtatMateriel();
