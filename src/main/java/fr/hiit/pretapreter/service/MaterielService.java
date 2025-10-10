@@ -25,10 +25,12 @@ public class MaterielService {
         return empruntRepository;
     }
 
-    // public MaterielDto createMateriel (String nom)
+    public MaterielDto creeMateriel(String nom, String reference, String etatMateriel,
+                                    String commentaire, String categorie, LocalDateTime dateAjout) {
+        
+        Materiel materielR = (Materiel) materielRepository;
 
-   
 
 
-
+}
 }
