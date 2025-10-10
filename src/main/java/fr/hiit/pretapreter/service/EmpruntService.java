@@ -54,6 +54,7 @@ public class EmpruntService {
             if (chevauchement) {
                 throw new IllegalStateException("Le matériel est déjà emprunté pendant cette période.");
             }
+
         }
 
         // Créer l'emprunt
