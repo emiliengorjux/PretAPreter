@@ -31,24 +31,24 @@ public class EmpruntService {
 
     public EmpruntDto createEmprunt(String emprunteur, Long materielId, LocalDate dateEmprunt, LocalDate dateRetourPrevu) {
 
-    // Vérifier que le matériel existe
-    Materiel materiel = materielRepository
-            .findById(materielId)
-            .orElseThrow(() -> new IllegalArgumentException("Le matériel n'existe pas"));
+        // Vérifier que le matériel existe
+        Materiel materiel = materielRepository
+                .findById(materielId)
+                .orElseThrow(() -> new IllegalArgumentException("Le matériel n'existe pas"));
 
-    // Vérifier que les dates sont valides
-    if (dateRetourPrevu.isBefore(dateEmprunt)) {
-        throw new IllegalArgumentException("La date de retour prévu doit être anterieur à la date d'emprunt.");
-    }
+        // Vérifier que les dates sont valides
+        if (dateRetourPrevu.isBefore(dateEmprunt)) {
+            throw new IllegalArgumentException("La date de retour prévu doit être anterieur à la date d'emprunt.");
+        }
 
-    // Vérifier les chevauchements d'emprunt
-    List<Emprunt> empruntsExistants = empruntRepository.findAll().stream()
-        .filter(e -> e.getMateriel().getId().equals(materielId))
-        .toList();
+        // Vérifier les chevauchements d'emprunt
+        List<Emprunt> empruntsExistants = empruntRepository.findAll().stream()
+                .filter(e -> e.getMateriel().getId().equals(materielId))
+                .toList();
 
-    for (Emprunt e : empruntsExistants) {
-        LocalDate debut = e.getDateEmprunt();
-        LocalDate fin = e.getRetourEffectif() != null ? e.getRetourEffectif() : e.getRetourPrevu();
+        for (Emprunt e : empruntsExistants) {
+            LocalDate debut = e.getDateEmprunt();
+            LocalDate fin = e.getRetourEffectif() != null ? e.getRetourEffectif() : e.getRetourPrevu();
 
         boolean chevauchement = !(dateRetourPrevu.isBefore(debut) || dateEmprunt.isAfter(fin));
         if (chevauchement) {
@@ -56,24 +56,22 @@ public class EmpruntService {
         }
     }
 
-    
+        // Créer l'emprunt
+        Emprunt emprunt = new Emprunt();
+        emprunt.setEmprunteur(emprunteur);
+        emprunt.setMateriel(materiel);
+        emprunt.setDateEmprunt(dateEmprunt);
+        emprunt.setRetourPrevu(dateRetourPrevu);
+        emprunt.setRetourEffectif(null); // pas encore retourné
+        emprunt.setSuiviEtatMateriel("Bon état"); // ou la valeur par défaut que tu veux
 
-    // Créer l'emprunt
-    Emprunt emprunt = new Emprunt();
-    emprunt.setEmprunteur(emprunteur);
-    emprunt.setMateriel(materiel);
-    emprunt.setDateEmprunt(dateEmprunt);
-    emprunt.setRetourPrevu(dateRetourPrevu);
-    emprunt.setRetourEffectif(null); // pas encore retourné
-    emprunt.setSuiviEtatMateriel("Bon état"); // ou la valeur par défaut que tu veux
+        // Sauvegarder
+        Emprunt savedEmprunt = empruntRepository.save(emprunt);
 
-    // Sauvegarder
-    Emprunt savedEmprunt = empruntRepository.save(emprunt);
-
-    // Retourner le DTO
-    return EmpruntDto.toDto(savedEmprunt);
+        // Retourner le DTO
+        return EmpruntDto.toDto(savedEmprunt);
 
 
-}
+    }
 
 }

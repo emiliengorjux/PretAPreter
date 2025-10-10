@@ -1,5 +1,6 @@
 package fr.hiit.pretapreter.service;
 
+
 import org.springframework.stereotype.Service;
 
 import fr.hiit.pretapreter.service.repository.EmpruntRepository;
@@ -11,7 +12,7 @@ public class MaterielService {
     private final EmpruntRepository empruntRepository;
     private final MaterielRepository materielRepository;
 
-    public MaterielService(EmpruntRepository empruntRepository,  MaterielRepository materielRepository) {
+    public MaterielService(EmpruntRepository empruntRepository, MaterielRepository materielRepository) {
         this.empruntRepository = empruntRepository;
         this.materielRepository = materielRepository;
     }
@@ -23,6 +24,8 @@ public class MaterielService {
     public EmpruntRepository getEmpruntRepository() {
         return empruntRepository;
     }
+
+    // public MaterielDto createMateriel (String nom)
 
    
 
