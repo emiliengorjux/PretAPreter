@@ -56,6 +56,8 @@ public class EmpruntService {
         }
     }
 
+    
+
     // Créer l'emprunt
     Emprunt emprunt = new Emprunt();
     emprunt.setEmprunteur(emprunteur);
