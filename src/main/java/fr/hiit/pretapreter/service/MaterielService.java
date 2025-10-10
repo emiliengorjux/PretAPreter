@@ -1,14 +1,14 @@
 package fr.hiit.pretapreter.service;
 
 
-import fr.hiit.pretapreter.service.presentation.dto.MaterielDto;
-import fr.hiit.pretapreter.service.repository.entity.Materiel;
+import java.time.LocalDateTime;
+
 import org.springframework.stereotype.Service;
 
+import fr.hiit.pretapreter.service.presentation.dto.MaterielDto;
 import fr.hiit.pretapreter.service.repository.EmpruntRepository;
 import fr.hiit.pretapreter.service.repository.MaterielRepository;
-
-import java.time.LocalDateTime;
+import fr.hiit.pretapreter.service.repository.entity.Materiel;
 
 @Service
 public class MaterielService {
@@ -33,7 +33,6 @@ public class MaterielService {
     public MaterielDto creeMateriel(String nom, String reference, String etatMateriel,
                                     String commentaire, String categorie, LocalDateTime dateAjout) {
         Materiel materielR = (Materiel) materielRepository;
-
 
         String defectueux = materielR.getEtatMateriel();
         if (defectueux.equals("Mauvais")) {
