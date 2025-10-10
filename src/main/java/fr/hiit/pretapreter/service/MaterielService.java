@@ -1,18 +1,18 @@
 package fr.hiit.pretapreter.service;
 
-import fr.hiit.pretapreter.service.repository.MaterielRepository;
-import fr.hiit.pretapreter.service.repository.entity.Materiel;
-import lombok.Getter;
 import org.springframework.stereotype.Service;
+
+import fr.hiit.pretapreter.service.repository.EmpruntRepository;
+import fr.hiit.pretapreter.service.repository.MaterielRepository;
 
 @Service
 public class MaterielService {
 
-    private final EmpruntService empruntService;
+    private final EmpruntRepository empruntRepository;
     private final MaterielRepository materielRepository;
 
-    public MaterielService(EmpruntService empruntService,  MaterielRepository materielRepository) {
-        this.empruntService = empruntService;
+    public MaterielService(EmpruntRepository empruntRepository,  MaterielRepository materielRepository) {
+        this.empruntRepository = empruntRepository;
         this.materielRepository = materielRepository;
     }
 
@@ -20,9 +20,13 @@ public class MaterielService {
         return materielRepository;
     }
 
-    public EmpruntService getEmpruntService() {
-        return empruntService;
+    public EmpruntRepository getEmpruntRepository() {
+        return empruntRepository;
     }
+
+    // public MaterielDto createMateriel (String nom)
+
+
 
 
 

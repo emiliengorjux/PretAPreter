@@ -1,52 +1,77 @@
 package fr.hiit.pretapreter.service;
 
+import java.time.LocalDate;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import fr.hiit.pretapreter.service.presentation.dto.EmpruntDto;
 import fr.hiit.pretapreter.service.repository.EmpruntRepository;
 import fr.hiit.pretapreter.service.repository.MaterielRepository;
 import fr.hiit.pretapreter.service.repository.entity.Emprunt;
 import fr.hiit.pretapreter.service.repository.entity.Materiel;
-import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
-import java.util.List;
-
 
 @Service
 public class EmpruntService {
-    private final MaterielService materielService;
-    private final EmpruntRepository empruntRepository;
     private final MaterielRepository materielRepository;
+    private final EmpruntRepository empruntRepository;
 
-    public EmpruntService(MaterielService materielService, EmpruntRepository empruntRepository, MaterielRepository materielRepository) {
-        this.materielService = materielService;
-        this.empruntRepository = empruntRepository;
+    public EmpruntService(MaterielRepository materielRepository,  EmpruntRepository empruntRepository) {
         this.materielRepository = materielRepository;
+        this.empruntRepository = empruntRepository;
     }
 
     public EmpruntRepository getEmpruntRepository() {
         return empruntRepository;
     }
 
-    public MaterielService getMaterielService() {
-        return materielService;
+    public MaterielRepository getMaterielRepository() {
+        return materielRepository;
     }
 
-    public Emprunt emprunterMateriel(Long empruntId) {
-        Emprunt emprunt = empruntRepository.findById(empruntId)
-                .orElseThrow(() -> new RuntimeException("L'emprunt non disponible"));
-        if (new LocalDate(emprunt.getDateEmprunt()).isAfter(emprunt.getRetourPrevu())) {
-            throw new RuntimeException("L'emprunt n'est pas possible, matériel déjà emprunté");
+    public EmpruntDto createEmprunt(String emprunteur, Long materielId, LocalDate dateEmprunt, LocalDate dateRetourPrevu) {
+
+        // Vérifier que le matériel existe
+        Materiel materiel = materielRepository
+                .findById(materielId)
+                .orElseThrow(() -> new IllegalArgumentException("Le matériel n'existe pas"));
+
+        // Vérifier que les dates sont valides
+        if (dateRetourPrevu.isBefore(dateEmprunt)) {
+            throw new IllegalArgumentException("La date de retour prévu doit être anterieur à la date d'emprunt.");
         }
 
+        // Vérifier les chevauchements d'emprunt
+        List<Emprunt> empruntsExistants = empruntRepository.findAll().stream()
+                .filter(e -> e.getMateriel().getId().equals(materielId))
+                .toList();
+
+        for (Emprunt e : empruntsExistants) {
+            LocalDate debut = e.getDateEmprunt();
+            LocalDate fin = e.getRetourEffectif() != null ? e.getRetourEffectif() : e.getRetourPrevu();
+
+            boolean chevauchement = !(dateRetourPrevu.isBefore(debut) || dateEmprunt.isAfter(fin));
+            if (chevauchement) {
+                throw new IllegalStateException("Le matériel est déjà emprunté pendant cette période.");
+            }
+        }
+
+        // Créer l'emprunt
+        Emprunt emprunt = new Emprunt();
+        emprunt.setEmprunteur(emprunteur);
+        emprunt.setMateriel(materiel);
+        emprunt.setDateEmprunt(dateEmprunt);
+        emprunt.setRetourPrevu(dateRetourPrevu);
+        emprunt.setRetourEffectif(null); // pas encore retourné
+        emprunt.setSuiviEtatMateriel("Bon état"); // ou la valeur par défaut que tu veux
+
+        // Sauvegarder
+        Emprunt savedEmprunt = empruntRepository.save(emprunt);
+
+        // Retourner le DTO
+        return EmpruntDto.toDto(savedEmprunt);
+
+
     }
+
 }
-
-
-
-
-/*Vérifier si le retour est en retard
-if (LocalDateTime.now().isAfter(emprunt.getDateRetourPrevue())) {
-        long joursRetard = ChronoUnit.DAYS.between(emprunt.getDateRetourPrevue(), LocalDateTime.now());
-        // Envoyer un avertissement (ex : email, notification)
-        notificationService.envoyerAvertissementRetard(emprunt.getNomEmprunteur(), joursRetard);
-    }
-
