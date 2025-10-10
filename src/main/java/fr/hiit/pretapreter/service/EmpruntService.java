@@ -36,6 +36,11 @@ public class EmpruntService {
             .findById(materielId)
             .orElseThrow(() -> new IllegalArgumentException("Le matériel n'existe pas"));
 
+    // Vérifier que les dates sont valides
+    if (dateRetourPrevu.isBefore(dateEmprunt)) {
+        throw new IllegalArgumentException("La date de retour prévu doit être anterieur à la date d'emprunt.");
+    }
+
     // Vérifier les chevauchements d'emprunt
     List<Emprunt> empruntsExistants = empruntRepository.findAll().stream()
         .filter(e -> e.getMateriel().getId().equals(materielId))
