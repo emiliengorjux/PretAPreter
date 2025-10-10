@@ -30,8 +30,8 @@ public class EmpruntDto {
         return emprunt;
     }
 
-    public static Emprunt toDto(Emprunt emprunt) {
-        Emprunt empruntDto = new Emprunt();
+    public static EmpruntDto toDto(Emprunt emprunt) {
+        EmpruntDto empruntDto = new EmpruntDto();
         empruntDto.setEmprunteur(emprunt.getEmprunteur());
         empruntDto.setDateEmprunt(emprunt.getDateEmprunt());
         empruntDto.setRetourPrevu(emprunt.getRetourPrevu());
