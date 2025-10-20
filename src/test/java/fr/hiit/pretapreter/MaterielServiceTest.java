@@ -2,17 +2,17 @@ package fr.hiit.pretapreter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import fr.hiit.pretapreter.service.repository.model.MaterielServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import fr.hiit.pretapreter.service.MaterielService;
 
 @SpringBootTest
 public class MaterielServiceTest {
 
     @Autowired
-    private MaterielService materielService;
+    private MaterielServiceImpl materielService;
 
     @Test
     void testCreeMateriel() {

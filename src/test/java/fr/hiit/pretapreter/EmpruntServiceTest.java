@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import fr.hiit.pretapreter.service.EmpruntServiceImpl;
+import fr.hiit.pretapreter.service.repository.model.EmpruntServiceImpl;
 
 @SpringBootTest
 public class EmpruntServiceTest {
