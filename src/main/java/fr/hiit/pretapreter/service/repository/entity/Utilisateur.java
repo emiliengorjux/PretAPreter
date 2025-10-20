@@ -1,4 +1,4 @@
- /*package fr.hiit.pretapreter.entity;
+ package fr.hiit.pretapreter.service.repository.entity;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -34,6 +34,9 @@ public class Utilisateur {
     @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL)
     private Set<Emprunt> emprunts = new HashSet<>();
 
+    @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL)
+    private Set<Materiel> materiel = new HashSet<>();
+
 
     public Utilisateur() {}
 
@@ -43,7 +46,6 @@ public class Utilisateur {
         this.email = email;
 
     }
-
 
     public Long getId() {
         return id; }
@@ -69,4 +71,12 @@ public class Utilisateur {
         return emprunts; }
     public void setEmprunts(Set<Emprunt> emprunts) {
         this.emprunts = emprunts; }
-} */
+
+    public Set<Materiel> getMateriel() {
+        return materiel;
+    }
+
+    public void setMateriel(Set<Materiel> materiel) {
+        this.materiel = materiel;
+    }
+}
