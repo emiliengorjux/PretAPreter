@@ -8,11 +8,19 @@ import java.util.List;
 
 public interface EmpruntService {
 
-    EmpruntDto createEmprunt (String emprunteur, Long materielId, LocalDate dateEmprunt, LocalDate dateRetourPrevu);
+    EmpruntDto createEmprunt (String utilisateur, Long materielId, LocalDate dateEmprunt, LocalDate dateRetourPrevu);
     Emprunt updateEmprunt (Emprunt emprunt);
-    Emprunt findEmprunt (Long id);
-    List<Emprunt> findAllEmprunt (Long id);
+
+
+    List <Emprunt> findAllEmprunts(Long id);
+    Emprunt findEmpruntById(Long id);
+
+
+
     Emprunt deleteEmprunt (Long id);
+
+
+
 
 
 }

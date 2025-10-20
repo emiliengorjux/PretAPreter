@@ -2,9 +2,13 @@ package fr.hiit.pretapreter.service.repository.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import fr.hiit.pretapreter.service.EmpruntService;
+import fr.hiit.pretapreter.service.repository.UtilisateurRepository;
+import fr.hiit.pretapreter.service.repository.entity.Utilisateur;
 import org.springframework.stereotype.Service;
 
 import fr.hiit.pretapreter.service.presentation.dto.EmpruntDto;
@@ -17,21 +21,28 @@ import fr.hiit.pretapreter.service.repository.entity.Materiel;
 public class EmpruntServiceImpl implements EmpruntService {
     private final MaterielRepository materielRepository;
     private final EmpruntRepository empruntRepository;
+    private final UtilisateurRepository utilisateurRepository;
 
-    public EmpruntServiceImpl(MaterielRepository materielRepository, EmpruntRepository empruntRepository) {
+
+    private final Map<Long, Emprunt> emprunts = new HashMap<>();
+
+
+    public EmpruntServiceImpl(MaterielRepository materielRepository,
+                              EmpruntRepository empruntRepository,
+                              UtilisateurRepository utilisateurRepository) {
         this.materielRepository = materielRepository;
         this.empruntRepository = empruntRepository;
+        this.utilisateurRepository = utilisateurRepository;
     }
 
-    public EmpruntRepository getEmpruntRepository() {
+    Utilisateur utilisateur = utilisateurRepository.findById(utilisateurId)
+            .orElseThrow(() -> new IllegalArgumentException("Utilisateur non trouvé"));
 
-        return empruntRepository;
-    }
 
-    public MaterielRepository getMaterielRepository() {
+    Materiel materiel = materielRepository.findById(materielId)
+            .orElseThrow(() -> new IllegalArgumentException("Matériel non trouvé"));
 
-        return materielRepository;
-    }
+
 
     public EmpruntDto createEmprunt(String emprunteur, Long materielId, LocalDate dateEmprunt, LocalDate dateRetourPrevu) {
 
@@ -78,57 +89,38 @@ public class EmpruntServiceImpl implements EmpruntService {
     }
 
     @Override
+    public Emprunt findEmpruntById(Long id) {
+        return empruntRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Emprunt non trouvé"));
+    }
+
+    @Override
+    public List<Emprunt> findAllEmprunts(Long id) {
+        return List.of();
+    }
+
+
+
+    @Override
     public Emprunt updateEmprunt(Emprunt emprunt) {
-        if(student.getId() == null || student.getPrenom() == null || student.getNom() == null || student.getEmail() == null){
+        if(emprunt.getId() == null || emprunt.getMateriel() == null || emprunt.getDateEmprunt() == null){
             throw new IllegalArgumentException("Id, Nom, Prenom et Email obligatoires ! ");
         }
-        if(students.get(student.getId()) == null ){
+        if(emprunts.get(emprunt.getId()) == null ){
             throw new RuntimeException("Emprunt à modifier inexistant");
         }
-        students.put(student.getId(), student);
+        emprunts.put(emprunt.getId(), emprunt);
 
-        return student;
+        return emprunt;
 
-    }
-
-    @Override
-    public Emprunt findEmprunt(Long id) {
-        List<Emprunt> empruntById = new ArrayList<>();
-        if(id == null){
-            empruntById.addAll(students.values());
-        } else {
-            for(Student student : students.values()) {
-                if (student.getNom().contains(nom)) {
-                    empruntById.add(student);
-                }
-            }
-        }
-        return empruntById;
-    }
-
-    @Override
-    public List<Emprunt> findAllEmprunt(Long id) {
-        List<Emprunt> allEmpruntById = new ArrayList<>();
-        if(id == null){
-            allEmpruntById.addAll(students.values());
-        } else {
-            for(Student student : students.values()) {
-                if (student.getNom().contains(nom)) {
-                    allEmpruntById.add(student);
-                }
-            }
-        }
-        return allEmpruntById;
-
-        return List.of();
     }
 
     @Override
     public Emprunt deleteEmprunt(Long id) {
-        if(Emprunt.get(id) == null){
+        if(emprunts.get(id) == null){
             throw new IllegalArgumentException("Emprunt inexistant, suppression impossible");
         }
-        return Emprunt.remove(id);
+        return emprunts.remove(id);
 
     }
 
