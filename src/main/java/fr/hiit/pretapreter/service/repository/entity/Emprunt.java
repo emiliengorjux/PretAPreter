@@ -36,7 +36,8 @@ public class Emprunt {
 
     private String commentaire;
 
-    public Emprunt() {}
+    public Emprunt() {
+    }
 
     public Emprunt(Materiel materiel, Utilisateur utilisateur, LocalDate dateEmprunt,
                    LocalDate retourPrevu, LocalDate retourEffectif, String suiviEtatMateriel, String commentaire) {
