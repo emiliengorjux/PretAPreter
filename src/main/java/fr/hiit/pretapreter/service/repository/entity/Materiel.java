@@ -42,6 +42,9 @@ public class Materiel {
     @OneToMany(mappedBy = "materiel", cascade = CascadeType.ALL)
     private Set<Emprunt> emprunts = new HashSet<>();
 
+    @OneToMany(mappedBy = "materiel", cascade = CascadeType.ALL)
+    private Set<Utilisateur> utilisateur = new HashSet<>();
+
 
     public Materiel(String reference, String nom, String categorie, String etatMateriel, String commentaire, LocalDateTime dateAjout) {
         this.reference = reference;
@@ -115,12 +118,11 @@ public class Materiel {
         this.dateAjout = dateAjout;
     }
 
-
     public Set<Emprunt> getEmprunts() {
         return emprunts;
     }
 
-    public void setEmprunts(Set<Emprunt> emprunts) {
-        this.emprunts = emprunts;
+    public Set<Utilisateur> getUtilisateur() {
+        return utilisateur;
     }
 }

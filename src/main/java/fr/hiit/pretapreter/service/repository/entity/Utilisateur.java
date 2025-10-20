@@ -3,22 +3,23 @@
 import java.util.HashSet;
 import java.util.Set;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
-@Entity
+ @Entity
 @Table(name = "utilisateur")
 public class Utilisateur {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+     @ManyToOne
+     @JoinColumn(name = "materiel_id", nullable = false)
+     private Materiel materiel;
+
+     @ManyToOne
+     @JoinColumn(name = "emprunt_id", nullable = false)
+     private Materiel emprunt;
 
     @Column(nullable = false)
     private String nom;
@@ -28,14 +29,6 @@ public class Utilisateur {
 
     @Column(nullable = false)
     private String email;
-
-
-
-    @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL)
-    private Set<Emprunt> emprunts = new HashSet<>();
-
-    @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL)
-    private Set<Materiel> materiel = new HashSet<>();
 
 
     public Utilisateur() {}
@@ -66,17 +59,4 @@ public class Utilisateur {
         return email; }
     public void setEmail(String email) {
         this.email = email; }
-
-    public Set<Emprunt> getEmprunts() {
-        return emprunts; }
-    public void setEmprunts(Set<Emprunt> emprunts) {
-        this.emprunts = emprunts; }
-
-    public Set<Materiel> getMateriel() {
-        return materiel;
-    }
-
-    public void setMateriel(Set<Materiel> materiel) {
-        this.materiel = materiel;
-    }
 }

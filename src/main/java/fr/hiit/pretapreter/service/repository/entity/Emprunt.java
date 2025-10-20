@@ -1,15 +1,10 @@
 package fr.hiit.pretapreter.service.repository.entity;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "emprunt")
@@ -22,9 +17,6 @@ public class Emprunt {
     @ManyToOne
     @JoinColumn(name = "materiel_id", nullable = false)
     private Materiel materiel;
-
-    @Column(nullable = false)
-    private String emprunteur;
 
     @Column(nullable = false)
     private LocalDate dateEmprunt;
@@ -42,10 +34,12 @@ public class Emprunt {
     private String commentaire;
 
 
-    public Emprunt(Materiel materiel, String emprunteur, LocalDate dateEmprunt,
+    @OneToMany(mappedBy = "emprunt", cascade = CascadeType.ALL)
+    private Set<Utilisateur> utilisateur = new HashSet<>();
+
+    public Emprunt(Materiel materiel, LocalDate dateEmprunt,
                    LocalDate retourPrevu, LocalDate retourEffectif, String suiviEtatMateriel, String commentaire) {
         this.materiel = materiel;
-        this.emprunteur = emprunteur;
         this.dateEmprunt = dateEmprunt;
         this.retourPrevu = retourPrevu;
         this.retourEffectif = retourEffectif;
@@ -53,10 +47,13 @@ public class Emprunt {
         this.commentaire = commentaire;
     }
 
-    public Emprunt() {}
+    public Emprunt() {
+    }
 
 
-    public Long getId() { return id; }
+    public Long getId() {
+        return id;
+    }
 
 
     public Materiel getMateriel() {
@@ -65,15 +62,6 @@ public class Emprunt {
 
     public void setMateriel(Materiel materiel) {
         this.materiel = materiel;
-    }
-
-
-    public String getEmprunteur() {
-        return emprunteur;
-    }
-
-    public void setEmprunteur(String emprunteur) {
-        this.emprunteur = emprunteur;
     }
 
 
@@ -118,5 +106,10 @@ public class Emprunt {
 
     public void setCommentaire(String commentaire) {
         this.commentaire = commentaire;
+    }
+
+    public Set<Utilisateur> getUtilisateur() {
+        return utilisateur;
+
     }
 }
