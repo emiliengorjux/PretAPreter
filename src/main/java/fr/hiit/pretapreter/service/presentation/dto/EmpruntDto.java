@@ -21,7 +21,6 @@ public class EmpruntDto {
 
     public static Emprunt toEntity(EmpruntDto empruntDto) {
         Emprunt emprunt = new Emprunt();
-        emprunt.setEmprunteur(empruntDto.getEmprunteur());
         emprunt.setDateEmprunt(empruntDto.getDateEmprunt());
         emprunt.setRetourPrevu(empruntDto.getRetourPrevu());
         emprunt.setRetourEffectif(empruntDto.getRetourEffectif());
@@ -32,7 +31,6 @@ public class EmpruntDto {
 
     public static EmpruntDto toDto(Emprunt emprunt) {
         EmpruntDto empruntDto = new EmpruntDto();
-        empruntDto.setEmprunteur(emprunt.getEmprunteur());
         empruntDto.setDateEmprunt(emprunt.getDateEmprunt());
         empruntDto.setRetourPrevu(emprunt.getRetourPrevu());
         empruntDto.setRetourEffectif(emprunt.getRetourEffectif());

@@ -58,7 +58,6 @@ public class EmpruntService {
 
         // Créer l'emprunt
         Emprunt emprunt = new Emprunt();
-        emprunt.setEmprunteur(emprunteur);
         emprunt.setMateriel(materiel);
         emprunt.setDateEmprunt(dateEmprunt);
         emprunt.setRetourPrevu(dateRetourPrevu);

@@ -1,8 +1,6 @@
 package fr.hiit.pretapreter.service.repository.entity;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
 import jakarta.persistence.*;
 
@@ -14,32 +12,36 @@ public class Emprunt {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    // 🔗 Le matériel emprunté
+    @ManyToOne(optional = false)
     @JoinColumn(name = "materiel_id", nullable = false)
     private Materiel materiel;
 
-    @Column(nullable = false)
+    // 🔗 L’utilisateur qui a fait cet emprunt
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "utilisateur_id", nullable = false)
+    private Utilisateur utilisateur;
+
+    @Column(name = "date_emprunt", nullable = false)
     private LocalDate dateEmprunt;
 
-    @Column(nullable = false)
+    @Column(name = "retour_prevu", nullable = false)
     private LocalDate retourPrevu;
 
-    @Column(nullable = true)
+    @Column(name = "retour_effectif")
     private LocalDate retourEffectif;
 
-    @Column(nullable = false)
+    @Column(name = "suivi_etat_materiel", nullable = false)
     private String suiviEtatMateriel;
 
-    @Column(nullable = true)
     private String commentaire;
 
+    public Emprunt() {}
 
-    @OneToMany(mappedBy = "emprunt", cascade = CascadeType.ALL)
-    private Set<Utilisateur> utilisateur = new HashSet<>();
-
-    public Emprunt(Materiel materiel, LocalDate dateEmprunt,
+    public Emprunt(Materiel materiel, Utilisateur utilisateur, LocalDate dateEmprunt,
                    LocalDate retourPrevu, LocalDate retourEffectif, String suiviEtatMateriel, String commentaire) {
         this.materiel = materiel;
+        this.utilisateur = utilisateur;
         this.dateEmprunt = dateEmprunt;
         this.retourPrevu = retourPrevu;
         this.retourEffectif = retourEffectif;
@@ -47,14 +49,11 @@ public class Emprunt {
         this.commentaire = commentaire;
     }
 
-    public Emprunt() {
-    }
-
+    // --- Getters & Setters ---
 
     public Long getId() {
         return id;
     }
-
 
     public Materiel getMateriel() {
         return materiel;
@@ -64,6 +63,13 @@ public class Emprunt {
         this.materiel = materiel;
     }
 
+    public Utilisateur getUtilisateur() {
+        return utilisateur;
+    }
+
+    public void setUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
+    }
 
     public LocalDate getDateEmprunt() {
         return dateEmprunt;
@@ -73,7 +79,6 @@ public class Emprunt {
         this.dateEmprunt = dateEmprunt;
     }
 
-
     public LocalDate getRetourPrevu() {
         return retourPrevu;
     }
@@ -81,7 +86,6 @@ public class Emprunt {
     public void setRetourPrevu(LocalDate retourPrevu) {
         this.retourPrevu = retourPrevu;
     }
-
 
     public LocalDate getRetourEffectif() {
         return retourEffectif;
@@ -99,17 +103,11 @@ public class Emprunt {
         this.suiviEtatMateriel = suiviEtatMateriel;
     }
 
-
     public String getCommentaire() {
         return commentaire;
     }
 
     public void setCommentaire(String commentaire) {
         this.commentaire = commentaire;
-    }
-
-    public Set<Utilisateur> getUtilisateur() {
-        return utilisateur;
-
     }
 }

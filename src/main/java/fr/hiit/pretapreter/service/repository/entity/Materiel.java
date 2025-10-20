@@ -4,14 +4,7 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "materiel")
@@ -24,29 +17,28 @@ public class Materiel {
     @Column(nullable = false)
     private String nom;
 
-    @Column(unique = true, nullable = true)
+    @Column(unique = true)
     private String reference;
 
-    @Column(nullable = false)
+    @Column(name = "etat_materiel", nullable = false)
     private String etatMateriel;
 
-    @Column(nullable = true)
     private String commentaire;
 
     @Column(nullable = false)
     private String categorie;
 
-    @Column(nullable = false, updatable = false)
+    @Column(name = "date_ajout", nullable = false, updatable = false)
     private LocalDateTime dateAjout = LocalDateTime.now();
 
-    @OneToMany(mappedBy = "materiel", cascade = CascadeType.ALL)
+    // 🔁 Un matériel peut avoir plusieurs emprunts au fil du temps
+    @OneToMany(mappedBy = "materiel", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Emprunt> emprunts = new HashSet<>();
 
-    @OneToMany(mappedBy = "materiel", cascade = CascadeType.ALL)
-    private Set<Utilisateur> utilisateur = new HashSet<>();
+    public Materiel() {
+    }
 
-
-    public Materiel(String reference, String nom, String categorie, String etatMateriel, String commentaire, LocalDateTime dateAjout) {
+    public Materiel(String reference, String nom, String categorie, String etatMateriel, String commentaire) {
         this.reference = reference;
         this.nom = nom;
         this.categorie = categorie;
@@ -55,10 +47,7 @@ public class Materiel {
         this.dateAjout = LocalDateTime.now();
     }
 
-
-    public Materiel() {
-
-    }
+    // --- Getters & Setters ---
 
     public Long getId() {
         return id;
@@ -100,7 +89,6 @@ public class Materiel {
         this.commentaire = commentaire;
     }
 
-
     public String getCategorie() {
         return categorie;
     }
@@ -108,7 +96,6 @@ public class Materiel {
     public void setCategorie(String categorie) {
         this.categorie = categorie;
     }
-
 
     public LocalDateTime getDateAjout() {
         return dateAjout;
@@ -122,7 +109,8 @@ public class Materiel {
         return emprunts;
     }
 
-    public Set<Utilisateur> getUtilisateur() {
-        return utilisateur;
+    public void setEmprunts(Set<Emprunt> emprunts) {
+        this.emprunts = emprunts;
     }
+
 }
