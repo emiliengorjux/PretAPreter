@@ -1,16 +1,8 @@
- /*package fr.hiit.pretapreter.entity;
+package fr.hiit.pretapreter.service.repository.entity;
 
+import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
-
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "utilisateur")
@@ -26,14 +18,12 @@ public class Utilisateur {
     @Column(nullable = false)
     private String prenom;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
-
-
-    @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL)
+    // 🔁 Un utilisateur peut avoir plusieurs emprunts
+    @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Emprunt> emprunts = new HashSet<>();
-
 
     public Utilisateur() {}
 
@@ -41,32 +31,48 @@ public class Utilisateur {
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
-
     }
 
+    // --- Getters & Setters ---
 
     public Long getId() {
-        return id; }
+        return id;
+    }
+
     public void setId(Long id) {
-        this.id = id; }
+        this.id = id;
+    }
 
     public String getNom() {
-        return nom; }
+        return nom;
+    }
+
     public void setNom(String nom) {
-        this.nom = nom; }
+        this.nom = nom;
+    }
 
     public String getPrenom() {
-        return prenom; }
+        return prenom;
+    }
+
     public void setPrenom(String prenom) {
-        this.prenom = prenom; }
+        this.prenom = prenom;
+    }
 
     public String getEmail() {
-        return email; }
+        return email;
+    }
+
     public void setEmail(String email) {
-        this.email = email; }
+        this.email = email;
+    }
 
     public Set<Emprunt> getEmprunts() {
-        return emprunts; }
+        return emprunts;
+    }
+
     public void setEmprunts(Set<Emprunt> emprunts) {
-        this.emprunts = emprunts; }
-} */
+        this.emprunts = emprunts;
+    }
+
+}
