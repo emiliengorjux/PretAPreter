@@ -12,11 +12,11 @@ import fr.hiit.pretapreter.service.repository.entity.Emprunt;
 import fr.hiit.pretapreter.service.repository.entity.Materiel;
 
 @Service
-public class EmpruntService {
+public class EmpruntServiceImpl {
     private final MaterielRepository materielRepository;
     private final EmpruntRepository empruntRepository;
 
-    public EmpruntService(MaterielRepository materielRepository,  EmpruntRepository empruntRepository) {
+    public EmpruntServiceImpl(MaterielRepository materielRepository, EmpruntRepository empruntRepository) {
         this.materielRepository = materielRepository;
         this.empruntRepository = empruntRepository;
     }

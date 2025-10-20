@@ -11,12 +11,12 @@ import fr.hiit.pretapreter.service.repository.MaterielRepository;
 import java.time.LocalDateTime;
 
 @Service
-public class MaterielService {
+public class MaterielServiceImpl {
 
     private final EmpruntRepository empruntRepository;
     private final MaterielRepository materielRepository;
 
-    public MaterielService(EmpruntRepository empruntRepository, MaterielRepository materielRepository) {
+    public MaterielServiceImpl(EmpruntRepository empruntRepository, MaterielRepository materielRepository) {
         this.empruntRepository = empruntRepository;
         this.materielRepository = materielRepository;
     }
@@ -32,6 +32,7 @@ public class MaterielService {
 
     public MaterielDto creeMateriel(String nom, String reference, String etatMateriel,
                                     String commentaire, String categorie, LocalDateTime dateAjout) {
+
         Materiel materielR = (Materiel) materielRepository;
 
 
