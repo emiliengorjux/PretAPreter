@@ -1,31 +1,25 @@
 package fr.hiit.pretapreter.service.repository.model;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import fr.hiit.pretapreter.service.EmpruntService;
-import fr.hiit.pretapreter.service.repository.UtilisateurRepository;
-import fr.hiit.pretapreter.service.repository.entity.Utilisateur;
-import org.springframework.stereotype.Service;
-
 import fr.hiit.pretapreter.service.presentation.dto.EmpruntDto;
 import fr.hiit.pretapreter.service.repository.EmpruntRepository;
 import fr.hiit.pretapreter.service.repository.MaterielRepository;
+import fr.hiit.pretapreter.service.repository.UtilisateurRepository;
 import fr.hiit.pretapreter.service.repository.entity.Emprunt;
 import fr.hiit.pretapreter.service.repository.entity.Materiel;
+import fr.hiit.pretapreter.service.repository.entity.Utilisateur;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class EmpruntServiceImpl implements EmpruntService {
+
     private final MaterielRepository materielRepository;
     private final EmpruntRepository empruntRepository;
     private final UtilisateurRepository utilisateurRepository;
-
-
-    private final Map<Long, Emprunt> emprunts = new HashMap<>();
-
 
     public EmpruntServiceImpl(MaterielRepository materielRepository,
                               EmpruntRepository empruntRepository,
@@ -35,93 +29,86 @@ public class EmpruntServiceImpl implements EmpruntService {
         this.utilisateurRepository = utilisateurRepository;
     }
 
-    Utilisateur utilisateur = utilisateurRepository.findById(utilisateurId)
-            .orElseThrow(() -> new IllegalArgumentException("Utilisateur non trouvé"));
+    @Override
+    public EmpruntDto createEmprunt(Long utilisateurId, Long materielId, LocalDate dateEmprunt, LocalDate dateRetourPrevu) {
 
+        Utilisateur utilisateur = utilisateurRepository.findById(utilisateurId)
+                .orElseThrow(() -> new IllegalArgumentException("Utilisateur non trouvé"));
 
-    Materiel materiel = materielRepository.findById(materielId)
-            .orElseThrow(() -> new IllegalArgumentException("Matériel non trouvé"));
+        Materiel materiel = materielRepository.findById(materielId)
+                .orElseThrow(() -> new IllegalArgumentException("Matériel non trouvé"));
 
-
-
-    public EmpruntDto createEmprunt(String emprunteur, Long materielId, LocalDate dateEmprunt, LocalDate dateRetourPrevu) {
-
-        // Vérifier que le matériel existe
-        Materiel materiel = materielRepository
-                .findById(materielId)
-                .orElseThrow(() -> new IllegalArgumentException("Le matériel n'existe pas"));
-
-        // Vérifier que les dates sont valides
         if (dateRetourPrevu.isBefore(dateEmprunt)) {
-            throw new IllegalArgumentException("La date de retour prévu doit être anterieur à la date d'emprunt.");
+            throw new IllegalArgumentException("La date de retour prévue doit être après la date d'emprunt.");
         }
 
-        // Vérifier les chevauchements d'emprunt
-        List<Emprunt> empruntsExistants = empruntRepository.findAll().stream()
-                .filter(e -> e.getMateriel().getId().equals(materielId))
-                .toList();
-
+        // Vérifier disponibilité
+        List<Emprunt> empruntsExistants = empruntRepository.findByMaterielId(materielId);
         for (Emprunt e : empruntsExistants) {
             LocalDate debut = e.getDateEmprunt();
             LocalDate fin = e.getRetourEffectif() != null ? e.getRetourEffectif() : e.getRetourPrevu();
-
-        boolean chevauchement = !(dateRetourPrevu.isBefore(debut) || dateEmprunt.isAfter(fin));
-        if (chevauchement) {
-            throw new IllegalStateException("Le matériel est déjà emprunté pendant cette période.");
+            if (!(dateRetourPrevu.isBefore(debut) || dateEmprunt.isAfter(fin))) {
+                throw new IllegalStateException("Le matériel est déjà emprunté pendant cette période.");
+            }
         }
-    }
 
-        // Créer l'emprunt
         Emprunt emprunt = new Emprunt();
+        emprunt.setUtilisateur(utilisateur);
         emprunt.setMateriel(materiel);
         emprunt.setDateEmprunt(dateEmprunt);
         emprunt.setRetourPrevu(dateRetourPrevu);
-        emprunt.setRetourEffectif(null); // pas encore retourné
-        emprunt.setSuiviEtatMateriel("Bon état"); // ou la valeur par défaut que tu veux
+        emprunt.setSuiviEtatMateriel("Bon état");
 
-        // Sauvegarder
-        Emprunt savedEmprunt = empruntRepository.save(emprunt);
-
-        // Retourner le DTO
-        return EmpruntDto.toDto(savedEmprunt);
-
-
+        return EmpruntDto.toDto(empruntRepository.save(emprunt));
     }
 
     @Override
-    public Emprunt findEmpruntById(Long id) {
-        return empruntRepository.findById(id)
+    public EmpruntDto updateEmprunt(Emprunt emprunt) {
+        if (emprunt.getId() == null) throw new IllegalArgumentException("ID obligatoire");
+        Emprunt existing = empruntRepository.findById(emprunt.getId())
                 .orElseThrow(() -> new IllegalArgumentException("Emprunt non trouvé"));
+        existing.setDateEmprunt(emprunt.getDateEmprunt());
+        existing.setRetourPrevu(emprunt.getRetourPrevu());
+        existing.setRetourEffectif(emprunt.getRetourEffectif());
+        existing.setSuiviEtatMateriel(emprunt.getSuiviEtatMateriel());
+        existing.setCommentaire(emprunt.getCommentaire());
+        return EmpruntDto.toDto(empruntRepository.save(existing));
     }
 
     @Override
-    public List<Emprunt> findAllEmprunts(Long id) {
-        return List.of();
-    }
-
-
-
-    @Override
-    public Emprunt updateEmprunt(Emprunt emprunt) {
-        if(emprunt.getId() == null || emprunt.getMateriel() == null || emprunt.getDateEmprunt() == null){
-            throw new IllegalArgumentException("Id, Nom, Prenom et Email obligatoires ! ");
-        }
-        if(emprunts.get(emprunt.getId()) == null ){
-            throw new RuntimeException("Emprunt à modifier inexistant");
-        }
-        emprunts.put(emprunt.getId(), emprunt);
-
-        return emprunt;
-
+    public EmpruntDto findEmpruntById(Long id) {
+        return EmpruntDto.toDto(empruntRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Emprunt non trouvé")));
     }
 
     @Override
-    public Emprunt deleteEmprunt(Long id) {
-        if(emprunts.get(id) == null){
-            throw new IllegalArgumentException("Emprunt inexistant, suppression impossible");
-        }
-        return emprunts.remove(id);
-
+    public List<EmpruntDto> findAllEmprunts() {
+        return empruntRepository.findAll()
+                .stream()
+                .map(EmpruntDto::toDto)
+                .collect(Collectors.toList());
     }
 
+    @Override
+    public List<EmpruntDto> findAllByUtilisateurId(Long utilisateurId) {
+        return empruntRepository.findById(utilisateurId)
+                .stream()
+                .map(EmpruntDto::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<EmpruntDto> findAllByMaterielId(Long materielId) {
+        return empruntRepository.findByMaterielId(materielId)
+                .stream()
+                .map(EmpruntDto::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public void deleteEmprunt(Long id) {
+        Emprunt existing = empruntRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Emprunt non trouvé"));
+        empruntRepository.delete(existing);
+    }
 }

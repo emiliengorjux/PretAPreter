@@ -1,6 +1,7 @@
 package fr.hiit.pretapreter.service.repository.model;
 
 import fr.hiit.pretapreter.service.UtilisateurService;
+import fr.hiit.pretapreter.service.presentation.dto.UtilisateurDto;
 import fr.hiit.pretapreter.service.repository.UtilisateurRepository;
 import fr.hiit.pretapreter.service.repository.entity.Utilisateur;
 import fr.hiit.pretapreter.service.repository.entity.Emprunt;
@@ -19,7 +20,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     }
 
     @Override
-    public Utilisateur createUtilisateur(Utilisateur utilisateur) {
+    public UtilisateurDto createUtilisateur(UtilisateurDto utilisateur) {
         return utilisateurRepository.save(utilisateur);
     }
 
@@ -34,7 +35,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     }
 
     @Override
-    public Utilisateur updateUtilisateur(Long id, Utilisateur utilisateur) {
+    public UtilisateurDto updateUtilisateur(Long id, UtilisateurDto utilisateur) {
         return utilisateurRepository.findById(id).map(existing -> {
             existing.setNom(utilisateur.getNom());
             existing.setPrenom(utilisateur.getPrenom());

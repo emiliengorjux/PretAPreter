@@ -11,9 +11,10 @@ public interface MaterielService {
     MaterielDto creeMateriel(String nom, String reference, String etatMateriel,
                              String commentaire, String categorie, LocalDateTime dateAjout);
 
-    Materiel updateMateriel(Materiel materiel);
-    Materiel deleteMateriel (Long id);
-    List<Materiel> findAllMateriels();
-    List<Materiel> findMaterielById(Long id);
+    MaterielDto updateMateriel(MaterielDto materielDto);
+
+    MaterielDto deleteMateriel (Long id);
+    List<MaterielDto> findAllMateriels();
+    List<MaterielDto> findMaterielById(Long id);
 
 }

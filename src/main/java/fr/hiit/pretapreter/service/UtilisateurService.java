@@ -1,5 +1,6 @@
 package fr.hiit.pretapreter.service;
 
+import fr.hiit.pretapreter.service.presentation.dto.UtilisateurDto;
 import fr.hiit.pretapreter.service.repository.entity.Utilisateur;
 import java.util.List;
 import java.util.Optional;
@@ -7,7 +8,7 @@ import java.util.Optional;
 public interface UtilisateurService {
 
     // Créer un utilisateur
-    Utilisateur createUtilisateur(Utilisateur utilisateur);
+    UtilisateurDto createUtilisateur(UtilisateurDto utilisateur);
 
     // Récupérer un utilisateur par ID
     Optional<Utilisateur> getUtilisateurById(Long id);
@@ -16,7 +17,7 @@ public interface UtilisateurService {
     List<Utilisateur> getAllUtilisateurs();
 
     // Mettre à jour un utilisateur
-    Utilisateur updateUtilisateur(Long id, Utilisateur utilisateur);
+    UtilisateurDto updateUtilisateur(Long id, UtilisateurDto utilisateur);
 
     // Supprimer un utilisateur
     void deleteUtilisateur(Long id);

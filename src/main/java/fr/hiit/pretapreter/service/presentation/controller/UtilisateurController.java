@@ -2,12 +2,15 @@ package fr.hiit.pretapreter.service.presentation.controller;
 
 import fr.hiit.pretapreter.service.UtilisateurService;
 import fr.hiit.pretapreter.service.repository.entity.Utilisateur;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/utilisateurs")
+@RequestMapping("/utilisateurs")
 public class UtilisateurController {
 
     private final UtilisateurService utilisateurService;
@@ -16,28 +19,28 @@ public class UtilisateurController {
         this.utilisateurService = utilisateurService;
     }
 
-    @GetMapping
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Utilisateur> getAll() {
         return utilisateurService.getAllUtilisateurs();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{id}")
     public Utilisateur getById(@PathVariable Long id) {
         return utilisateurService.getUtilisateurById(id)
                 .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé"));
     }
 
-    @PostMapping
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public Utilisateur create(@RequestBody Utilisateur utilisateur) {
         return utilisateurService.createUtilisateur(utilisateur);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{id}")
     public Utilisateur update(@PathVariable Long id, @RequestBody Utilisateur utilisateur) {
         return utilisateurService.updateUtilisateur(id, utilisateur);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{id}")
     public void delete(@PathVariable Long id) {
         utilisateurService.deleteUtilisateur(id);
     }

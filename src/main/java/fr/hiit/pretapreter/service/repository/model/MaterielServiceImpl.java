@@ -1,26 +1,22 @@
 package fr.hiit.pretapreter.service.repository.model;
 
-
 import fr.hiit.pretapreter.service.MaterielService;
 import fr.hiit.pretapreter.service.presentation.dto.MaterielDto;
+import fr.hiit.pretapreter.service.repository.MaterielRepository;
 import fr.hiit.pretapreter.service.repository.entity.Materiel;
 import org.springframework.stereotype.Service;
 
-import fr.hiit.pretapreter.service.repository.EmpruntRepository;
-import fr.hiit.pretapreter.service.repository.MaterielRepository;
-
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MaterielServiceImpl implements MaterielService {
-    private final Map<Long, Materiel> materiels = new HashMap<>();
 
-    private final EmpruntRepository empruntRepository;
     private final MaterielRepository materielRepository;
 
-    public MaterielServiceImpl(EmpruntRepository empruntRepository, MaterielRepository materielRepository) {
-        this.empruntRepository = empruntRepository;
+    public MaterielServiceImpl(MaterielRepository materielRepository) {
         this.materielRepository = materielRepository;
     }
 
@@ -28,14 +24,9 @@ public class MaterielServiceImpl implements MaterielService {
     public MaterielDto creeMateriel(String nom, String reference, String etatMateriel,
                                     String commentaire, String categorie, LocalDateTime dateAjout) {
 
-        Materiel materielR = (Materiel) materielRepository;
-
-
-        String defectueux = materielR.getEtatMateriel();
-        if (defectueux.equals("Mauvais")) {
-            throw new IllegalStateException("Le matériel est défectueux, il ne peut pas être emprunté");
+        if ("Mauvais".equals(etatMateriel)) {
+            throw new IllegalStateException("Le matériel est défectueux, il ne peut pas être ajouté");
         }
-
 
         Materiel materiel = new Materiel();
         materiel.setNom(nom);
@@ -46,45 +37,44 @@ public class MaterielServiceImpl implements MaterielService {
         materiel.setDateAjout(dateAjout);
 
         Materiel savedMateriel = materielRepository.save(materiel);
-
-
         return MaterielDto.toDtoMateriel(savedMateriel);
-
-
     }
 
     @Override
-    public Materiel updateMateriel(Materiel materiel) {
-        if(materiel.getId() == null || materiel.getNom() == null || materiel.getReference() == null || materiel.getCategorie() == null){
-            throw new IllegalArgumentException("Nom, Catégorie et Reference du matériel obligatoires ! ");
-        }
-        if(materiels.get(materiel.getId()) == null ){
-            throw new RuntimeException("Matériel à modifier inexistant");
-        }
-        materiels.put(materiel.getId(), materiel);
+    public MaterielDto updateMateriel(MaterielDto materielDto) {
+        Materiel existing = materielRepository.findById(materielDto.getId())
+                .orElseThrow(() -> new IllegalArgumentException("Matériel à modifier inexistant"));
 
-        return materiel;
+        existing.setNom(materielDto.getNom());
+        existing.setReference(materielDto.getReference());
+        existing.setEtatMateriel(materielDto.getEtatMateriel());
+        existing.setCommentaire(materielDto.getCommentaire());
+        existing.setCategorie(materielDto.getCategorie());
+        existing.setDateAjout(LocalDateTime.parse(materielDto.getDateAjout()));
+
+        return MaterielDto.toDtoMateriel(materielRepository.save(existing));
     }
 
     @Override
-    public Materiel deleteMateriel(Long id) {
-        if(materiels.get(id) == null){
-            throw new IllegalArgumentException("Matériel inéxistant, suppression impossible");
-        }
-        return materiels.remove(id);
+    public MaterielDto deleteMateriel(Long id) {
+        Materiel existing = materielRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Matériel inexistant, suppression impossible"));
+        materielRepository.delete(existing);
+        return MaterielDto.toDtoMateriel(existing);
     }
 
     @Override
-    public List<Materiel> findMaterielById(Long id) {
-        return Collections.singletonList(materielRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Materiel inexistant")));
+    public List<MaterielDto> findMaterielById(Long id) {
+        Materiel materiel = materielRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Matériel inexistant"));
+        return Collections.singletonList(MaterielDto.toDtoMateriel(materiel));
     }
 
     @Override
-    public List<Materiel> findAllMateriels() {
-        return materielRepository.findAll();
+    public List<MaterielDto> findAllMateriels() {
+        return materielRepository.findAll()
+                .stream()
+                .map(MaterielDto::toDtoMateriel)
+                .collect(Collectors.toList());
     }
-
-
 }
-
