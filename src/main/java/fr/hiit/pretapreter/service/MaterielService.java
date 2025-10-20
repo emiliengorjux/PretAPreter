@@ -13,7 +13,7 @@ public interface MaterielService {
 
     Materiel updateMateriel(Materiel materiel);
     Materiel deleteMateriel (Long id);
+    List<Materiel> findAllMateriels();
     List<Materiel> findMaterielById(Long id);
-    List<Materiel> findAllMateriel();
 
 }
