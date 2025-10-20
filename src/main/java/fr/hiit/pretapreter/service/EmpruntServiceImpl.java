@@ -50,12 +50,11 @@ public class EmpruntServiceImpl {
             LocalDate debut = e.getDateEmprunt();
             LocalDate fin = e.getRetourEffectif() != null ? e.getRetourEffectif() : e.getRetourPrevu();
 
-            boolean chevauchement = !(dateRetourPrevu.isBefore(debut) || dateEmprunt.isAfter(fin));
-            if (chevauchement) {
-                throw new IllegalStateException("Le matériel est déjà emprunté pendant cette période.");
-            }
-
+        boolean chevauchement = !(dateRetourPrevu.isBefore(debut) || dateEmprunt.isAfter(fin));
+        if (chevauchement) {
+            throw new IllegalStateException("Le matériel est déjà emprunté pendant cette période.");
         }
+    }
 
         // Créer l'emprunt
         Emprunt emprunt = new Emprunt();
