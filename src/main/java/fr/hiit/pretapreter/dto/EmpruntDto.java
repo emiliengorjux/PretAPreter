@@ -1,8 +1,12 @@
 package fr.hiit.pretapreter.dto;
 
 import fr.hiit.pretapreter.model.entity.Emprunt;
-import java.time.LocalDate;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.time.LocalDate;
+@Getter
+@Setter
 public class EmpruntDto {
 
     private Long id;
@@ -15,37 +19,6 @@ public class EmpruntDto {
     private LocalDate retourEffectif;
     private String suiviEtatMateriel;
     private String commentaire;
-
-    // --- Getters & Setters ---
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-
-    public Long getUtilisateurId() { return utilisateurId; }
-    public void setUtilisateurId(Long utilisateurId) { this.utilisateurId = utilisateurId; }
-
-    public Long getMaterielId() { return materielId; }
-    public void setMaterielId(Long materielId) { this.materielId = materielId; }
-
-    public String getEmprunteurNom() { return emprunteurNom; }
-    public void setEmprunteurNom(String emprunteurNom) { this.emprunteurNom = emprunteurNom; }
-
-    public String getMaterielNom() { return materielNom; }
-    public void setMaterielNom(String materielNom) { this.materielNom = materielNom; }
-
-    public LocalDate getDateEmprunt() { return dateEmprunt; }
-    public void setDateEmprunt(LocalDate dateEmprunt) { this.dateEmprunt = dateEmprunt; }
-
-    public LocalDate getRetourPrevu() { return retourPrevu; }
-    public void setRetourPrevu(LocalDate retourPrevu) { this.retourPrevu = retourPrevu; }
-
-    public LocalDate getRetourEffectif() { return retourEffectif; }
-    public void setRetourEffectif(LocalDate retourEffectif) { this.retourEffectif = retourEffectif; }
-
-    public String getSuiviEtatMateriel() { return suiviEtatMateriel; }
-    public void setSuiviEtatMateriel(String suiviEtatMateriel) { this.suiviEtatMateriel = suiviEtatMateriel; }
-
-    public String getCommentaire() { return commentaire; }
-    public void setCommentaire(String commentaire) { this.commentaire = commentaire; }
 
     // --- Conversion Entity -> DTO ---
     public static EmpruntDto toDto(Emprunt emprunt) {

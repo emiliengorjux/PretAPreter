@@ -32,7 +32,7 @@ public class EmpruntServiceImpl implements EmpruntService {
     @Override
     public EmpruntDto createEmprunt(Long utilisateurId, Long materielId, LocalDate dateEmprunt, LocalDate dateRetourPrevu) {
 
-        UtilisateurDto utilisateur = utilisateurRepository.findById(utilisateurId)
+        Utilisateur utilisateur = utilisateurRepository.findById(utilisateurId)
                 .orElseThrow(() -> new IllegalArgumentException("Utilisateur non trouvé"));
 
         Materiel materiel = materielRepository.findById(materielId)
@@ -53,7 +53,7 @@ public class EmpruntServiceImpl implements EmpruntService {
         }
 
         Emprunt emprunt = new Emprunt();
-        emprunt.setUtilisateur(utilisateur);
+        emprunt.setUtilisateur(UtilisateurDto.toDto(utilisateur));
         emprunt.setMateriel(materiel);
         emprunt.setDateEmprunt(dateEmprunt);
         emprunt.setRetourPrevu(dateRetourPrevu);
