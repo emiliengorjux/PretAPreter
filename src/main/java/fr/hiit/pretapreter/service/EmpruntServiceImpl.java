@@ -63,7 +63,7 @@ public class EmpruntServiceImpl implements EmpruntService {
     }
 
     @Override
-    public EmpruntDto updateEmprunt(Emprunt emprunt) {
+    public EmpruntDto updateEmprunt(EmpruntDto emprunt) {
         if (emprunt.getId() == null) throw new IllegalArgumentException("ID obligatoire");
         Emprunt existing = empruntRepository.findById(emprunt.getId())
                 .orElseThrow(() -> new IllegalArgumentException("Emprunt non trouvé"));

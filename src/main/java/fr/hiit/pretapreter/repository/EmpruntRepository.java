@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface EmpruntRepository extends JpaRepository<Emprunt, Long > {
 
+    List<Emprunt> findByUtilisateurId(Long utilisateurId);
     List<Emprunt> findByMaterielId(Long materielId);
 }
 
