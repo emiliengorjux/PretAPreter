@@ -1,9 +1,8 @@
 package fr.hiit.pretapreter.service;
 
+import fr.hiit.pretapreter.dto.EmpruntDto;
 import fr.hiit.pretapreter.dto.UtilisateurDto;
 import fr.hiit.pretapreter.repository.UtilisateurRepository;
-import fr.hiit.pretapreter.model.entity.Utilisateur;
-import fr.hiit.pretapreter.model.entity.Emprunt;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,7 +28,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     }
 
     @Override
-    public List<Utilisateur> getAllUtilisateurs() {
+    public List<UtilisateurDto> getAllUtilisateurs() {
         return utilisateurRepository.findAll();
     }
 
@@ -44,8 +43,8 @@ public class UtilisateurServiceImpl implements UtilisateurService {
             if (utilisateur.getEmprunts() != null) {
                 existing.getEmprunts().clear();
                 existing.getEmprunts().addAll(utilisateur.getEmprunts());
-                for (Emprunt e : existing.getEmprunts()) {
-                    e.setUtilisateur(existing); // Maintenir la relation bidirectionnelle
+                for (EmpruntDto e : existing.getEmprunts()) {
+                    e.setEmprunteurNom(String.valueOf(existing)); // Maintenir la relation bidirectionnelle
                 }
             }
 
@@ -59,9 +58,9 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     }
 
     @Override
-    public List<Utilisateur> getUtilisateursWithEmprunts() {
+    public List<UtilisateurDto> getUtilisateursWithEmprunts() {
         // Charge tous les utilisateurs avec leurs emprunts et le matériel associé
-        List<Utilisateur> utilisateurs = utilisateurRepository.findAll();
+        List<UtilisateurDto> utilisateurs = utilisateurRepository.findAll();
         // Hibernate chargera automatiquement les emprunts et les matériels si FetchType.EAGER ou via JOIN FETCH
         return utilisateurs;
     }
