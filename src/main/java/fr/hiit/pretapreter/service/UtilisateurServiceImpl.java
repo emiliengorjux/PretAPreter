@@ -21,14 +21,10 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
     @Override
     public UtilisateurDto createUtilisateur(UtilisateurDto utilisateurDto) {
-        // Conversion DTO -> entity
         Utilisateur utilisateur = UtilisateurDto.toEntity(utilisateurDto);
-        // Sauvegarde en base
         Utilisateur saved = utilisateurRepository.save(utilisateur);
-        // Conversion entity -> DTO
         return UtilisateurDto.toDto(saved);
     }
-
 
     @Override
     public Optional<UtilisateurDto> getUtilisateurById(Long id) {
@@ -44,7 +40,6 @@ public class UtilisateurServiceImpl implements UtilisateurService {
                 .toList();
     }
 
-
     @Override
     public UtilisateurDto updateUtilisateur(Long id, UtilisateurDto utilisateurDto) {
         return utilisateurRepository.findById(id).map(existing -> {
@@ -57,7 +52,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
                 existing.getEmprunts().clear();
                 for (EmpruntDto eDto : utilisateurDto.getEmprunts()) {
                     Emprunt e = EmpruntDto.toEntity(eDto);
-                    e.setUtilisateur(UtilisateurDto.toDto(existing)); // relation bidirectionnelle
+                    e.setUtilisateur(existing);
                     existing.getEmprunts().add(e);
                 }
             }
@@ -67,17 +62,16 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         }).orElseThrow(() -> new RuntimeException("Utilisateur non trouvé avec l'id : " + id));
     }
 
-
     @Override
     public void deleteUtilisateur(Long id) {
         utilisateurRepository.deleteById(id);
     }
 
     @Override
-    public List<Utilisateur> getUtilisateursWithEmprunts() {
-        // Charge tous les utilisateurs avec leurs emprunts et le matériel associé
-        List<Utilisateur> utilisateurs = utilisateurRepository.findAll();
-        // Hibernate chargera automatiquement les emprunts et les matériels si FetchType.EAGER ou via JOIN FETCH
-        return utilisateurs;
+    public List<UtilisateurDto> getUtilisateursWithEmprunts() {
+        return utilisateurRepository.findAll()
+                .stream()
+                .map(UtilisateurDto::toDto)
+                .toList();
     }
 }

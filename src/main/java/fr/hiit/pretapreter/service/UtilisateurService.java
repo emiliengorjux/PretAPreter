@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface UtilisateurService {
 
     // Créer un utilisateur
-    UtilisateurDto createUtilisateur(UtilisateurDto utilisateur);
+    UtilisateurDto createUtilisateur(UtilisateurDto utilisateurDto);
 
     // Récupérer un utilisateur par ID
     Optional<UtilisateurDto> getUtilisateurById(Long id);
@@ -18,11 +18,11 @@ public interface UtilisateurService {
     List<UtilisateurDto> getAllUtilisateurs();
 
     // Mettre à jour un utilisateur
-    UtilisateurDto updateUtilisateur(Long id, UtilisateurDto utilisateur);
+    UtilisateurDto updateUtilisateur(Long id, UtilisateurDto utilisateurDto);
 
     // Supprimer un utilisateur
     void deleteUtilisateur(Long id);
 
     // Récupérer les emprunts d’un utilisateur avec le matériel associé
-    List<Utilisateur> getUtilisateursWithEmprunts();
+    List<UtilisateurDto> getUtilisateursWithEmprunts();
 }

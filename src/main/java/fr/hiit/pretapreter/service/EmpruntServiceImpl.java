@@ -53,7 +53,7 @@ public class EmpruntServiceImpl implements EmpruntService {
         }
 
         Emprunt emprunt = new Emprunt();
-        emprunt.setUtilisateur(UtilisateurDto.toDto(utilisateur));
+        emprunt.setUtilisateur(utilisateur);
         emprunt.setMateriel(materiel);
         emprunt.setDateEmprunt(dateEmprunt);
         emprunt.setRetourPrevu(dateRetourPrevu);
