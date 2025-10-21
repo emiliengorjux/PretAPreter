@@ -3,13 +3,12 @@ package fr.hiit.pretapreter.dto;
 import fr.hiit.pretapreter.model.entity.Materiel;
 import lombok.Getter;
 import lombok.Setter;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
-
 public class MaterielDto {
     private Long id;
-
     private String nom;
     private String reference;
     private String etatMateriel;
@@ -17,17 +16,21 @@ public class MaterielDto {
     private String categorie;
     private String dateAjout;
 
-    public static Materiel toEntityMateriel(MaterielDto materielDto) {
+    // Conversion DTO → Entité
+    public static Materiel toEntity(MaterielDto materielDto) {
         Materiel materiel = new Materiel();
+        materiel.setId(materielDto.getId());
         materiel.setNom(materielDto.getNom());
         materiel.setReference(materielDto.getReference());
         materiel.setEtatMateriel(materielDto.getEtatMateriel());
         materiel.setCommentaire(materielDto.getCommentaire());
         materiel.setCategorie(materielDto.getCategorie());
+        materiel.setDateAjout(LocalDateTime.parse(materielDto.getDateAjout()));
         return materiel;
     }
 
-    public static MaterielDto toDtoMateriel(Materiel materiel) {
+    // Conversion Entité → DTO
+    public static MaterielDto toDto(Materiel materiel) {
         MaterielDto materielDto = new MaterielDto();
         materielDto.setId(materiel.getId());
         materielDto.setNom(materiel.getNom());

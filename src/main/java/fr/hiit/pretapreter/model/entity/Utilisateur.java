@@ -21,7 +21,7 @@ public class Utilisateur {
     @Column(nullable = false, unique = true)
     private String email;
 
-    // 🔁 Un utilisateur peut avoir plusieurs emprunts
+    // Un utilisateur peut avoir plusieurs emprunts
     @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Emprunt> emprunts = new HashSet<>();
 

@@ -11,7 +11,7 @@ public interface UtilisateurService {
     UtilisateurDto createUtilisateur(UtilisateurDto utilisateur);
 
     // Récupérer un utilisateur par ID
-    Optional<Utilisateur> getUtilisateurById(Long id);
+    Optional<UtilisateurDto> getUtilisateurById(Long id);
 
     // Récupérer tous les utilisateurs
     List<Utilisateur> getAllUtilisateurs();

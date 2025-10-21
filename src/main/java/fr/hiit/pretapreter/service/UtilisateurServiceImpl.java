@@ -24,7 +24,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     }
 
     @Override
-    public Optional<Utilisateur> getUtilisateurById(Long id) {
+    public Optional<UtilisateurDto> getUtilisateurById(Long id) {
         return utilisateurRepository.findById(id);
     }
 

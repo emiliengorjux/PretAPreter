@@ -14,7 +14,7 @@ public class UtilisateurDto {
     private String nom;
     private String prenom;
     private String email;
-    private List<EmpruntDto> emprunts; // liste d'emprunts simplifiée
+    private List<EmpruntDto> emprunts;
 
     public static UtilisateurDto toDto(Utilisateur utilisateur) {
         UtilisateurDto dto = new UtilisateurDto();

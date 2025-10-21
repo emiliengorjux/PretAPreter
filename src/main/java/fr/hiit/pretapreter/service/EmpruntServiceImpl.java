@@ -1,6 +1,7 @@
 package fr.hiit.pretapreter.service;
 
 import fr.hiit.pretapreter.dto.EmpruntDto;
+import fr.hiit.pretapreter.dto.UtilisateurDto;
 import fr.hiit.pretapreter.repository.EmpruntRepository;
 import fr.hiit.pretapreter.repository.MaterielRepository;
 import fr.hiit.pretapreter.repository.UtilisateurRepository;
@@ -31,7 +32,7 @@ public class EmpruntServiceImpl implements EmpruntService {
     @Override
     public EmpruntDto createEmprunt(Long utilisateurId, Long materielId, LocalDate dateEmprunt, LocalDate dateRetourPrevu) {
 
-        Utilisateur utilisateur = utilisateurRepository.findById(utilisateurId)
+        UtilisateurDto utilisateur = utilisateurRepository.findById(utilisateurId)
                 .orElseThrow(() -> new IllegalArgumentException("Utilisateur non trouvé"));
 
         Materiel materiel = materielRepository.findById(materielId)
