@@ -1,7 +1,6 @@
 package fr.hiit.pretapreter.service;
 
 import fr.hiit.pretapreter.dto.UtilisateurDto;
-import fr.hiit.pretapreter.model.entity.Utilisateur;
 
 import java.util.List;
 import java.util.Optional;
