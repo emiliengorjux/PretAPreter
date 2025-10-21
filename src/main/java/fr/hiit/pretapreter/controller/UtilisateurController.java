@@ -1,8 +1,7 @@
-package fr.hiit.pretapreter.service.presentation.controller;
+package fr.hiit.pretapreter.controller;
 
 import fr.hiit.pretapreter.service.UtilisateurService;
-import fr.hiit.pretapreter.service.repository.entity.Utilisateur;
-import org.springframework.http.HttpStatus;
+import fr.hiit.pretapreter.model.entity.Utilisateur;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 

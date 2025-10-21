@@ -1,7 +1,7 @@
 package fr.hiit.pretapreter.service;
 
-import fr.hiit.pretapreter.service.presentation.dto.EmpruntDto;
-import fr.hiit.pretapreter.service.repository.entity.Emprunt;
+import fr.hiit.pretapreter.dto.EmpruntDto;
+import fr.hiit.pretapreter.model.entity.Emprunt;
 
 import java.time.LocalDate;
 import java.util.List;

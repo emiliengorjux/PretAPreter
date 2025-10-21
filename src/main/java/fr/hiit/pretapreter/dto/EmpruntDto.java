@@ -1,6 +1,6 @@
-package fr.hiit.pretapreter.service.presentation.dto;
+package fr.hiit.pretapreter.dto;
 
-import fr.hiit.pretapreter.service.repository.entity.Emprunt;
+import fr.hiit.pretapreter.model.entity.Emprunt;
 import java.time.LocalDate;
 
 public class EmpruntDto {

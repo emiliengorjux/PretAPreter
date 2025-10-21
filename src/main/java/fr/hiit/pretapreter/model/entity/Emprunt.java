@@ -1,4 +1,4 @@
-package fr.hiit.pretapreter.service.repository.entity;
+package fr.hiit.pretapreter.model.entity;
 
 import java.time.LocalDate;
 

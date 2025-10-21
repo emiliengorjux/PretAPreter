@@ -1,9 +1,9 @@
-package fr.hiit.pretapreter.service.repository;
+package fr.hiit.pretapreter.repository;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import fr.hiit.pretapreter.service.repository.entity.Emprunt;
+import fr.hiit.pretapreter.model.entity.Emprunt;
 
 import java.util.List;
 

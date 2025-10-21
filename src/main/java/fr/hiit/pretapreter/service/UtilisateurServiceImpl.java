@@ -1,10 +1,9 @@
-package fr.hiit.pretapreter.service.repository.model;
+package fr.hiit.pretapreter.service;
 
-import fr.hiit.pretapreter.service.UtilisateurService;
-import fr.hiit.pretapreter.service.presentation.dto.UtilisateurDto;
-import fr.hiit.pretapreter.service.repository.UtilisateurRepository;
-import fr.hiit.pretapreter.service.repository.entity.Utilisateur;
-import fr.hiit.pretapreter.service.repository.entity.Emprunt;
+import fr.hiit.pretapreter.dto.UtilisateurDto;
+import fr.hiit.pretapreter.repository.UtilisateurRepository;
+import fr.hiit.pretapreter.model.entity.Utilisateur;
+import fr.hiit.pretapreter.model.entity.Emprunt;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

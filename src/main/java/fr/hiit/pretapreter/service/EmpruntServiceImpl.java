@@ -1,13 +1,12 @@
-package fr.hiit.pretapreter.service.repository.model;
+package fr.hiit.pretapreter.service;
 
-import fr.hiit.pretapreter.service.EmpruntService;
-import fr.hiit.pretapreter.service.presentation.dto.EmpruntDto;
-import fr.hiit.pretapreter.service.repository.EmpruntRepository;
-import fr.hiit.pretapreter.service.repository.MaterielRepository;
-import fr.hiit.pretapreter.service.repository.UtilisateurRepository;
-import fr.hiit.pretapreter.service.repository.entity.Emprunt;
-import fr.hiit.pretapreter.service.repository.entity.Materiel;
-import fr.hiit.pretapreter.service.repository.entity.Utilisateur;
+import fr.hiit.pretapreter.dto.EmpruntDto;
+import fr.hiit.pretapreter.repository.EmpruntRepository;
+import fr.hiit.pretapreter.repository.MaterielRepository;
+import fr.hiit.pretapreter.repository.UtilisateurRepository;
+import fr.hiit.pretapreter.model.entity.Emprunt;
+import fr.hiit.pretapreter.model.entity.Materiel;
+import fr.hiit.pretapreter.model.entity.Utilisateur;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;

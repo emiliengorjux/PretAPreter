@@ -1,6 +1,6 @@
-package fr.hiit.pretapreter.service.presentation.dto;
+package fr.hiit.pretapreter.dto;
 
-import fr.hiit.pretapreter.service.repository.entity.Materiel;
+import fr.hiit.pretapreter.model.entity.Materiel;
 import lombok.Getter;
 import lombok.Setter;
 

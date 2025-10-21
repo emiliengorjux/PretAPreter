@@ -1,7 +1,6 @@
 package fr.hiit.pretapreter.service;
 
-import fr.hiit.pretapreter.service.presentation.dto.MaterielDto;
-import fr.hiit.pretapreter.service.repository.entity.Materiel;
+import fr.hiit.pretapreter.dto.MaterielDto;
 
 import java.time.LocalDateTime;
 import java.util.List;

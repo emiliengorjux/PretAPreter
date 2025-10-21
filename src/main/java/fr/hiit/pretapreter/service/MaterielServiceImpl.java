@@ -1,9 +1,8 @@
-package fr.hiit.pretapreter.service.repository.model;
+package fr.hiit.pretapreter.service;
 
-import fr.hiit.pretapreter.service.MaterielService;
-import fr.hiit.pretapreter.service.presentation.dto.MaterielDto;
-import fr.hiit.pretapreter.service.repository.MaterielRepository;
-import fr.hiit.pretapreter.service.repository.entity.Materiel;
+import fr.hiit.pretapreter.dto.MaterielDto;
+import fr.hiit.pretapreter.repository.MaterielRepository;
+import fr.hiit.pretapreter.model.entity.Materiel;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
