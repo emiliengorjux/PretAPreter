@@ -2,6 +2,7 @@ package fr.hiit.pretapreter.model.entity;
 
 import java.time.LocalDate;
 
+import fr.hiit.pretapreter.dto.UtilisateurDto;
 import jakarta.persistence.*;
 
 @Entity
@@ -68,7 +69,7 @@ public class Emprunt {
         return utilisateur;
     }
 
-    public void setUtilisateur(Utilisateur utilisateur) {
+    public void setUtilisateur(UtilisateurDto utilisateur) {
         this.utilisateur = utilisateur;
     }
 
