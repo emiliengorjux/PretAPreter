@@ -21,23 +21,22 @@ public class MaterielController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<MaterielDto> getAllMateriel() {
-        return materielService.getAllMateriel();
+        return materielService.findAllMateriels();
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{id}")
     public MaterielDto getById(@PathVariable Long id) {
-        return materielService.getMaterielById(id)
-                .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé"));
+        return materielService.findMaterielById(id);
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public MaterielDto create(@RequestBody Materiel materiel) {
+    public MaterielDto creeMateriel(@RequestBody Materiel materiel) {
         return materielService.creeMateriel(MaterielDto.toDto(materiel));
     }
 
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{id}")
     public MaterielDto update(@PathVariable Long id, @RequestBody Materiel materiel) {
-        return materielService.updateMateriel(id, MaterielDto.toDto(materiel));
+        return materielService.updateMateriel(MaterielDto.toDto(materiel));
     }
 
     @DeleteMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{id}")

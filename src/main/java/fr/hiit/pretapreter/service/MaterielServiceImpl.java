@@ -4,8 +4,6 @@ import fr.hiit.pretapreter.dto.MaterielDto;
 import fr.hiit.pretapreter.model.entity.Materiel;
 import fr.hiit.pretapreter.repository.MaterielRepository;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,18 +17,11 @@ public class MaterielServiceImpl implements MaterielService {
     }
 
     @Override
-    public MaterielDto creeMateriel(String nom, String reference, String etatMateriel, String commentaire, String categorie) {
-        if ("Mauvais".equals(etatMateriel)) {
+    public MaterielDto creeMateriel(MaterielDto materielDto) {
+        Materiel materiel = MaterielDto.toEntity(materielDto);
+        if ("Mauvais".equals(materiel.getEtatMateriel())) {
             throw new IllegalStateException("Le matériel est défectueux, il ne peut pas être ajouté");
         }
-
-        Materiel materiel = new Materiel();
-        materiel.setNom(nom);
-        materiel.setReference(reference);
-        materiel.setEtatMateriel(etatMateriel);
-        materiel.setCommentaire(commentaire);
-        materiel.setCategorie(categorie);
-        materiel.setDateAjout(LocalDateTime.now());
 
         Materiel savedMateriel = materielRepository.save(materiel);
         return MaterielDto.toDto(savedMateriel);

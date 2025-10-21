@@ -4,7 +4,7 @@ import fr.hiit.pretapreter.dto.MaterielDto;
 import java.util.List;
 
 public interface MaterielService {
-    MaterielDto creeMateriel(String nom, String reference, String etatMateriel, String commentaire, String categorie);
+    MaterielDto creeMateriel(MaterielDto materielDto);
     MaterielDto updateMateriel(MaterielDto materielDto);
     void deleteMateriel(Long id);
     MaterielDto findMaterielById(Long id);
