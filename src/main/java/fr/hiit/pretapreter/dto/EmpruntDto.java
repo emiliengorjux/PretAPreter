@@ -1,5 +1,6 @@
 package fr.hiit.pretapreter.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import fr.hiit.pretapreter.model.entity.Emprunt;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,13 +8,14 @@ import lombok.Setter;
 import java.time.LocalDate;
 @Getter
 @Setter
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class EmpruntDto {
 
     private Long id;
     private Long utilisateurId;
     private Long materielId;
-    private String emprunteurNom; // optionnel pour affichage
-    private String materielNom;   // optionnel pour affichage
+    private String emprunteurPrenom;
+    private String materielNom;
     private LocalDate dateEmprunt;
     private LocalDate retourPrevu;
     private LocalDate retourEffectif;
@@ -26,7 +28,7 @@ public class EmpruntDto {
         dto.setId(emprunt.getId());
         dto.setUtilisateurId(emprunt.getUtilisateur() != null ? emprunt.getUtilisateur().getId() : null);
         dto.setMaterielId(emprunt.getMateriel() != null ? emprunt.getMateriel().getId() : null);
-        dto.setEmprunteurNom(emprunt.getUtilisateur() != null ? emprunt.getUtilisateur().getNom() : null);
+        dto.setEmprunteurPrenom(emprunt.getUtilisateur() != null ? emprunt.getUtilisateur().getPrenom(): null);
         dto.setMaterielNom(emprunt.getMateriel() != null ? emprunt.getMateriel().getNom() : null);
         dto.setDateEmprunt(emprunt.getDateEmprunt());
         dto.setRetourPrevu(emprunt.getRetourPrevu());

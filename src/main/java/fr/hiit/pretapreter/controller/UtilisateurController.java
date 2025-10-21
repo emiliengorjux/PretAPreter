@@ -20,8 +20,8 @@ public class UtilisateurController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<UtilisateurDto> getAll() {
-        return utilisateurService.getAllUtilisateurs();
+    public List<UtilisateurDto> getAll(@RequestParam(required = false) String prenom) {
+        return utilisateurService.getAllUtilisateurs(prenom);
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{id}")

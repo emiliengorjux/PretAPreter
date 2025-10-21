@@ -1,7 +1,6 @@
 package fr.hiit.pretapreter.service;
 
 import fr.hiit.pretapreter.dto.UtilisateurDto;
-import fr.hiit.pretapreter.model.entity.Utilisateur;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +14,7 @@ public interface UtilisateurService {
     Optional<UtilisateurDto> getUtilisateurById(Long id);
 
     // Récupérer tous les utilisateurs
-    List<UtilisateurDto> getAllUtilisateurs();
+    List<UtilisateurDto> getAllUtilisateurs(String prenom);
 
     // Mettre à jour un utilisateur
     UtilisateurDto updateUtilisateur(Long id, UtilisateurDto utilisateurDto);

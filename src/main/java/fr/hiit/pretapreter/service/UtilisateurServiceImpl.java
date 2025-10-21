@@ -6,7 +6,6 @@ import fr.hiit.pretapreter.model.entity.Emprunt;
 import fr.hiit.pretapreter.model.entity.Utilisateur;
 import fr.hiit.pretapreter.repository.UtilisateurRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -33,12 +32,21 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     }
 
     @Override
-    public List<UtilisateurDto> getAllUtilisateurs() {
-        return utilisateurRepository.findAll()
-                .stream()
+    public List<UtilisateurDto> getAllUtilisateurs(String prenom) {
+        List<Utilisateur> utilisateurs;
+        if (prenom != null && !prenom.isBlank()) {
+            utilisateurs = utilisateurRepository
+                    .findByPrenom(prenom);
+        } else {
+            utilisateurs = utilisateurRepository.findAll();
+        }
+        return utilisateurs.stream()
                 .map(UtilisateurDto::toDto)
                 .toList();
     }
+
+
+
 
     @Override
     public UtilisateurDto updateUtilisateur(Long id, UtilisateurDto utilisateurDto) {
@@ -47,7 +55,6 @@ public class UtilisateurServiceImpl implements UtilisateurService {
             existing.setPrenom(utilisateurDto.getPrenom());
             existing.setEmail(utilisateurDto.getEmail());
 
-            // Mettre à jour les emprunts si nécessaire
             if (utilisateurDto.getEmprunts() != null) {
                 existing.getEmprunts().clear();
                 for (EmpruntDto eDto : utilisateurDto.getEmprunts()) {

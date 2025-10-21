@@ -1,5 +1,6 @@
 package fr.hiit.pretapreter.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import fr.hiit.pretapreter.model.entity.Materiel;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,6 +8,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class MaterielDto {
     private Long id;
     private String nom;
