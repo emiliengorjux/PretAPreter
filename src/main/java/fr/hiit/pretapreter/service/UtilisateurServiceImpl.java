@@ -57,7 +57,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
                 existing.getEmprunts().clear();
                 for (EmpruntDto eDto : utilisateurDto.getEmprunts()) {
                     Emprunt e = EmpruntDto.toEntity(eDto);
-                    e.setUtilisateur(UtilisateurDto.toDto(existing)); // relation bidirectionnelle
+                    e.setUtilisateur((existing));
                     existing.getEmprunts().add(e);
                 }
             }

@@ -23,6 +23,7 @@ public class UtilisateurDto {
         dto.setPrenom(utilisateur.getPrenom());
         dto.setEmail(utilisateur.getEmail());
         return dto;
+
     }
 
         public static Utilisateur toEntity (UtilisateurDto dto){
