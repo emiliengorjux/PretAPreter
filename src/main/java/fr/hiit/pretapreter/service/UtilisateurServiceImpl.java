@@ -33,9 +33,17 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     }
 
     @Override
-    public List<UtilisateurDto> getAllUtilisateurs() {
-        return utilisateurRepository.findAll()
-                .stream()
+    public List<UtilisateurDto> getAllUtilisateurs(String prenom) {
+        List<Utilisateur> utilisateurs;
+
+        if (prenom != null && !prenom.isBlank()) {
+            utilisateurs = utilisateurRepository
+                    .findByPrenom(prenom);
+        } else {
+            utilisateurs = utilisateurRepository.findAll();
+        }
+
+        return utilisateurs.stream()
                 .map(UtilisateurDto::toDto)
                 .toList();
     }

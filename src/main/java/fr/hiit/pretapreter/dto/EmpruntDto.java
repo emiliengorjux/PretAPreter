@@ -12,7 +12,7 @@ public class EmpruntDto {
     private Long id;
     private Long utilisateurId;
     private Long materielId;
-    private String emprunteurNom; // optionnel pour affichage
+    private String emprunteurPrenom; // optionnel pour affichage
     private String materielNom;   // optionnel pour affichage
     private LocalDate dateEmprunt;
     private LocalDate retourPrevu;
@@ -26,7 +26,7 @@ public class EmpruntDto {
         dto.setId(emprunt.getId());
         dto.setUtilisateurId(emprunt.getUtilisateur() != null ? emprunt.getUtilisateur().getId() : null);
         dto.setMaterielId(emprunt.getMateriel() != null ? emprunt.getMateriel().getId() : null);
-        dto.setEmprunteurNom(emprunt.getUtilisateur() != null ? emprunt.getUtilisateur().getNom() : null);
+        dto.setEmprunteurPrenom(emprunt.getUtilisateur() != null ? emprunt.getUtilisateur().getPrenom() : null);
         dto.setMaterielNom(emprunt.getMateriel() != null ? emprunt.getMateriel().getNom() : null);
         dto.setDateEmprunt(emprunt.getDateEmprunt());
         dto.setRetourPrevu(emprunt.getRetourPrevu());

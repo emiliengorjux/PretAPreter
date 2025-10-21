@@ -15,7 +15,7 @@ public interface UtilisateurService {
     Optional<UtilisateurDto> getUtilisateurById(Long id);
 
     // Récupérer tous les utilisateurs
-    List<UtilisateurDto> getAllUtilisateurs();
+    List<UtilisateurDto> getAllUtilisateurs(String prenom);
 
     // Mettre à jour un utilisateur
     UtilisateurDto updateUtilisateur(Long id, UtilisateurDto utilisateurDto);
