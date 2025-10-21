@@ -1,5 +1,6 @@
 package fr.hiit.pretapreter.controller;
 
+import fr.hiit.pretapreter.dto.UtilisateurDto;
 import fr.hiit.pretapreter.service.UtilisateurService;
 import fr.hiit.pretapreter.model.entity.Utilisateur;
 import org.springframework.http.MediaType;
@@ -19,24 +20,24 @@ public class UtilisateurController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Utilisateur> getAll() {
+    public List<UtilisateurDto> getAll() {
         return utilisateurService.getAllUtilisateurs();
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{id}")
-    public Utilisateur getById(@PathVariable Long id) {
+    public UtilisateurDto getById(@PathVariable Long id) {
         return utilisateurService.getUtilisateurById(id)
                 .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé"));
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public Utilisateur create(@RequestBody Utilisateur utilisateur) {
-        return utilisateurService.createUtilisateur(utilisateur);
+    public UtilisateurDto create(@RequestBody Utilisateur utilisateur) {
+        return utilisateurService.createUtilisateur(UtilisateurDto.toDto(utilisateur));
     }
 
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{id}")
-    public Utilisateur update(@PathVariable Long id, @RequestBody Utilisateur utilisateur) {
-        return utilisateurService.updateUtilisateur(id, utilisateur);
+    public UtilisateurDto update(@PathVariable Long id, @RequestBody Utilisateur utilisateur) {
+        return utilisateurService.updateUtilisateur(id, UtilisateurDto.toDto(utilisateur));
     }
 
     @DeleteMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{id}")
