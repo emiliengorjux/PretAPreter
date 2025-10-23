@@ -1,6 +1,7 @@
 package fr.hiit.pretapreter.model.entity;
 
 import jakarta.persistence.*;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,11 +22,18 @@ public class Utilisateur {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(nullable = false)
+    private String motDePasse;
+
+    @Column(nullable = false)
+    private String role;
+
 
     @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Emprunt> emprunts = new HashSet<>();
 
-    public Utilisateur() {}
+    public Utilisateur() {
+    }
 
     public Utilisateur(String nom, String prenom, String email) {
         this.nom = nom;
@@ -75,5 +83,16 @@ public class Utilisateur {
         this.emprunts = emprunts;
     }
 
-
+    public String getMotDePasse() {
+        return motDePasse;
+    }
+    public void setMotDePasse(String motDePasse) {
+        this.motDePasse = motDePasse;
+    }
+    public String getRole() {
+        return role;
+    }
+    public void setRole(String role) {
+        this.role = role;
+    }
 }
