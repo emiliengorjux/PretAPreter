@@ -1,8 +1,6 @@
-version: '3.8'
-
 services:
   postgres:
-    image: postgres:15
+    image: postgres:18
     container_name: pretapreter-db
     environment:
       POSTGRES_USER: EE

@@ -1,4 +1,4 @@
-package fr.hiit.pretapreter.controller;
+package fr.hiit.pretapreter.controllertest;
 
 import fr.hiit.pretapreter.dto.UtilisateurDto;
 import fr.hiit.pretapreter.service.UtilisateurService;

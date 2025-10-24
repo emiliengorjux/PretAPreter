@@ -1,4 +1,4 @@
-package fr.hiit.pretapreter.security;
+/*package fr.hiit.pretapreter.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,9 +17,9 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(AbstractHttpConfigurer::disable)
+                .csrf(AbstractHttpConfigurer::disable) //Regarder ce qu'est les attaques CSRF.
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/docker-console/**", "/emprunt/**", "/materiels/").permitAll()
+                        .requestMatchers("/docker-console/**", "/emprunt/**", "/materiels/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())
@@ -50,3 +50,4 @@ public class SecurityConfig {
         return new InMemoryUserDetailsManager(admin, user);
     }
 }
+*/

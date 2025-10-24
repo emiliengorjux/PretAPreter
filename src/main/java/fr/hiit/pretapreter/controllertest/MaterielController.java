@@ -1,4 +1,4 @@
-package fr.hiit.pretapreter.controller;
+package fr.hiit.pretapreter.controllertest;
 
 import fr.hiit.pretapreter.dto.MaterielDto;
 import fr.hiit.pretapreter.model.entity.Materiel;
