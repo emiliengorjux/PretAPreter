@@ -1,21 +1,32 @@
-services:
-  postgres:
-    image: postgres:18
-    container_name: pretapreter-db
-    environment:
-      POSTGRES_USER: EE
-      POSTGRES_PASSWORD: admin
-      POSTGRES_DB: pretapreter
-    ports:
-      - "5432:5432"
+version: '3.8'
 
-  pgadmin:
-    image: dpage/pgadmin4
-    container_name: pgadmin
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: pretapreter-mysql
+    restart: always
     environment:
-      PGADMIN_DEFAULT_EMAIL: ee@admin.com
-      PGADMIN_DEFAULT_PASSWORD: admin
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: pretapreter
+      MYSQL_USER: EE
+      MYSQL_PASSWORD: admin
     ports:
-      - "8081:80"
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: EE
+      PMA_PASSWORD: admin
+    ports:
+      - "8082:80"
     depends_on:
-      - postgres
+      - mysql
+
+volumes:
+  mysql_data:
