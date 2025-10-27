@@ -1,4 +1,4 @@
-package fr.hiit.pretapreter.controllertest;
+package fr.hiit.pretapreter.controller;
 
 import fr.hiit.pretapreter.dto.EmpruntDto;
 import fr.hiit.pretapreter.service.EmpruntService;

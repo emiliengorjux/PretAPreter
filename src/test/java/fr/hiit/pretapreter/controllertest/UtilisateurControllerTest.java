@@ -1,5 +1,6 @@
 package fr.hiit.pretapreter.controllertest;
 
+import fr.hiit.pretapreter.controller.UtilisateurController;
 import fr.hiit.pretapreter.dto.UtilisateurDto;
 import fr.hiit.pretapreter.model.entity.Utilisateur;
 import fr.hiit.pretapreter.service.UtilisateurService;
