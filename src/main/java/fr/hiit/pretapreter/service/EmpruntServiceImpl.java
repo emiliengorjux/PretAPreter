@@ -91,7 +91,7 @@ public class EmpruntServiceImpl implements EmpruntService {
 
     @Override
     public List<EmpruntDto> findAllByUtilisateurId(Long utilisateurId) {
-        return empruntRepository.findById(utilisateurId)
+        return empruntRepository.findByUtilisateurId(utilisateurId)
                 .stream()
                 .map(EmpruntDto::toDto)
                 .collect(Collectors.toList());
