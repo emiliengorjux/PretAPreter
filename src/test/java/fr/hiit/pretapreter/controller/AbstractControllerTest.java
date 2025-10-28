@@ -14,7 +14,7 @@ public abstract class AbstractControllerTest {
         } catch (Exception e) {
             throw new RuntimeException(e);
         } // Permet de convertir/modifié mes objets en JSON, et mapper disable,
-         // avec "write etc.." les date ne seront plus sérializé sous forme de timestemps
+         // avec "write ..." les date ne seront plus sérializé sous forme de timestamps
         // rend la chose plus lisible et permet d'écrire une date en format YY/MM/JJ(format américain)
     }
 }
