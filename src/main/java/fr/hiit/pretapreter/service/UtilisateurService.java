@@ -1,10 +1,12 @@
 package fr.hiit.pretapreter.service;
 
 import fr.hiit.pretapreter.dto.UtilisateurDto;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public interface UtilisateurService {
 
     // Créer un utilisateur
@@ -24,4 +26,5 @@ public interface UtilisateurService {
 
     // Récupérer les emprunts d’un utilisateur avec le matériel associé
     List<UtilisateurDto> getUtilisateursWithEmprunts();
+
 }

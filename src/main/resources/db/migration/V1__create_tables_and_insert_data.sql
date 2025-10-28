@@ -58,7 +58,8 @@ VALUES ('Dupont', 'Didier', 'didier@exemple.com'),
        ('Petit', 'Michel', 'michel@exemple.com');
 
 -- Emprunts
-INSERT INTO emprunt (materiel_id, utilisateur_id, date_emprunt, retour_prevu, retour_effectif, suivi_etat_materiel, commentaire)
+INSERT INTO emprunt (materiel_id, utilisateur_id, date_emprunt, retour_prevu, retour_effectif, suivi_etat_materiel,
+                     commentaire)
 VALUES (1, 1, '2025-10-07', '2025-10-10', '2025-10-11', 'Bon', 'RAS'),
        (2, 2, '2025-10-07', '2025-10-10', '2025-10-11', 'Bon', 'Matériel en bon état'),
        (3, 3, '2025-10-07', '2025-10-10', '2025-10-11', 'Mauvais', 'Défectueux'),

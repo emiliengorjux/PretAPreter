@@ -2,10 +2,12 @@ package fr.hiit.pretapreter.service;
 
 import fr.hiit.pretapreter.dto.EmpruntDto;
 import fr.hiit.pretapreter.model.entity.Emprunt;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
 
+@Service
 public interface EmpruntService {
 
     // Créer un emprunt pour un utilisateur et un matériel
