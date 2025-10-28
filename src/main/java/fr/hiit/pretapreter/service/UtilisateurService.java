@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
 @Service
 public interface UtilisateurService {
 
@@ -26,5 +25,4 @@ public interface UtilisateurService {
 
     // Récupérer les emprunts d’un utilisateur avec le matériel associé
     List<UtilisateurDto> getUtilisateursWithEmprunts();
-
 }
