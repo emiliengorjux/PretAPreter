@@ -1,7 +1,5 @@
 package fr.hiit.pretapreter.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import fr.hiit.pretapreter.controller.EmpruntController;
 import fr.hiit.pretapreter.dto.EmpruntDto;
 import fr.hiit.pretapreter.service.EmpruntService;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,7 +23,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(MockitoExtension.class)
 class EmpruntControllerTest extends AbstractControllerTest {
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Mock
     private EmpruntService empruntService;
@@ -172,7 +169,7 @@ class EmpruntControllerTest extends AbstractControllerTest {
         // WHEN + THEN
         mockMvc.perform(put("/emprunts/{id}", 1L)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(emprunt)))
+                        .content(asJsonString(emprunt)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(1))
