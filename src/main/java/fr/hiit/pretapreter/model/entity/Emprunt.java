@@ -12,12 +12,12 @@ public class Emprunt {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // 🔗 Le matériel emprunté
+    //  Le matériel emprunté
     @ManyToOne(optional = false)
     @JoinColumn(name = "materiel_id", nullable = false)
     private Materiel materiel;
 
-    // 🔗 L’utilisateur qui a fait cet emprunt
+    //  L’utilisateur qui a fait cet emprunt
     @ManyToOne(optional = false)
     @JoinColumn(name = "utilisateur_id", nullable = false)
     private Utilisateur utilisateur;

@@ -34,6 +34,7 @@ public class Utilisateur {
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
+
     }
 
     // === Getters & Setters ===
@@ -77,4 +78,5 @@ public class Utilisateur {
     public void setEmprunts(Set<Emprunt> emprunts) {
         this.emprunts = emprunts;
     }
+
 }
