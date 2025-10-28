@@ -1,7 +1,6 @@
-package fr.hiit.pretapreter.controllertest;
+package fr.hiit.pretapreter.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fr.hiit.pretapreter.controller.EmpruntController;
 import fr.hiit.pretapreter.dto.EmpruntDto;
 import fr.hiit.pretapreter.service.EmpruntService;
 import org.junit.jupiter.api.BeforeEach;
