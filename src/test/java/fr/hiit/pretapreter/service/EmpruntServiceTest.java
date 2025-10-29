@@ -13,12 +13,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class EmpruntServiceTest extends AbstractServiceTest {
@@ -84,25 +86,70 @@ class EmpruntServiceTest extends AbstractServiceTest {
     @Test
     void should_delete_Emprunt() {
         // Given
+
+        Long empruntId = 1L;
         Emprunt empruntCreeASuppr = new Emprunt();
+        empruntCreeASuppr.setUtilisateur(new Utilisateur());
+        empruntCreeASuppr.setMateriel(new Materiel());
+        empruntCreeASuppr.setDateEmprunt(stringToLocalDate("2025-10-21"));
+        empruntCreeASuppr.setRetourPrevu(stringToLocalDate("2025-10-28"));
 
         // When
 
+        when(empruntRepository.findById(empruntId)).thenReturn(Optional.of(empruntCreeASuppr));
+        doNothing().when(empruntRepository).delete(empruntCreeASuppr);
+
         // Then
+        assertDoesNotThrow(() -> empruntServiceImpl.deleteEmprunt(empruntId));
+
+        //verify(empruntRepository, times(1)).findById(empruntId);
+        //verify(empruntRepository, times(1)).delete(empruntCreeASuppr);
+        // Ici les verify sont commenté pour evité le casser l'effet boite noir des T.U
+        // /!\ POSER LA QUESTION DE BONNE PRATIQUE !!
+
     }
 
     @Test
     void should_find_Emprunt_By_Id() {
         // Given
 
+        Long empruntId = 1L;
+        EmpruntDto expectedEmpruntDto = new EmpruntDto();
+        expectedEmpruntDto.setId(empruntId);
+        expectedEmpruntDto.setUtilisateurId(1L);
+        expectedEmpruntDto.setMaterielId(1L);
+        expectedEmpruntDto.setDateEmprunt(stringToLocalDate("2025-10-21"));
+        expectedEmpruntDto.setRetourPrevu(stringToLocalDate("2025-10-28"));
+
+        Emprunt empruntEntity = new Emprunt();
+        empruntEntity.setId(empruntId);
+
+        when(empruntRepository.findById(empruntId)).thenReturn(Optional.of(empruntEntity));
+
         // When
+        EmpruntDto result = empruntServiceImpl.findEmpruntById(empruntId);
 
         // Then
+        assertNotNull(result);
+        assertEquals(expectedEmpruntDto.getId(), result.getId());
+        assertEquals(expectedEmpruntDto.getUtilisateurId(), result.getUtilisateurId());
+        assertEquals(expectedEmpruntDto.getMaterielId(), result.getMaterielId());
+        assertEquals(expectedEmpruntDto.getDateEmprunt(), result.getDateEmprunt());
+        assertEquals(expectedEmpruntDto.getRetourPrevu(), result.getRetourPrevu());
     }
+
 
     @Test
     void should_find_All_Emprunts() {
         // Given
+        EmpruntDto empruntCree1 = new EmpruntDto();
+        empruntCree1.setId(1L);
+        EmpruntDto empruntCree2 = new EmpruntDto();
+        empruntCree2.setId(2L);
+        EmpruntDto empruntCree3 = new EmpruntDto();
+        empruntCree3.setId(3L);
+
+        List<EmpruntDto> empruntsCreeList = Arrays.asList(empruntCree1, empruntCree2);
 
         // When
 
