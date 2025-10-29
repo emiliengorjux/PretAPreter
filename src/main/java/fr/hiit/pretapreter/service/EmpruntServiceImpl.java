@@ -29,8 +29,6 @@ public class EmpruntServiceImpl implements EmpruntService {
     }
 
     public EmpruntDto createEmprunt(EmpruntDto empruntDto) {
-        // On convertit le DTO en entité
-        Emprunt emprunt = EmpruntDto.toEntity(empruntDto);
 
         // On récupère les IDs directement depuis le DTO
         Long utilisateurId = empruntDto.getUtilisateurId();
@@ -43,11 +41,14 @@ public class EmpruntServiceImpl implements EmpruntService {
         Materiel materiel = materielRepository.findById(materielId)
                 .orElseThrow(() -> new IllegalArgumentException("Matériel non trouvé"));
 
-        // On lie les entités (si ton entité Emprunt a bien ces relations)
+        // On convertit le DTO en entité
+        Emprunt emprunt = EmpruntDto.toEntity(empruntDto);
+
+        // On lie les entités
         emprunt.setUtilisateur(utilisateur);
         emprunt.setMateriel(materiel);
 
-        // 💡 (optionnel) validations métier
+        // validations métier
         LocalDate dateEmprunt = emprunt.getDateEmprunt();
         LocalDate dateRetourPrevu = emprunt.getRetourPrevu();
 
@@ -57,6 +58,26 @@ public class EmpruntServiceImpl implements EmpruntService {
 
         if (dateRetourPrevu != null && dateRetourPrevu.isBefore(dateEmprunt)) {
             throw new IllegalArgumentException("La date de retour prévue doit être après la date d'emprunt.");
+        }
+
+        // Vérifier les autres emprunts existants du même matériel
+        List<Emprunt> empruntsExistants = empruntRepository.findByMaterielId(materielId);
+
+        for (Emprunt e : empruntsExistants) {
+            LocalDate debut = e.getDateEmprunt();
+            LocalDate fin = e.getRetourEffectif() != null ? e.getRetourEffectif() : e.getRetourPrevu();
+
+            // Si la nouvelle date d'emprunt est comprise entre le début et la fin d’un emprunt existant
+            if (!dateEmprunt.isAfter(fin) && !dateRetourPrevu.isBefore(debut)) {
+                throw new IllegalArgumentException(
+                        "Le matériel est déjà emprunté pendant cette période (" + debut + " → " + fin + ")"
+                );
+            }
+
+            // Vérifie spécifiquement si la date d'emprunt est exactement la même
+            if (dateEmprunt.isEqual(debut)) {
+                throw new IllegalArgumentException("La date d'emprunt ne doit pas être la même qu'un autre emprunt existant");
+            }
         }
 
         // Sauvegarde
