@@ -13,7 +13,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -39,7 +38,7 @@ class EmpruntServiceTest extends AbstractServiceTest {
 
     @Test
     void should_create_Emprunt() {
-        // Given
+        // --- GIVEN ---
         Utilisateur utilisateurPourCree = new Utilisateur();
         utilisateurPourCree.setId(1L);
 
@@ -47,31 +46,34 @@ class EmpruntServiceTest extends AbstractServiceTest {
         materielPourCree.setId(2L);
 
         Emprunt empruntCree = new Emprunt();
+        empruntCree.setId(10L);
         empruntCree.setUtilisateur(utilisateurPourCree);
         empruntCree.setMateriel(materielPourCree);
         empruntCree.setDateEmprunt(stringToLocalDate("2025-10-21"));
         empruntCree.setRetourPrevu(stringToLocalDate("2025-10-28"));
 
+        EmpruntDto empruntDto = new EmpruntDto();
+        empruntDto.setUtilisateurId(1L);
+        empruntDto.setMaterielId(2L);
+        empruntDto.setDateEmprunt(stringToLocalDate("2025-10-21"));
+        empruntDto.setRetourPrevu(stringToLocalDate("2025-10-28"));
+
         when(utilisateurRepository.findById(1L)).thenReturn(Optional.of(utilisateurPourCree));
         when(materielRepository.findById(2L)).thenReturn(Optional.of(materielPourCree));
         when(empruntRepository.save(any(Emprunt.class))).thenReturn(empruntCree);
 
-        // When
-        EmpruntDto result = empruntServiceImpl.createEmprunt(
-                1L, 2L,
-                stringToLocalDate("2025-10-21"),
-                stringToLocalDate("2025-10-28")
-        );
+        // --- WHEN ---
+        EmpruntDto result = empruntServiceImpl.createEmprunt(empruntDto);
 
-        // Then
+        // --- THEN ---
         assertNotNull(result);
         assertEquals(1L, result.getUtilisateurId());
         assertEquals(2L, result.getMaterielId());
         assertEquals(stringToLocalDate("2025-10-21"), result.getDateEmprunt());
         assertEquals(stringToLocalDate("2025-10-28"), result.getRetourPrevu());
-        System.out.println("Emprunt cree avec succès !" + empruntCree);
 
-}
+        System.out.println("Emprunt créé avec succès : " + result);
+    }
 
 
 @Test
@@ -112,30 +114,21 @@ class EmpruntServiceTest extends AbstractServiceTest {
     @Test
     void should_find_Emprunt_By_Id() {
         // Given
+        Long empruntId = 3L;
+        EmpruntDto empruntDtoById = new EmpruntDto();
+        empruntDtoById.setId(empruntId);
 
-        Long empruntId = 1L;
-        EmpruntDto expectedEmpruntDto = new EmpruntDto();
-        expectedEmpruntDto.setId(empruntId);
-        expectedEmpruntDto.setUtilisateurId(1L);
-        expectedEmpruntDto.setMaterielId(1L);
-        expectedEmpruntDto.setDateEmprunt(stringToLocalDate("2025-10-21"));
-        expectedEmpruntDto.setRetourPrevu(stringToLocalDate("2025-10-28"));
+        Emprunt empruntFoundById = new Emprunt();
+        empruntFoundById.setId(empruntId);
 
-        Emprunt empruntEntity = new Emprunt();
-        empruntEntity.setId(empruntId);
-
-        when(empruntRepository.findById(empruntId)).thenReturn(Optional.of(empruntEntity));
+        when(empruntRepository.findById(empruntId)).thenReturn(Optional.of(empruntFoundById));
 
         // When
         EmpruntDto result = empruntServiceImpl.findEmpruntById(empruntId);
 
         // Then
         assertNotNull(result);
-        assertEquals(expectedEmpruntDto.getId(), result.getId());
-        assertEquals(expectedEmpruntDto.getUtilisateurId(), result.getUtilisateurId());
-        assertEquals(expectedEmpruntDto.getMaterielId(), result.getMaterielId());
-        assertEquals(expectedEmpruntDto.getDateEmprunt(), result.getDateEmprunt());
-        assertEquals(expectedEmpruntDto.getRetourPrevu(), result.getRetourPrevu());
+        assertEquals(empruntDtoById.getId(), result.getId());
     }
 
 

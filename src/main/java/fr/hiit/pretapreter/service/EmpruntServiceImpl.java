@@ -43,11 +43,10 @@ public class EmpruntServiceImpl implements EmpruntService {
         Materiel materiel = materielRepository.findById(materielId)
                 .orElseThrow(() -> new IllegalArgumentException("Matériel non trouvé"));
 
-        // On lie les entités (si ton entité Emprunt a bien ces relations)
         emprunt.setUtilisateur(utilisateur);
         emprunt.setMateriel(materiel);
 
-        // 💡 (optionnel) validations métier
+        //(optionnel) validations métier
         LocalDate dateEmprunt = emprunt.getDateEmprunt();
         LocalDate dateRetourPrevu = emprunt.getRetourPrevu();
 
