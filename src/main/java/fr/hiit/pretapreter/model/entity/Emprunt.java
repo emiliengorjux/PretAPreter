@@ -56,6 +56,10 @@ public class Emprunt {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Materiel getMateriel() {
         return materiel;
     }

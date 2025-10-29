@@ -1,8 +1,10 @@
 package fr.hiit.pretapreter.controller;
 
 import fr.hiit.pretapreter.dto.EmpruntDto;
+import fr.hiit.pretapreter.model.entity.Emprunt;
 import fr.hiit.pretapreter.service.EmpruntService;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -52,13 +54,18 @@ public class EmpruntController {
         return empruntService.findAllByMaterielId(materielId);
     }
 
-    // --- Mettre à jour un emprunt ---
-    @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public EmpruntDto updateEmprunt(@PathVariable Long id, @RequestBody EmpruntDto empruntDto) {
-        return empruntService.updateEmprunt(
-                empruntService.updateEmprunt(empruntDto)
-        );
+    @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<EmpruntDto> updateEmprunt(
+            @PathVariable Long id,
+            @RequestBody Emprunt emprunt) {
+
+        emprunt.setId(id);
+
+        EmpruntDto updated = empruntService.updateEmprunt(EmpruntDto.toDto(emprunt));
+
+        return ResponseEntity.ok(updated);
     }
+
 
     // --- Supprimer un emprunt ---
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
