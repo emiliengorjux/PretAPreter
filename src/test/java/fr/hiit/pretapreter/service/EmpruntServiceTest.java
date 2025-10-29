@@ -112,22 +112,44 @@ class EmpruntServiceTest extends AbstractServiceTest {
     @Test
     void should_find_Emprunt_By_Id() {
         // Given
-        EmpruntDto empruntCree1 = new EmpruntDto();
-        empruntCree1.setId(1L);
-        EmpruntDto empruntCree2 = new EmpruntDto();
-        empruntCree2.setId(2L);
-        List<EmpruntDto> empruntsCreeList = Arrays.asList(empruntCree1, empruntCree2);
 
+        Long empruntId = 1L;
+        EmpruntDto expectedEmpruntDto = new EmpruntDto();
+        expectedEmpruntDto.setId(empruntId);
+        expectedEmpruntDto.setUtilisateurId(1L);
+        expectedEmpruntDto.setMaterielId(1L);
+        expectedEmpruntDto.setDateEmprunt(stringToLocalDate("2025-10-21"));
+        expectedEmpruntDto.setRetourPrevu(stringToLocalDate("2025-10-28"));
 
+        Emprunt empruntEntity = new Emprunt();
+        empruntEntity.setId(empruntId);
+
+        when(empruntRepository.findById(empruntId)).thenReturn(Optional.of(empruntEntity));
 
         // When
-        when(empruntsCreeList.findEmpruntById
+        EmpruntDto result = empruntServiceImpl.findEmpruntById(empruntId);
+
         // Then
+        assertNotNull(result);
+        assertEquals(expectedEmpruntDto.getId(), result.getId());
+        assertEquals(expectedEmpruntDto.getUtilisateurId(), result.getUtilisateurId());
+        assertEquals(expectedEmpruntDto.getMaterielId(), result.getMaterielId());
+        assertEquals(expectedEmpruntDto.getDateEmprunt(), result.getDateEmprunt());
+        assertEquals(expectedEmpruntDto.getRetourPrevu(), result.getRetourPrevu());
     }
+
 
     @Test
     void should_find_All_Emprunts() {
         // Given
+        EmpruntDto empruntCree1 = new EmpruntDto();
+        empruntCree1.setId(1L);
+        EmpruntDto empruntCree2 = new EmpruntDto();
+        empruntCree2.setId(2L);
+        EmpruntDto empruntCree3 = new EmpruntDto();
+        empruntCree3.setId(3L);
+
+        List<EmpruntDto> empruntsCreeList = Arrays.asList(empruntCree1, empruntCree2);
 
         // When
 
