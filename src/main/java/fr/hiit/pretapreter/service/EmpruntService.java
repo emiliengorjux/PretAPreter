@@ -10,7 +10,7 @@ import java.util.List;
 public interface EmpruntService {
 
     // Créer un emprunt pour un utilisateur et un matériel
-    EmpruntDto createEmprunt(Long utilisateurId, Long materielId, EmpruntDto empruntDto);
+    EmpruntDto createEmprunt(EmpruntDto empruntDto);
 
     // Mettre à jour un emprunt existant
     EmpruntDto updateEmprunt(EmpruntDto emprunt );

@@ -48,13 +48,11 @@ class EmpruntControllerTest extends AbstractControllerTest {
         emprunt1.setRetourPrevu(LocalDate.now().plusDays(7));
 
         when(empruntService.createEmprunt(
-                any(Long.class),
-                any(Long.class),
                 any(EmpruntDto.class))
         ).thenReturn(emprunt1);
 
         // WHEN + THEN
-        mockMvc.perform(post("/emprunts/{utilisateurId}/{materielId}", 3L, 5L)
+        mockMvc.perform(post("/emprunts/{id}", 1L)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(emprunt1)))
                 .andExpect(status().isOk())

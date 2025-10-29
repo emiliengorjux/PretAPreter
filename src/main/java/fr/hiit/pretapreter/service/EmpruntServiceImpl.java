@@ -29,31 +29,39 @@ public class EmpruntServiceImpl implements EmpruntService {
         this.utilisateurRepository = utilisateurRepository;
     }
 
-    @Override
-    public EmpruntDto createEmprunt(Long utilisateurId, Long materielId, EmpruntDto empruntDto) {
+    public EmpruntDto createEmprunt(EmpruntDto empruntDto) {
+        // On convertit le DTO en entité
         Emprunt emprunt = EmpruntDto.toEntity(empruntDto);
+
+        // On récupère les IDs directement depuis le DTO
+        Long utilisateurId = empruntDto.getUtilisateurId();
+        Long materielId = empruntDto.getMaterielId();
+
+        // On vérifie que l'utilisateur et le matériel existent
         Utilisateur utilisateur = utilisateurRepository.findById(utilisateurId)
                 .orElseThrow(() -> new IllegalArgumentException("Utilisateur non trouvé"));
 
         Materiel materiel = materielRepository.findById(materielId)
                 .orElseThrow(() -> new IllegalArgumentException("Matériel non trouvé"));
 
-//        if (dateRetourPrevu.isBefore(dateEmprunt)) {
-//            throw new IllegalArgumentException("La date de retour prévue doit être après la date d'emprunt.");
-//        }
-//
-//        // Vérifier disponibilité
-//        List<Emprunt> empruntsExistants = empruntRepository.findByMaterielId(materielId);
-//        for (Emprunt e : empruntsExistants) {
-//            LocalDate debut = e.getDateEmprunt();
-//            LocalDate fin = e.getRetourEffectif() != null ? e.getRetourEffectif() : e.getRetourPrevu();
-//            if (!(dateRetourPrevu.isBefore(debut) || dateEmprunt.isAfter(fin))) {
-//                throw new IllegalStateException("Le matériel est déjà emprunté pendant cette période.");
-//            }
-//        }
+        // On lie les entités (si ton entité Emprunt a bien ces relations)
+        emprunt.setUtilisateur(utilisateur);
+        emprunt.setMateriel(materiel);
 
-        return EmpruntDto.toDto(empruntRepository.save(emprunt));
+        // 💡 (optionnel) validations métier
+        LocalDate dateEmprunt = emprunt.getDateEmprunt();
+        LocalDate dateRetourPrevu = emprunt.getRetourPrevu();
+
+        if (dateRetourPrevu != null && dateRetourPrevu.isBefore(dateEmprunt)) {
+            throw new IllegalArgumentException("La date de retour prévue doit être après la date d'emprunt.");
+        }
+
+        // Sauvegarde
+        Emprunt saved = empruntRepository.save(emprunt);
+
+        return EmpruntDto.toDto(saved);
     }
+
 
     @Override
     public EmpruntDto updateEmprunt(EmpruntDto emprunt) {

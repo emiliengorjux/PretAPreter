@@ -20,15 +20,13 @@ public class EmpruntController {
     }
 
     // --- Créer un nouvel emprunt ---
-    @PostMapping(value = "/{utilisateurId}/{materielId}",
+    @PostMapping(value = "/{id}",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<EmpruntDto> createEmprunt(
-            @PathVariable Long utilisateurId,
-            @PathVariable Long materielId,
             @RequestBody EmpruntDto empruntDto) {
 
-        EmpruntDto created = empruntService.createEmprunt(utilisateurId, materielId, empruntDto);
+        EmpruntDto created = empruntService.createEmprunt(empruntDto);
         return ResponseEntity.ok(created);
     }
 
