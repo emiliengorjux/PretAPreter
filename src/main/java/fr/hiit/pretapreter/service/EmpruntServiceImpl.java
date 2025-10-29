@@ -1,7 +1,6 @@
 package fr.hiit.pretapreter.service;
 
 import fr.hiit.pretapreter.dto.EmpruntDto;
-import fr.hiit.pretapreter.dto.UtilisateurDto;
 import fr.hiit.pretapreter.repository.EmpruntRepository;
 import fr.hiit.pretapreter.repository.MaterielRepository;
 import fr.hiit.pretapreter.repository.UtilisateurRepository;
