@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class MaterielServiceTest extends AbstractServiceTest {
 
     @Test
-    void creeMateriel() {
+    void should_cree_Materiel() {
         // Given
 
         // When
@@ -16,7 +16,7 @@ class MaterielServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    void updateMateriel() {
+    void should_update_Materiel() {
         // Given
 
         // When
@@ -25,7 +25,7 @@ class MaterielServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    void deleteMateriel() {
+    void should_delete_Materiel() {
         // Given
 
         // When
@@ -34,7 +34,7 @@ class MaterielServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    void findMaterielById() {
+    void should_find_Materiel_ById() {
         // Given
 
         // When
@@ -43,7 +43,7 @@ class MaterielServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    void findAllMateriels() {
+    void should_find_All_Materiels() {
         // Given
 
         // When

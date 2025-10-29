@@ -7,26 +7,67 @@ import static org.junit.jupiter.api.Assertions.*;
 class UtilisateurServiceTest extends AbstractServiceTest{
 
     @Test
-    void createUtilisateur() {
+    void should_create_Utilisateur() {
+        // Given
+
+        // When
+
+        // Then
+
     }
 
     @Test
-    void getUtilisateurById() {
+    void should_get_Utilisateur_By_Id() {
+        // Given
+
+        // When
+
+        // Then
+
     }
 
     @Test
-    void getAllUtilisateurs() {
+    void should_get_All_Utilisateurs() {
+        // Given
+
+        // When
+
+        // Then
+
+
     }
 
     @Test
-    void updateUtilisateur() {
+    void should_update_Utilisateur() {
+        // Given
+
+        // When
+
+        // Then
+
+
     }
 
     @Test
-    void deleteUtilisateur() {
+    void should_delete_Utilisateur() {
+        // Given
+
+        // When
+
+        // Then
+
+
     }
 
     @Test
-    void getUtilisateursWithEmprunts() {
+    void should_get_Utilisateurs_With_Emprunts() {
+        // Given
+
+        // When
+
+        // Then
+
+
+
     }
 }

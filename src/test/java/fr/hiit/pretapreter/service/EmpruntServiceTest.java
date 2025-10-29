@@ -73,7 +73,7 @@ class EmpruntServiceTest extends AbstractServiceTest {
 
 
 @Test
-    void updateEmprunt() {
+    void should_update_Emprunt() {
         // Given
 
         // When
@@ -82,7 +82,17 @@ class EmpruntServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    void deleteEmprunt() {
+    void should_delete_Emprunt() {
+        // Given
+        Emprunt empruntCreeASuppr = new Emprunt();
+
+        // When
+
+        // Then
+    }
+
+    @Test
+    void should_find_Emprunt_By_Id() {
         // Given
 
         // When
@@ -91,7 +101,7 @@ class EmpruntServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    void findEmpruntById() {
+    void should_find_All_Emprunts() {
         // Given
 
         // When
@@ -100,7 +110,7 @@ class EmpruntServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    void findAllEmprunts() {
+    void should_find_All_By_UtilisateurId() {
         // Given
 
         // When
@@ -109,16 +119,7 @@ class EmpruntServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    void findAllByUtilisateurId() {
-        // Given
-
-        // When
-
-        // Then
-    }
-
-    @Test
-    void findAllByMaterielId() {
+    void should_find_All_By_MaterielId() {
         // Given
 
         // When
