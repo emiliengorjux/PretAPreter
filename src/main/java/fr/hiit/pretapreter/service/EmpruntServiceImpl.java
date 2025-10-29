@@ -30,34 +30,27 @@ public class EmpruntServiceImpl implements EmpruntService {
     }
 
     @Override
-    public EmpruntDto createEmprunt(Long utilisateurId, Long materielId, LocalDate dateEmprunt, LocalDate dateRetourPrevu) {
-
+    public EmpruntDto createEmprunt(Long utilisateurId, Long materielId, EmpruntDto empruntDto) {
+        Emprunt emprunt = EmpruntDto.toEntity(empruntDto);
         Utilisateur utilisateur = utilisateurRepository.findById(utilisateurId)
                 .orElseThrow(() -> new IllegalArgumentException("Utilisateur non trouvé"));
 
         Materiel materiel = materielRepository.findById(materielId)
                 .orElseThrow(() -> new IllegalArgumentException("Matériel non trouvé"));
 
-        if (dateRetourPrevu.isBefore(dateEmprunt)) {
-            throw new IllegalArgumentException("La date de retour prévue doit être après la date d'emprunt.");
-        }
-
-        // Vérifier disponibilité
-        List<Emprunt> empruntsExistants = empruntRepository.findByMaterielId(materielId);
-        for (Emprunt e : empruntsExistants) {
-            LocalDate debut = e.getDateEmprunt();
-            LocalDate fin = e.getRetourEffectif() != null ? e.getRetourEffectif() : e.getRetourPrevu();
-            if (!(dateRetourPrevu.isBefore(debut) || dateEmprunt.isAfter(fin))) {
-                throw new IllegalStateException("Le matériel est déjà emprunté pendant cette période.");
-            }
-        }
-
-        Emprunt emprunt = new Emprunt();
-        emprunt.setUtilisateur(utilisateur);
-        emprunt.setMateriel(materiel);
-        emprunt.setDateEmprunt(dateEmprunt);
-        emprunt.setRetourPrevu(dateRetourPrevu);
-        emprunt.setSuiviEtatMateriel("Bon état");
+//        if (dateRetourPrevu.isBefore(dateEmprunt)) {
+//            throw new IllegalArgumentException("La date de retour prévue doit être après la date d'emprunt.");
+//        }
+//
+//        // Vérifier disponibilité
+//        List<Emprunt> empruntsExistants = empruntRepository.findByMaterielId(materielId);
+//        for (Emprunt e : empruntsExistants) {
+//            LocalDate debut = e.getDateEmprunt();
+//            LocalDate fin = e.getRetourEffectif() != null ? e.getRetourEffectif() : e.getRetourPrevu();
+//            if (!(dateRetourPrevu.isBefore(debut) || dateEmprunt.isAfter(fin))) {
+//                throw new IllegalStateException("Le matériel est déjà emprunté pendant cette période.");
+//            }
+//        }
 
         return EmpruntDto.toDto(empruntRepository.save(emprunt));
     }
