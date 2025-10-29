@@ -52,6 +52,10 @@ public class EmpruntServiceImpl implements EmpruntService {
         LocalDate dateEmprunt = emprunt.getDateEmprunt();
         LocalDate dateRetourPrevu = emprunt.getRetourPrevu();
 
+        if (empruntDto.getDateEmprunt() == null || empruntDto.getRetourPrevu() == null) {
+            throw new IllegalArgumentException("Les dates d'emprunt et de retour sont obligatoires.");
+        }
+
         if (dateRetourPrevu != null && dateRetourPrevu.isBefore(dateEmprunt)) {
             throw new IllegalArgumentException("La date de retour prévue doit être après la date d'emprunt.");
         }

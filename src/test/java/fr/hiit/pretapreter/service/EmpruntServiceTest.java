@@ -13,12 +13,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class EmpruntServiceTest extends AbstractServiceTest {
@@ -37,7 +38,7 @@ class EmpruntServiceTest extends AbstractServiceTest {
 
     @Test
     void should_create_Emprunt() {
-        // Given
+        // --- GIVEN ---
         Utilisateur utilisateurPourCree = new Utilisateur();
         utilisateurPourCree.setId(1L);
 
@@ -45,34 +46,38 @@ class EmpruntServiceTest extends AbstractServiceTest {
         materielPourCree.setId(2L);
 
         Emprunt empruntCree = new Emprunt();
+        empruntCree.setId(10L);
         empruntCree.setUtilisateur(utilisateurPourCree);
         empruntCree.setMateriel(materielPourCree);
-        empruntCree.setDateEmprunt(stringToLocalDate("2025-10-21"));
-        empruntCree.setRetourPrevu(stringToLocalDate("2025-10-28"));
+        empruntCree.setDateEmprunt(LocalDate.of(2025, 10, 21));
+        empruntCree.setRetourPrevu(LocalDate.of(2025, 10, 28));
+
+        EmpruntDto empruntDto = new EmpruntDto();
+        empruntDto.setUtilisateurId(1L);
+        empruntDto.setMaterielId(2L);
+        empruntDto.setDateEmprunt(LocalDate.of(2025, 10, 21));
+        empruntDto.setRetourPrevu(LocalDate.of(2025, 10, 28));
 
         when(utilisateurRepository.findById(1L)).thenReturn(Optional.of(utilisateurPourCree));
         when(materielRepository.findById(2L)).thenReturn(Optional.of(materielPourCree));
         when(empruntRepository.save(any(Emprunt.class))).thenReturn(empruntCree);
 
-        // When
-        EmpruntDto result = empruntServiceImpl.createEmprunt(
-                1L, 2L,
-                stringToLocalDate("2025-10-21"),
-                stringToLocalDate("2025-10-28")
-        );
+        // --- WHEN ---
+        EmpruntDto result = empruntServiceImpl.createEmprunt(empruntDto);
 
-        // Then
+        // --- THEN ---
         assertNotNull(result);
         assertEquals(1L, result.getUtilisateurId());
         assertEquals(2L, result.getMaterielId());
-        assertEquals(stringToLocalDate("2025-10-21"), result.getDateEmprunt());
-        assertEquals(stringToLocalDate("2025-10-28"), result.getRetourPrevu());
-        System.out.println("Emprunt cree avec succès !" + empruntCree);
+        assertEquals(LocalDate.of(2025, 10, 21), result.getDateEmprunt());
+        assertEquals(LocalDate.of(2025, 10, 28), result.getRetourPrevu());
 
-}
+        System.out.println("Emprunt créé avec succès : " + result);
+    }
 
 
-@Test
+
+    @Test
     void should_update_Emprunt() {
         // Given
 
