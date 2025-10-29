@@ -25,18 +25,12 @@ public class UtilisateurDto {
         dto.setNom(utilisateur.getNom());
         dto.setPrenom(utilisateur.getPrenom());
         dto.setEmail(utilisateur.getEmail());
+         return dto;
+         }
 
-        if (utilisateur.getEmprunts() != null && !utilisateur.getEmprunts().isEmpty()) {
-            dto.setEmprunts(utilisateur.getEmprunts()
-                    .stream()
-                    .map(EmpruntDto::toDto)
-                    .collect(Collectors.toList()));
-        } return dto;
-    }
 
     public static Utilisateur toEntity (UtilisateurDto dto){
         Utilisateur utilisateur = new Utilisateur();
-        utilisateur.setId(dto.getId());
         utilisateur.setNom(dto.getNom());
         utilisateur.setPrenom(dto.getPrenom());
         utilisateur.setEmail(dto.getEmail());

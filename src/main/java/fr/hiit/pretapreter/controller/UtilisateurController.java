@@ -4,6 +4,7 @@ import fr.hiit.pretapreter.dto.UtilisateurDto;
 import fr.hiit.pretapreter.service.UtilisateurService;
 import fr.hiit.pretapreter.model.entity.Utilisateur;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -35,9 +36,16 @@ public class UtilisateurController {
         return utilisateurService.createUtilisateur(UtilisateurDto.toDto(utilisateur));
     }
 
-    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{id}")
-    public UtilisateurDto update(@PathVariable Long id, @RequestBody Utilisateur utilisateur) {
-        return utilisateurService.updateUtilisateur(id, UtilisateurDto.toDto(utilisateur));
+    @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<UtilisateurDto> update(
+            @PathVariable Long id,
+            @RequestBody Utilisateur utilisateur) {
+
+        // On force l'id venant de l'URL dans l'objet
+        utilisateur.setId(id);
+
+        UtilisateurDto updated = utilisateurService.updateUtilisateur(UtilisateurDto.toDto(utilisateur));
+        return ResponseEntity.ok(updated);
     }
 
     @DeleteMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{id}")

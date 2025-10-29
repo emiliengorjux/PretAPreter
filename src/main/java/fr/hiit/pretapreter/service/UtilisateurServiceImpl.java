@@ -1,8 +1,10 @@
 package fr.hiit.pretapreter.service;
 
 import fr.hiit.pretapreter.dto.EmpruntDto;
+import fr.hiit.pretapreter.dto.MaterielDto;
 import fr.hiit.pretapreter.dto.UtilisateurDto;
 import fr.hiit.pretapreter.model.entity.Emprunt;
+import fr.hiit.pretapreter.model.entity.Materiel;
 import fr.hiit.pretapreter.model.entity.Utilisateur;
 import fr.hiit.pretapreter.repository.UtilisateurRepository;
 import org.springframework.stereotype.Service;
@@ -49,25 +51,16 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     }
 
     @Override
-    public UtilisateurDto updateUtilisateur(Long id, UtilisateurDto utilisateurDto) {
-        return utilisateurRepository.findById(id).map(existing -> {
-            existing.setNom(utilisateurDto.getNom());
-            existing.setPrenom(utilisateurDto.getPrenom());
-            existing.setEmail(utilisateurDto.getEmail());
+    public UtilisateurDto updateUtilisateur(UtilisateurDto utilisateurDto) {
+        Utilisateur existing = utilisateurRepository.findById(utilisateurDto.getId())
+                .orElseThrow(() -> new IllegalArgumentException("Utilisateur inexistant"));
+                existing.setNom(utilisateurDto.getNom());
+                existing.setPrenom(utilisateurDto.getPrenom());
+                existing.setEmail(utilisateurDto.getEmail());
 
-            // Mettre à jour les emprunts si nécessaire
-            if (utilisateurDto.getEmprunts() != null) {
-                existing.getEmprunts().clear();
-                for (EmpruntDto eDto : utilisateurDto.getEmprunts()) {
-                    Emprunt e = EmpruntDto.toEntity(eDto);
-                    e.setUtilisateur(existing);
-                    existing.getEmprunts().add(e);
-                }
-            }
+        Utilisateur updatedUtilisateur = utilisateurRepository.save(existing);
+        return UtilisateurDto.toDto(updatedUtilisateur);
 
-            Utilisateur saved = utilisateurRepository.save(existing);
-            return UtilisateurDto.toDto(saved);
-        }).orElseThrow(() -> new RuntimeException("Utilisateur non trouvé avec l'id : " + id));
     }
 
     @Override

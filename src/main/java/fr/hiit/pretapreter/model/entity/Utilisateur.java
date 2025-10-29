@@ -23,6 +23,15 @@ public class Utilisateur {
     private String email;
 
 
+//    @Column(nullable = false)
+//    private String role;
+//
+//
+//    @Column(nullable = false)
+//    private String motDePasse;
+
+
+
 
     @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Emprunt> emprunts = new HashSet<>();
@@ -30,11 +39,12 @@ public class Utilisateur {
     public Utilisateur() {
     }
 
-    public Utilisateur(String nom, String prenom, String email) {
+    public Utilisateur(String nom, String prenom, String email, String motDePasse, String role) {
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
-
+//        this.role = role;
+//        this.motDePasse = motDePasse;
     }
 
     // === Getters & Setters ===
@@ -78,5 +88,24 @@ public class Utilisateur {
     public void setEmprunts(Set<Emprunt> emprunts) {
         this.emprunts = emprunts;
     }
+
+//    public String getRole() {
+//        return role;
+//    }
+//
+//    public void setRole(String role) {
+//        this.role = role;
+//    }
+//
+//    public String getMotDePasse() {
+//        return motDePasse;
+//    }
+//
+//    public void setMotDePasse(String motDePasse) {
+//        this.motDePasse = motDePasse;
+//    }
+
+
+
 
 }

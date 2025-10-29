@@ -63,9 +63,9 @@ public class EmpruntServiceImpl implements EmpruntService {
 
     @Override
     public EmpruntDto updateEmprunt(EmpruntDto emprunt) {
-        if (emprunt.getId() == null) throw new IllegalArgumentException("ID obligatoire");
+
         Emprunt existing = empruntRepository.findById(emprunt.getId())
-                .orElseThrow(() -> new IllegalArgumentException("Emprunt non trouvé"));
+                .orElseThrow(() -> new IllegalArgumentException("Emprunt inexistant"));
         existing.setDateEmprunt(emprunt.getDateEmprunt());
         existing.setRetourPrevu(emprunt.getRetourPrevu());
         existing.setRetourEffectif(emprunt.getRetourEffectif());
@@ -73,7 +73,6 @@ public class EmpruntServiceImpl implements EmpruntService {
         existing.setCommentaire(emprunt.getCommentaire());
         return EmpruntDto.toDto(empruntRepository.save(existing));
     }
-
     @Override
     public EmpruntDto findEmpruntById(Long id) {
         return EmpruntDto.toDto(empruntRepository.findById(id)

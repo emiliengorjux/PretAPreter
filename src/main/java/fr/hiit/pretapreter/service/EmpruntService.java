@@ -13,11 +13,10 @@ public interface EmpruntService {
     EmpruntDto createEmprunt(Long utilisateurId, Long materielId, LocalDate dateEmprunt, LocalDate dateRetourPrevu);
 
     // Mettre à jour un emprunt existant
-    EmpruntDto updateEmprunt(EmpruntDto emprunt);
+    EmpruntDto updateEmprunt(EmpruntDto emprunt );
 
     // Supprimer un emprunt par ID
     void deleteEmprunt(Long id);
-
 
     // Trouver un emprunt par ID
     EmpruntDto findEmpruntById(Long id);
