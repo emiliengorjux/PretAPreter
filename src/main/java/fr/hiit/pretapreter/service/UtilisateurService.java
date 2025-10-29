@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
 @Service
 public interface UtilisateurService {
 
@@ -18,7 +19,7 @@ public interface UtilisateurService {
     List<UtilisateurDto> getAllUtilisateurs(String prenom);
 
     // Mettre à jour un utilisateur
-    UtilisateurDto updateUtilisateur(Long id, UtilisateurDto utilisateurDto);
+    UtilisateurDto updateUtilisateur(UtilisateurDto utilisateurDto);
 
     // Supprimer un utilisateur
     void deleteUtilisateur(Long id);

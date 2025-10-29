@@ -4,6 +4,7 @@ import fr.hiit.pretapreter.dto.MaterielDto;
 import fr.hiit.pretapreter.model.entity.Materiel;
 import fr.hiit.pretapreter.repository.MaterielRepository;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.stream.Collectors;
 

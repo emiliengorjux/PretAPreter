@@ -21,7 +21,6 @@ public class MaterielDto {
     // Conversion DTO → Entité
     public static Materiel toEntity(MaterielDto materielDto) {
         Materiel materiel = new Materiel();
-        materiel.setId(materielDto.getId());
         materiel.setNom(materielDto.getNom());
         materiel.setReference(materielDto.getReference());
         materiel.setEtatMateriel(materielDto.getEtatMateriel());

@@ -120,7 +120,7 @@ class UtilisateurControllerTest extends AbstractControllerTest {
 
 
         // When
-        when(utilisateurService.updateUtilisateur(eq(1L), any(UtilisateurDto.class))).thenReturn(utilisateurCorrige);
+        when(utilisateurService.updateUtilisateur(any(UtilisateurDto.class))).thenReturn(utilisateurCorrige);
         // ANY : Accepte n'importe quel objet de type UtilisateurDto comme 2eme argu.
 
         
@@ -135,7 +135,7 @@ class UtilisateurControllerTest extends AbstractControllerTest {
                 .andExpect(jsonPath("$.email", is("terrassepresquile@gmail.com")));
 
 
-        verify(utilisateurService, times(1)).updateUtilisateur(eq(1L), any(UtilisateurDto.class));
+        verify(utilisateurService, times(1)).updateUtilisateur(any(UtilisateurDto.class));
     }
 
     @Test
