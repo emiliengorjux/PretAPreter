@@ -1,5 +1,6 @@
 package fr.hiit.pretapreter.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import fr.hiit.pretapreter.model.entity.Emprunt;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,6 +8,7 @@ import lombok.Setter;
 import java.time.LocalDate;
 @Getter
 @Setter
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class EmpruntDto {
 
     private Long id;

@@ -20,14 +20,14 @@ public class EmpruntController {
     }
 
     // --- Créer un nouvel emprunt ---
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public EmpruntDto createEmprunt(@RequestBody EmpruntDto empruntDto) {
-        return empruntService.createEmprunt(
-                empruntDto.getUtilisateurId(),
-                empruntDto.getMaterielId(),
-                empruntDto.getDateEmprunt(),
-                empruntDto.getRetourPrevu()
-        );
+    @PostMapping(value = "/{id}",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<EmpruntDto> createEmprunt(
+            @RequestBody EmpruntDto empruntDto) {
+
+        EmpruntDto created = empruntService.createEmprunt(empruntDto);
+        return ResponseEntity.ok(created);
     }
 
     // --- Récupérer un emprunt par son ID ---
