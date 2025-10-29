@@ -13,6 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -75,7 +76,6 @@ class EmpruntServiceTest extends AbstractServiceTest {
         System.out.println("Emprunt créé avec succès : " + result);
     }
 
-
 @Test
     void should_update_Emprunt() {
         // Given
@@ -114,21 +114,30 @@ class EmpruntServiceTest extends AbstractServiceTest {
     @Test
     void should_find_Emprunt_By_Id() {
         // Given
-        Long empruntId = 3L;
-        EmpruntDto empruntDtoById = new EmpruntDto();
-        empruntDtoById.setId(empruntId);
 
-        Emprunt empruntFoundById = new Emprunt();
-        empruntFoundById.setId(empruntId);
+        Long empruntId = 1L;
+        EmpruntDto expectedEmpruntDto = new EmpruntDto();
+        expectedEmpruntDto.setId(empruntId);
+        expectedEmpruntDto.setUtilisateurId(1L);
+        expectedEmpruntDto.setMaterielId(1L);
+        expectedEmpruntDto.setDateEmprunt(stringToLocalDate("2025-10-21"));
+        expectedEmpruntDto.setRetourPrevu(stringToLocalDate("2025-10-28"));
 
-        when(empruntRepository.findById(empruntId)).thenReturn(Optional.of(empruntFoundById));
+        Emprunt empruntEntity = new Emprunt();
+        empruntEntity.setId(empruntId);
+
+        when(empruntRepository.findById(empruntId)).thenReturn(Optional.of(empruntEntity));
 
         // When
         EmpruntDto result = empruntServiceImpl.findEmpruntById(empruntId);
 
         // Then
         assertNotNull(result);
-        assertEquals(empruntDtoById.getId(), result.getId());
+        assertEquals(expectedEmpruntDto.getId(), result.getId());
+        assertEquals(expectedEmpruntDto.getUtilisateurId(), result.getUtilisateurId());
+        assertEquals(expectedEmpruntDto.getMaterielId(), result.getMaterielId());
+        assertEquals(expectedEmpruntDto.getDateEmprunt(), result.getDateEmprunt());
+        assertEquals(expectedEmpruntDto.getRetourPrevu(), result.getRetourPrevu());
     }
 
 
