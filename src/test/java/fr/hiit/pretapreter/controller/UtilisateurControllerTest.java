@@ -1,6 +1,5 @@
 package fr.hiit.pretapreter.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.hiit.pretapreter.dto.UtilisateurDto;
 import fr.hiit.pretapreter.service.UtilisateurService;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,7 +18,6 @@ import java.util.Optional;
 
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;

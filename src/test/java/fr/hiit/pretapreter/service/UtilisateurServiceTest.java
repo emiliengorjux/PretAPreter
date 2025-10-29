@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class UtilisateurServiceTest {
+class UtilisateurServiceTest extends AbstractServiceTest{
 
     @Test
     void createUtilisateur() {
