@@ -12,6 +12,9 @@ public interface EmpruntService {
     // Créer un emprunt pour un utilisateur et un matériel
     EmpruntDto createEmprunt(EmpruntDto empruntDto);
 
+    //Créer le rendu de l'emprunt
+    EmpruntDto createRenduEmprunt (EmpruntDto empruntDto, LocalDate retourEffectif, String suiviEtatMateriel, String Commentaire);
+
     // Mettre à jour un emprunt existant
     EmpruntDto updateEmprunt(EmpruntDto emprunt );
 

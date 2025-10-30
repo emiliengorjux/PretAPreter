@@ -42,18 +42,7 @@ public class EmpruntController {
         return empruntService.findAllEmprunts();
     }
 
-    // --- Récupérer les emprunts d'un utilisateur spécifique ---
-    @GetMapping(value = "/utilisateur/{utilisateurId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<EmpruntDto> getEmpruntsByUtilisateur(@PathVariable Long utilisateurId) {
-        return empruntService.findAllByUtilisateurId(utilisateurId);
-    }
-
-    // --- Récupérer les emprunts d'un matériel spécifique ---
-    @GetMapping(value = "/materiel/{materielId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<EmpruntDto> getEmpruntsByMateriel(@PathVariable Long materielId) {
-        return empruntService.findAllByMaterielId(materielId);
-    }
-
+    // --- Modifier un Emprunt ---
     @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<EmpruntDto> updateEmprunt(
             @PathVariable Long id,

@@ -112,42 +112,6 @@ class EmpruntControllerTest extends AbstractControllerTest {
     }
 
     @Test
-    void should_get_emprunts_by_utilisateur() throws Exception {
-        // GIVEN
-        Long utilisateurId = 1L;
-        EmpruntDto emprunt1 = new EmpruntDto();
-        emprunt1.setUtilisateurId(utilisateurId);
-        List<EmpruntDto> emprunts = List.of(emprunt1);
-
-        when(empruntService.findAllByUtilisateurId(utilisateurId)).thenReturn(emprunts);
-
-        // WHEN + THEN
-        mockMvc.perform(get("/emprunts/utilisateur/{id}", utilisateurId)
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$[0].utilisateurId").value(utilisateurId));
-    }
-
-    @Test
-    void should_get_emprunts_by_materiel() throws Exception {
-        // GIVEN
-        Long materielId = 1L;
-        EmpruntDto emprunt1 = new EmpruntDto();
-        emprunt1.setMaterielId(materielId);
-        List<EmpruntDto> emprunts = List.of(emprunt1);
-
-        when(empruntService.findAllByMaterielId(materielId)).thenReturn(emprunts);
-
-        // WHEN + THEN
-        mockMvc.perform(get("/emprunts/materiel/{id}", materielId)
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$[0].materielId").value(materielId));
-    }
-
-    @Test
     void should_update_emprunt() throws Exception {
 
         // GIVEN

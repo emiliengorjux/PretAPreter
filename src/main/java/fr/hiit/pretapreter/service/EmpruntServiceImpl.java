@@ -86,6 +86,41 @@ public class EmpruntServiceImpl implements EmpruntService {
         return EmpruntDto.toDto(saved);
     }
 
+    public EmpruntDto createRenduEmprunt(EmpruntDto empruntDto, LocalDate retourEffectif, String suiviEtatMateriel, String commentaire) {
+
+        Long utilisateurId = empruntDto.getUtilisateurId();
+        Long materielId = empruntDto.getMaterielId();
+
+        Utilisateur utilisateur = utilisateurRepository.findById(utilisateurId)
+                .orElseThrow(() -> new IllegalArgumentException("Utilisateur non trouvé"));
+
+        Materiel materiel = materielRepository.findById(materielId)
+                .orElseThrow(() -> new IllegalArgumentException("Matériel non trouvé"));
+
+        Emprunt emprunt = EmpruntDto.toEntity(empruntDto);
+
+        emprunt.setUtilisateur(utilisateur);
+        emprunt.setMateriel(materiel);
+
+        // on met à jour les infos du rendu
+        emprunt.setRetourEffectif(retourEffectif);
+        emprunt.setSuiviEtatMateriel(suiviEtatMateriel);
+        emprunt.setCommentaire(commentaire);
+
+        // validations
+        if (retourEffectif == null || suiviEtatMateriel == null) {
+            throw new IllegalArgumentException("La date de retour et le suivi d'état du matériel sont obligatoires.");
+        }
+
+        if (retourEffectif.isBefore(emprunt.getDateEmprunt())) {
+            throw new IllegalArgumentException("La date de retour ne peut pas être avant la date d'emprunt.");
+        }
+
+        // Sauvegarde
+        Emprunt saved = empruntRepository.save(emprunt);
+        return EmpruntDto.toDto(saved);
+    }
+
 
     @Override
     public EmpruntDto updateEmprunt(EmpruntDto emprunt) {
