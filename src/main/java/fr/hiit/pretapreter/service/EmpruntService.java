@@ -15,6 +15,8 @@ public interface EmpruntService {
     //Créer le rendu de l'emprunt
     EmpruntDto createRenduEmprunt (EmpruntDto empruntDto, LocalDate retourEffectif, String suiviEtatMateriel, String Commentaire);
 
+    EmpruntDto intervalleEmprunt(EmpruntDto empruntDto, LocalDate dateEmprunt, LocalDate dateRetourPrevu);
+
     // Mettre à jour un emprunt existant
     EmpruntDto updateEmprunt(EmpruntDto emprunt );
 

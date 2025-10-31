@@ -10,6 +10,7 @@ import fr.hiit.pretapreter.model.entity.Utilisateur;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,11 +49,18 @@ public class EmpruntServiceImpl implements EmpruntService {
         emprunt.setUtilisateur(utilisateur);
         emprunt.setMateriel(materiel);
 
+        //Ajoute la date automatiquement a la creation
+        if (emprunt.getDateEmprunt() == null) {
+            emprunt.setDateEmprunt(LocalDate.now());
+        }
+
         // validations métier
         LocalDate dateEmprunt = emprunt.getDateEmprunt();
         LocalDate dateRetourPrevu = emprunt.getRetourPrevu();
 
-        if (empruntDto.getDateEmprunt() == null || empruntDto.getRetourPrevu() == null) {
+        intervalleEmprunt(empruntDto, dateEmprunt, dateRetourPrevu);
+
+        if (empruntDto.getRetourPrevu() == null) {
             throw new IllegalArgumentException("Les dates d'emprunt et de retour sont obligatoires.");
         }
 
@@ -86,6 +94,25 @@ public class EmpruntServiceImpl implements EmpruntService {
         return EmpruntDto.toDto(saved);
     }
 
+    public EmpruntDto intervalleEmprunt(EmpruntDto empruntDto, LocalDate dateEmprunt, LocalDate dateRetourPrevu) {
+
+        long dureeEnJours = ChronoUnit.DAYS.between(dateEmprunt, dateRetourPrevu);
+
+        Emprunt emprunt = EmpruntDto.toEntity(empruntDto);
+
+        if (dureeEnJours < 3) {
+            throw new IllegalArgumentException("La durée minimale d'emprunt est de 3 jours.");
+        }
+
+        if (dureeEnJours > 60) {
+            throw new IllegalArgumentException("La durée maximale d'emprunt est de 2 mois (60 jours).");
+        }
+        Emprunt saved = empruntRepository.save(emprunt);
+
+        return EmpruntDto.toDto(saved);
+    }
+
+
     public EmpruntDto createRenduEmprunt(EmpruntDto empruntDto, LocalDate retourEffectif, String suiviEtatMateriel, String commentaire) {
 
         Long utilisateurId = empruntDto.getUtilisateurId();
@@ -106,6 +133,11 @@ public class EmpruntServiceImpl implements EmpruntService {
         emprunt.setRetourEffectif(retourEffectif);
         emprunt.setSuiviEtatMateriel(suiviEtatMateriel);
         emprunt.setCommentaire(commentaire);
+
+        //Ajoute la date automatiquement a la creation
+        if (emprunt.getRetourEffectif() == null) {
+            emprunt.setRetourEffectif(LocalDate.now());
+        }
 
         // validations
         if (retourEffectif == null || suiviEtatMateriel == null) {
@@ -134,6 +166,7 @@ public class EmpruntServiceImpl implements EmpruntService {
         existing.setCommentaire(emprunt.getCommentaire());
         return EmpruntDto.toDto(empruntRepository.save(existing));
     }
+
     @Override
     public EmpruntDto findEmpruntById(Long id) {
         return EmpruntDto.toDto(empruntRepository.findById(id)
