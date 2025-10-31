@@ -29,128 +29,140 @@ public class EmpruntServiceImpl implements EmpruntService {
         this.utilisateurRepository = utilisateurRepository;
     }
 
+    @Override
     public EmpruntDto createEmprunt(EmpruntDto empruntDto) {
-
-        // On récupère les IDs directement depuis le DTO
         Long utilisateurId = empruntDto.getUtilisateurId();
         Long materielId = empruntDto.getMaterielId();
 
-        // On vérifie que l'utilisateur et le matériel existent
         Utilisateur utilisateur = utilisateurRepository.findById(utilisateurId)
                 .orElseThrow(() -> new IllegalArgumentException("Utilisateur non trouvé"));
-
         Materiel materiel = materielRepository.findById(materielId)
                 .orElseThrow(() -> new IllegalArgumentException("Matériel non trouvé"));
 
-        // On convertit le DTO en entité
         Emprunt emprunt = EmpruntDto.toEntity(empruntDto);
-
-        // On lie les entités
         emprunt.setUtilisateur(utilisateur);
         emprunt.setMateriel(materiel);
 
-        //Ajoute la date automatiquement a la creation
+        // Si la date d’emprunt n’est pas précisée, on met la date du jour
         if (emprunt.getDateEmprunt() == null) {
             emprunt.setDateEmprunt(LocalDate.now());
         }
 
-        // validations métier
-        LocalDate dateEmprunt = emprunt.getDateEmprunt();
-        LocalDate dateRetourPrevu = emprunt.getRetourPrevu();
+        // Vérifie la validité de l’intervalle AVANT sauvegarde
+        boolean intervalleValide = intervalleEmprunt(
+                emprunt.getDateEmprunt(),
+                emprunt.getRetourPrevu(),
+                materielId
+        );
 
-        intervalleEmprunt(empruntDto, dateEmprunt, dateRetourPrevu);
-
-        if (empruntDto.getRetourPrevu() == null) {
-            throw new IllegalArgumentException("Les dates d'emprunt et de retour sont obligatoires.");
+        if (!intervalleValide) {
+            throw new IllegalArgumentException("L’intervalle d’emprunt est invalide.");
         }
 
-        if (dateRetourPrevu != null && dateRetourPrevu.isBefore(dateEmprunt)) {
-            throw new IllegalArgumentException("La date de retour prévue doit être après la date d'emprunt.");
-        }
-
-        // Vérifier les autres emprunts existants du même matériel
-        List<Emprunt> empruntsExistants = empruntRepository.findByMaterielId(materielId);
-
-        for (Emprunt e : empruntsExistants) {
-            LocalDate debut = e.getDateEmprunt();
-            LocalDate fin = e.getRetourEffectif() != null ? e.getRetourEffectif() : e.getRetourPrevu();
-
-            // Si la nouvelle date d'emprunt est comprise entre le début et la fin d’un emprunt existant
-            if (!dateEmprunt.isAfter(fin) && !dateRetourPrevu.isBefore(debut)) {
-                throw new IllegalArgumentException(
-                        "Le matériel est déjà emprunté pendant cette période (" + debut + " → " + fin + ")"
-                );
-            }
-
-            // Vérifie spécifiquement si la date d'emprunt est exactement la même
-            if (dateEmprunt.isEqual(debut)) {
-                throw new IllegalArgumentException("La date d'emprunt ne doit pas être la même qu'un autre emprunt existant");
-            }
-        }
-
-        // Sauvegarde
+        // Sauvegarde de l’emprunt
         Emprunt saved = empruntRepository.save(emprunt);
-
         return EmpruntDto.toDto(saved);
     }
 
-    public EmpruntDto intervalleEmprunt(EmpruntDto empruntDto, LocalDate dateEmprunt, LocalDate dateRetourPrevu) {
+    public EmpruntDto createRenduEmprunt(EmpruntDto empruntDto) {
 
-        long dureeEnJours = ChronoUnit.DAYS.between(dateEmprunt, dateRetourPrevu);
+        // Récupère l’emprunt existant
+        Emprunt emprunt = empruntRepository.findById(empruntDto.getId())
+                .orElseThrow(() -> new IllegalArgumentException("Emprunt non trouvé"));
 
-        Emprunt emprunt = EmpruntDto.toEntity(empruntDto);
+        // Récupère les champs depuis le DTO
+        LocalDate retourEffectif = empruntDto.getRetourEffectif() != null ? empruntDto.getRetourEffectif() : LocalDate.now();
+        String suiviEtatMateriel = empruntDto.getSuiviEtatMateriel();
+        String commentaire = empruntDto.getCommentaire();
 
-        if (dureeEnJours < 3) {
-            throw new IllegalArgumentException("La durée minimale d'emprunt est de 3 jours.");
-        }
-
-        if (dureeEnJours > 60) {
-            throw new IllegalArgumentException("La durée maximale d'emprunt est de 2 mois (60 jours).");
-        }
-        Emprunt saved = empruntRepository.save(emprunt);
-
-        return EmpruntDto.toDto(saved);
-    }
-
-
-    public EmpruntDto createRenduEmprunt(EmpruntDto empruntDto, LocalDate retourEffectif, String suiviEtatMateriel, String commentaire) {
-
-        Long utilisateurId = empruntDto.getUtilisateurId();
-        Long materielId = empruntDto.getMaterielId();
-
-        Utilisateur utilisateur = utilisateurRepository.findById(utilisateurId)
-                .orElseThrow(() -> new IllegalArgumentException("Utilisateur non trouvé"));
-
-        Materiel materiel = materielRepository.findById(materielId)
-                .orElseThrow(() -> new IllegalArgumentException("Matériel non trouvé"));
-
-        Emprunt emprunt = EmpruntDto.toEntity(empruntDto);
-
-        emprunt.setUtilisateur(utilisateur);
-        emprunt.setMateriel(materiel);
-
-        // on met à jour les infos du rendu
-        emprunt.setRetourEffectif(retourEffectif);
-        emprunt.setSuiviEtatMateriel(suiviEtatMateriel);
-        emprunt.setCommentaire(commentaire);
-
-        //Ajoute la date automatiquement a la creation
-        if (emprunt.getRetourEffectif() == null) {
-            emprunt.setRetourEffectif(LocalDate.now());
-        }
-
-        // validations
-        if (retourEffectif == null || suiviEtatMateriel == null) {
-            throw new IllegalArgumentException("La date de retour et le suivi d'état du matériel sont obligatoires.");
+        // Validation obligatoire
+        if (suiviEtatMateriel == null) {
+            throw new IllegalArgumentException("Le suivi d'état du matériel est obligatoire.");
         }
 
         if (retourEffectif.isBefore(emprunt.getDateEmprunt())) {
             throw new IllegalArgumentException("La date de retour ne peut pas être avant la date d'emprunt.");
         }
 
+        // Calcul du retard
+        long joursDeRetard = 0;
+
+        if (emprunt.getRetourPrevu() != null) {
+            if (retourEffectif.isAfter(emprunt.getRetourPrevu())) {
+                joursDeRetard = ChronoUnit.DAYS.between(emprunt.getRetourPrevu(), retourEffectif);
+            }
+        }
+
+        // Mise à jour de l’emprunt
+        emprunt.setRetourEffectif(retourEffectif);
+        emprunt.setSuiviEtatMateriel(suiviEtatMateriel);
+        emprunt.setCommentaire((commentaire != null ? commentaire +"\n " : "") +
+                (joursDeRetard > 0 ? "Retour en retard de " + joursDeRetard + " jours." : ""));
+
         // Sauvegarde
         Emprunt saved = empruntRepository.save(emprunt);
         return EmpruntDto.toDto(saved);
+    }
+
+
+    public boolean intervalleEmprunt(LocalDate dateEmprunt, LocalDate dateRetourPrevu, Long materielId) {
+        if (dateEmprunt == null || dateRetourPrevu == null) {
+            throw new IllegalArgumentException("Les dates d'emprunt et de retour sont obligatoires.");
+        }
+
+        // Empêche une date d'emprunt dans le passé
+        if (dateEmprunt.isBefore(LocalDate.now())) {
+            throw new IllegalArgumentException("La date d'emprunt ne peut pas être antérieure à aujourd'hui.");
+        }
+
+        if (dateRetourPrevu.isBefore(dateEmprunt)) {
+            throw new IllegalArgumentException("La date de retour prévue doit être après la date d'emprunt.");
+        }
+
+        long duree = ChronoUnit.DAYS.between(dateEmprunt, dateRetourPrevu);
+
+        if (duree <= 3) {
+            throw new IllegalArgumentException("La durée minimale d'un emprunt est de 3 jours.");
+        }
+
+        if (duree >= 60) {
+            throw new IllegalArgumentException("La durée maximale d'un emprunt est de 2 mois (60 jours).");
+        }
+
+        // Vérifie les chevauchements avec d'autres emprunts du même matériel
+        List<Emprunt> empruntsExistants = empruntRepository.findByMaterielId(materielId);
+        for (Emprunt e : empruntsExistants) {
+            LocalDate debut = e.getDateEmprunt();
+            LocalDate fin = e.getRetourEffectif() != null ? e.getRetourEffectif() : e.getRetourPrevu();
+
+            boolean chevauchement = !dateEmprunt.isAfter(fin) && !dateRetourPrevu.isBefore(debut);
+            if (chevauchement) {
+                throw new IllegalArgumentException(
+                        "Le matériel est déjà emprunté ou réservé pendant cette période (" + debut + " → " + fin + ")."
+                );
+            }
+        }
+
+        // Si tout est OK
+        return true;
+    }
+
+    public long retardRetourEffectif(LocalDate dateRetourPrevu, LocalDate retourEffectif) {
+        if (retourEffectif == null) {
+            throw new IllegalArgumentException("La date de retour effective est obligatoire.");
+        }
+
+        if (dateRetourPrevu == null) {
+            throw new IllegalArgumentException("La date prévue de retour est manquante.");
+        }
+
+        // Si rendu avant ou le jour même → pas de retard
+        if (!retourEffectif.isAfter(dateRetourPrevu)) {
+            return 0;
+        }
+
+        // Sinon on calcule le nombre de jours de retard
+        return ChronoUnit.DAYS.between(dateRetourPrevu, retourEffectif);
     }
 
 

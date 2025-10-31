@@ -12,10 +12,14 @@ public interface EmpruntService {
     // Créer un emprunt pour un utilisateur et un matériel
     EmpruntDto createEmprunt(EmpruntDto empruntDto);
 
-    //Créer le rendu de l'emprunt
-    EmpruntDto createRenduEmprunt (EmpruntDto empruntDto, LocalDate retourEffectif, String suiviEtatMateriel, String Commentaire);
+    //Gere le rendu de l'emprunt
+    EmpruntDto createRenduEmprunt (EmpruntDto empruntDto);
 
-    EmpruntDto intervalleEmprunt(EmpruntDto empruntDto, LocalDate dateEmprunt, LocalDate dateRetourPrevu);
+    //Gere intervalle de date
+    boolean intervalleEmprunt(LocalDate dateEmprunt, LocalDate dateRetourPrevu, Long materielId);
+
+    //Gere le retard
+    long retardRetourEffectif(LocalDate dateRetourPrevu, LocalDate retourEffectif);
 
     // Mettre à jour un emprunt existant
     EmpruntDto updateEmprunt(EmpruntDto emprunt );

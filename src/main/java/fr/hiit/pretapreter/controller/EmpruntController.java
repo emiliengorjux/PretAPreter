@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -27,6 +28,17 @@ public class EmpruntController {
             @RequestBody EmpruntDto empruntDto) {
 
         EmpruntDto created = empruntService.createEmprunt(empruntDto);
+        return ResponseEntity.ok(created);
+    }
+
+    //Rendu d'emprunt
+    @PostMapping(value = "/rendu/{id}",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<EmpruntDto> createRenduEmprunt(
+            @RequestBody EmpruntDto empruntDto) {
+
+        EmpruntDto created = empruntService.createRenduEmprunt(empruntDto);
         return ResponseEntity.ok(created);
     }
 
