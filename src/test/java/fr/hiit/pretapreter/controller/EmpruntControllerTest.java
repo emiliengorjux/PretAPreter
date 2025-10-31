@@ -40,6 +40,7 @@ class EmpruntControllerTest extends AbstractControllerTest {
     @Test
     void should_create_emprunt() throws Exception {
         // GIVEN
+
         EmpruntDto emprunt1 = new EmpruntDto();
         emprunt1.setId(1L);
         emprunt1.setUtilisateurId(3L);
